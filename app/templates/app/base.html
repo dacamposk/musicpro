@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Music Pro</title>
+    <!-- Slider  -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.css">
+    <!-- Bootstrap -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+
+</head>
+
+<body>
+    <header>
+        <div class="contenedor-anuncio">
+            ¡Hemos actualizado nuestras ofertas! ♫
+        </div>
+        <!-- Bloques Header (para despues) 
+             <div class="row">
+            <div class="col-xs col-sm-6 col-md col-lg-4">
+      
+            
+            </div>
+      
+            <div class="col-xs col-sm-6 col-md col-lg-4">
+              <div>
+            </div>
+            <div class="col-xs col-sm-6 col-md col-lg-4">
+              
+                
+            </div>
+      
+          </div> -->
+        </div>
+        <div class="contenedor-logo">
+            <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
+        </div>
+        <ul class="nav">
+            <li><a href="">INSTRUMENTOS DE CUERDA</a>
+                <ul>
+                    <li><a href="">Guitarras</a>
+                        <ul>
+                            <li><a href="">Guitarras Cuerpo Solido</a></li>
+                            <li><a href="">Guitarras Acústicas</a></li>
+                            <li><a href="">Guitarras Eléctricas</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">Bajos</a>
+                        <ul>
+                            <li><a href="">Bajos Cuatro Cuerdas</a></li>
+                            <li><a href="">Bajos Cinco Cuerdas</a></li>
+                            <li><a href="">Bajos Activos</a></li>
+                            <li><a href="">Bajos Pasivos</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">Pianos</a>
+                        <ul>
+                            <li><a href="">Piano de media cola</a></li>
+                            <li><a href="">Piano de cola entera</a></li>
+                            <li><a href="">Pianolas</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="">PERCURSIÓN</a>
+                <ul>
+
+                    <li><a href=""> Baterías Acústicas</a>
+                        <ul>
+                            <li><a href="">Tama</a></li>
+                            <li><a href="">Pearl</a></li>
+                            <li><a href="">Sonor</a></li>
+                            <li><a href="">Mapex</a></li>
+                        </ul>
+                    </li>
+                    <li><a href=""> Batería Electrónica</a>
+                        <ul>
+                            <li><a href="">Roland</a></li>
+                            <li><a href="">Alesis</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="">AMPLIFICADORES</a>
+                <ul>
+                    <li><a href="">Cabezales</a>
+                        <ul>
+                            <li><a href="">ENGL</a></li>
+                            <li><a href="">Marshall</a></li>
+                            <li><a href="">Pavey</a></li>
+                            <li><a href="">EVH</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="">Cajas</a>
+                        <ul>
+                            <li><a href="">ENGL</a></li>
+                            <li><a href="">Marshall</a></li>
+                            <li><a href="">Pavey</a></li>
+                            <li><a href="">EVH</a></li>
+
+
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li><a href="">ACCESORIOS</a>
+                <ul>
+                    <li><a href="">Audifonos</a></li>
+                    <li><a href="">Monitores</a></li>
+                    <li><a href="">Paralantes</a></li>
+                    <li><a href="">Cables</a></li>
+                    <li><a href="">Microfonos</a></li>
+                    <li><a href="">Interfaces</a></li>
+                    <li><a href="">Mixers</a></li>
+                </ul>
+
+
+            </li>
+            <li><a href="">OFERTAS</a></li>
+        </ul>
+        <hr>
+    </header>
+
+    <div class="contenido">
+
+        {% block contenido %}
+        {% endblock %}
+
+    </div>
+
+
+    <footer>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-4 footer-col">
+                    <h3>Encuentranos</h3>
+                    <hr>
+                    <ul class="list-inline">
+                        <li>
+                            <img src="{% static 'img/footer/ubicacion.png' %}" class="img-fluid">
+                            Santiago - Providencia
+                        </li>
+                        <li>
+                            <img src="{% static 'img/footer/horario.png' %}" class="img-fluid">
+                            Horario de Atención: <br>De lunes a viernes
+                            10:00 a 15:00 <br> y de 16:00 a 21:00
+                            </a>
+                        </li>
+                        <li>
+                            <img src="{% static 'img/footer/atencion.png' %}" class="img-fluid">
+                            + 9 99570080
+                            </a>
+                        </li>
+                        <li>
+                            <img src="{% static 'img/footer/correo.png' %}" class="img-fluid">
+
+                            <a target="_self" href="#">musicpro@gmail.com</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <h3>Sobre Nosotros</h3>
+                    <hr>
+                    <ul class="list-inline">
+                        <li>
+                            “MUSIC PRO” es una distribuidora especialidada en la venta de instrumentos musicales, cuenta
+                            con
+                            varias sucursales alrededor de todo chile.
+                        </li>
+                    </ul>
+                </div>
+                <div class="col-md-4 footer-col">
+                    <h3>Legal</h3>
+                    <hr>
+                    <ul class="list-inline">
+                        <li>
+                            <a target="_self" href="#">Politicas de Envio</a>
+                        </li>
+                        <li>
+                        <a target="_self" href="#">Politicas de Privacidad</a>
+
+                        </li>
+                        <li>
+                        <a target="_self" href="#"> Politicas de Garantia y Devolución</a>
+                           
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+                <hr>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 footer-col">
+                    <div class="footer2">
+                        <hr>
+                        © 2023 MusicPro . Todos los derechos reservados.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+
+    </footer>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
+
+    <script>
+        $(document).ready(function () {
+            $(".slider").bxSlider();
+        });
+    </script>
+
+</body>
+
+</html>
