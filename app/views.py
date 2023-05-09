@@ -16,9 +16,11 @@ def CrearUsuario(request):
         if formulario.is_valid():
             formulario.save()
             user = authenticate(username= formulario.cleaned_data["username"],password= formulario.cleaned_data["password1"])
+            user.groups.add(1)   #funcion django que añade el usuario user recien creado al grupo con id 1 en la base de datos
             login (request,user)
             messages.success(request, 'te has registrado correctamente')
             return redirect(to='home')
+        
         data["form"] = formulario
           
     return render(request, 'registration/registro.html', data)
