@@ -8,11 +8,17 @@ from django.contrib.auth.forms import UserCreationForm
 
 
 
-class UserForm (ModelForm):
-    class Meta :
-        model = User
-        fields= ['usuario','contraseña',]
+
+rol= [
+    ('',''),
+    ('bodeguero','bodeguero'),
+    ('vendedor', 'vendedor'),
+    ('contador','contador'),
+    ]
 
 
 class NewUserForm(UserCreationForm):
-    pass
+    tipo= forms.CharField(label='Tipo de cuenta ', widget=forms.Select(choices=rol) )
+
+
+

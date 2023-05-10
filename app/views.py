@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import UserForm,NewUserForm
+from .forms import NewUserForm
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 # Create your views here.
@@ -15,9 +15,16 @@ def CrearUsuario(request):
         formulario = NewUserForm(data= request.POST)
         if formulario.is_valid():
             formulario.save()
+            tipo = formulario.cleaned_data['tipo']
             user = authenticate(username= formulario.cleaned_data["username"],password= formulario.cleaned_data["password1"])
-            user.groups.add(1)   #funcion django que añade el usuario user recien creado al grupo con id 1 en la base de datos
-            login (request,user)
+            if tipo == 'bodeguero':        
+                user.groups.add(1)   #funcion django que añade el usuario user recien creado al grupo con id 1 en la base de datos
+            elif tipo == 'vendedor':
+                user.groups.add(2)
+            elif tipo == 'contador':
+                 user.groups.add(3) 
+            else:
+                pass #exigir campo    
             messages.success(request, 'te has registrado correctamente')
             return redirect(to='home')
         
