@@ -127,6 +127,42 @@ ol {
 }
 
 
+
+/* producto contenedor */
+.producto img {
+    /* width: 100%;
+    height: 100%; */
+    object-fit: cover;
+}
+
+.producto .card {
+    margin-bottom: 20px;
+  }
+
+
+.producto .btn {
+    margin-bottom: 10px;
+    background-color: #810404;
+    border-color: #810404;
+    
+}
+
+.producto .btn:hover  {
+    margin-bottom: 10px;
+    background-color: #a32727;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 2px #810404;
+  
+    
+}
+
+.producto .btn:visited, .btn:focus, .btn:active, .btn.active {
+    margin-bottom: 10px;
+    background-color: #a32727;
+    border-color: #810404;
+    box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 2px #810404;
+    
+}
+
 /* footer */
 
 
