@@ -7,7 +7,11 @@ class User(models.Model):
     contraseña = models.CharField(max_length=30)
 
 
-
+class SubCategoria(models.Model):
+    idCategoria = models.IntegerField(primary_key=True,verbose_name='Id de categoria')
+    nombreSubCategoria = models.CharField(max_length=50, verbose_name='nombre subcategoria')
+    def __str__(self) -> str:
+        return self.nombreSubCategoria
 
 class Categoria(models.Model):
     idCategoria = models.IntegerField(primary_key=True,verbose_name='Id de categoria')
@@ -15,15 +19,29 @@ class Categoria(models.Model):
     def __str__(self) -> str:
         return self.nombreCategoria
 
+
+class Marca(models.Model):
+    idMarca = models.IntegerField(primary_key=True,verbose_name='marca')
+    marca = models.CharField(max_length=50, verbose_name='nombre Marca')
+    def __str__(self) -> str:
+        return self.nombreCategoria
+
 class Producto(models.Model):
-    SKU = models.CharField(max_length=6 ,primary_key=True ,verbose_name='SKU')      
-    nombre =  models.CharField(max_length=50 ,verbose_name='nombre')      
-    marca = models.CharField(max_length=10,verbose_name='marca')
-    precio = models.IntegerField(verbose_name='precio')
+    SKU = models.IntegerField(primary_key=True ,verbose_name='SKU')      
+    nombre =  models.CharField(max_length=80 ,verbose_name='nombre')      
+    valor = models.IntegerField(verbose_name='valor')
     stock = models.IntegerField(verbose_name='stock')
+    descripcion = models.TextField(verbose_name='descripcion')
     categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
+    Subcategoria = models.ForeignKey(SubCategoria,on_delete=models.CASCADE,blank=True,null=True)
+    marca = models.ForeignKey(Marca,on_delete=models.CASCADE)
+
     
     def __str__(self) -> str:
         return self.nombre   
+
+
+
+
 
 
