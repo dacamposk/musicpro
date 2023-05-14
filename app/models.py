@@ -1,11 +1,22 @@
 from django.db import models
-
+import datetime
 # Create your models here.
 
-class User(models.Model):
-    usuario = models.CharField(primary_key=True, max_length=50)
+class Cliente(models.Model):
+    email = models.CharField(max_length=50,primary_key=True)
+    telefono = models.CharField(max_length=50)
     contraseña = models.CharField(max_length=30)
+    ubicacion = models.CharField(max_length=50)
+    fechaRegistro = models.DateTimeField(default= datetime.datetime.now())
 
+
+
+class Invitado(models.Model):
+    email = models.CharField(max_length=50,primary_key=True)
+    telefono = models.CharField(max_length=50)
+    ubicacion = models.CharField(max_length=50)
+    contraseña = models.CharField(max_length=30)
+    fechaPedido = models.DateTimeField()
 
 class SubCategoria(models.Model):
     idCategoria = models.IntegerField(primary_key=True,verbose_name='Id de categoria')

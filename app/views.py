@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm
-from django.contrib.auth import authenticate, login
+from .forms import NewUserForm,LoginCli,RegistroClie
+from django.contrib.auth import authenticate
 from django.contrib import messages
 # Create your views here.
 
@@ -35,7 +35,32 @@ def CrearUsuario(request):
 def adminView (request):
     return render(request, 'app/administrador.html')
 
-def loginView (request):
-    return render(request, 'app/login.html')
+
+def loginCli (request):
+    data = { 'form' : LoginCli()}
+    if request.method == 'POST':
+        formulario = LoginCli(data= request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            user = authenticate(username= formulario.cleaned_data["username"],password= formulario.cleaned_data["password1"])
+        data["form"] = formulario
+          
+
+    return render(request, 'app/loguinCli.html',data)
+
+def RegistroCli (request):
+
+    if request.method == 'GET':
+       data = { 'form' : RegistroClie()}
+       return render(request, 'registration/registroCli.html',data)
+    
+    else:
+        if request.method == 'POST':
+            formulario = RegistroClie(data= request.POST)
+            if formulario.is_valid():
+                formulario.save()
+                return redirect(to='home')
+            data["form"] = formulario
+    return render(request, 'registration/registroCli.html',data)
 
 
