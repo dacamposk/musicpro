@@ -1,7 +1,9 @@
 from django.shortcuts import render, redirect
-from .forms import NewUserForm,LoginCli,RegistroClie
-from django.contrib.auth import authenticate
+from .forms import LoginCli,RegistroClie,RegistroEmp
+from django.contrib.auth import authenticate,login
 from django.contrib import messages
+from .models import User
+
 # Create your views here.
 
 def home (request):
@@ -9,22 +11,24 @@ def home (request):
 
 
 def CrearUsuario(request):
-    data = { 'form' : NewUserForm()}
-   
+    data = { 'form' : RegistroEmp()}
     if request.method == 'POST':
-        formulario = NewUserForm(data= request.POST)
+        formulario = RegistroEmp(data= request.POST)
         if formulario.is_valid():
-            formulario.save()
-            tipo = formulario.cleaned_data['tipo']
-            user = authenticate(username= formulario.cleaned_data["username"],password= formulario.cleaned_data["password1"])
-            if tipo == 'bodeguero':        
-                user.groups.add(1)   #funcion django que añade el usuario user recien creado al grupo con id 1 en la base de datos
+            tipo = formulario.cleaned_data["tipo"]
+            email = formulario.cleaned_data["email"]
+            username= formulario.cleaned_data["username"]
+            password = formulario.cleaned_data["password"]
+            print(tipo,email,username,password)
+            # funcion que llama al manager custom de user para crear un usuario bodeguero, revisar models customuser
+            if tipo == 'bodeguero' :
+                User.objects.create_bodeguero(email,username,password) 
             elif tipo == 'vendedor':
-                user.groups.add(2)
+                 User.objects.create_vendedor(email,username,password) 
             elif tipo == 'contador':
-                 user.groups.add(3) 
+                User.objects.create_contador(email,username,password) 
             else:
-                pass #exigir campo    
+                pass
             messages.success(request, 'te has registrado correctamente')
             return redirect(to='home')
         
@@ -41,15 +45,18 @@ def loginCli (request):
     if request.method == 'POST':
         formulario = LoginCli(data= request.POST)
         if formulario.is_valid():
-            formulario.save()
-            user = authenticate(username= formulario.cleaned_data["username"],password= formulario.cleaned_data["password1"])
+            username= formulario.cleaned_data["email"]
+            password= formulario.cleaned_data['contrasena']
+            user = authenticate(username,password)
+            login(request,user)
+            return redirect(to='home')
         data["form"] = formulario
           
 
-    return render(request, 'app/loguinCli.html',data)
+    return render(request, 'app/home.html',data)
 
 def RegistroCli (request):
-
+    
     if request.method == 'GET':
        data = { 'form' : RegistroClie()}
        return render(request, 'registration/registroCli.html',data)
@@ -58,7 +65,10 @@ def RegistroCli (request):
         if request.method == 'POST':
             formulario = RegistroClie(data= request.POST)
             if formulario.is_valid():
-                formulario.save()
+                email = formulario.cleaned_data["email"]
+                username= formulario.cleaned_data["username"]
+                password = formulario.cleaned_data["password"]
+                User.objects.create_user(email,username,password) 
                 return redirect(to='home')
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
