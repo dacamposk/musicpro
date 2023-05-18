@@ -45,15 +45,13 @@ def loginCli (request):
     if request.method == 'POST':
         formulario = LoginCli(data= request.POST)
         if formulario.is_valid():
-            username= formulario.cleaned_data["email"]
-            password= formulario.cleaned_data['contrasena']
-            user = authenticate(username,password)
+        
+            user = authenticate(    username= formulario.cleaned_data["email"],password= formulario.cleaned_data['contrasena'])
             login(request,user)
             return redirect(to='home')
         data["form"] = formulario
-          
-
-    return render(request, 'app/home.html',data)
+        
+    return render(request, 'app/loguinCli.html',data)
 
 def RegistroCli (request):
     

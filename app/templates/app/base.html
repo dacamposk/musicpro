@@ -27,22 +27,10 @@
 
         <nav>
             <li>
-
-                {% if user.is_authenticated %}
-                <li>
-                    <a href="{% url 'loginCli' %}"> cerrar sesion </a>
-                </li>
-            
-                {% else %}
-            
-                <li>
-                    <a href="{% url 'login' %}"> iniciar sesionn</a>
-                </li>
-                {% endif %}
                 
-              
+                <a href="{% url 'loginCli' %}">Iniciar sesion </a>
+                <label >{{ user.username }}</label>
             </li>
-            <label >{{ user.username }}</label>
         </nav>
         <!-- Bloques Header (para despues) 
              <div class="row">
