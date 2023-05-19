@@ -1,9 +1,6 @@
 from django import forms
 from .models import User
 
-
-
-
 rol= [
     ('',''),
     ('bodeguero','bodeguero'),
@@ -11,8 +8,6 @@ rol= [
     ('contador','contador'),
     ]
 
-
-   
 class RegistroEmp(forms.ModelForm):
     tipo = forms.ChoiceField(choices= rol)
     class Meta:
@@ -37,12 +32,10 @@ class RegistroEmp(forms.ModelForm):
             
         }
             
-    
-
 class RegistroClie(forms.ModelForm):
     class Meta:
         model = User
-        fields =  ['password','email','username']
+        fields =  ['username','email','password']
         widgets = {
             'email': forms.EmailInput(
             attrs={
@@ -61,7 +54,6 @@ class RegistroClie(forms.ModelForm):
             ),
             
         }
-
 
 class LoginCli(forms.Form):
     email = forms.CharField(label='Email')

@@ -4,9 +4,6 @@ from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUse
 # Create your models here.
 
 
-
-
-
 class Invitado(models.Model):
     email = models.CharField(max_length=50,primary_key=True)
     telefono = models.CharField(max_length=50)
@@ -46,10 +43,6 @@ class Producto(models.Model):
     
     def __str__(self) -> str:
         return self.nombre   
-
-
-
-
 
 class customUserManager (BaseUserManager):
     def create_user(self,email,username,password = None):

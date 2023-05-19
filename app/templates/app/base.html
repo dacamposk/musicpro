@@ -21,34 +21,23 @@
 <body>
     <header>
         <div class="contenedor-anuncio">
-            ¡Hemos actualizado nuestras ofertas! ♫
-          
+            ¡Hemos actualizado nuestras ofertas!
         </div>
 
-        <nav>
+        <div class= "sesion">
+            {% if user.is_authenticated %}
             <li>
-                
-                <a href="{% url 'loginCli' %}">Iniciar sesion </a>
-                <label >{{ user.username }}</label>
+                Bienvenido/a: <a href="#">{{user.email}}</a>
+                &nbsp;
+                <a href="{% url 'logout' %}">Cerrar Sesion </a>
             </li>
-        </nav>
-        <!-- Bloques Header (para despues) 
-             <div class="row">
-            <div class="col-xs col-sm-6 col-md col-lg-4">
-      
-            
-            </div>
-      
-            <div class="col-xs col-sm-6 col-md col-lg-4">
-              <div>
-            </div>
-            <div class="col-xs col-sm-6 col-md col-lg-4">
-              
-                
-            </div>
-      
-          </div> -->
+            {% else %}
+            <li>
+                <a href="{% url 'loginCli' %}">Iniciar sesion </a>
+            </li>
+            {% endif %}
         </div>
+
         <div class="contenedor-logo">
             <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
         </div>

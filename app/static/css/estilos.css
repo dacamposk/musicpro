@@ -17,6 +17,21 @@ header {
     color: #000;
 }
 
+/* inicio sesión y carrito*/
+.sesion {
+    font-size: 15px;
+    display: flex;
+    justify-content: flex-end;
+    margin: 0px;
+    margin-left: 50px;
+    list-style: none;
+    margin-right: 20px;
+}
+
+.sesion li {
+    margin-left: 150px;
+
+}
 
 /* carrosel*/
 .slider {
@@ -26,6 +41,9 @@ header {
 }
 
 
+label.required:after {
+    content: "" !important;
+}
 
 /* anuncio header*/
 .contenedor-anuncio {
@@ -46,20 +64,19 @@ header {
 .contenido {
     background-color: #fff;
     width: 90%;
-    margin:auto;
+    margin: auto;
 }
 
 /* div home -> garantias - envios etc. */
 .sellos-de-calidad {
-background-color: #cfcfcf;
-border-radius: 10px;
-height:150px;
-padding-top:15px;
-font-weight: bold;
-text-align:center;
-margin-top:20px;
+    background-color: #cfcfcf;
+    border-radius: 10px;
+    height: 150px;
+    padding-top: 15px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
 }
-
 
 .sellos-de-calidad h7 {
     font-style: italic;
@@ -67,26 +84,23 @@ margin-top:20px;
 
 .sellos-de-calidad:hover {
     background-color: #d6d6d6;
-  }
+}
 
 /* Menu*/
 ul,
 ol {
     list-style: none;
-    
+
 
 }
 
 .nav {
     display: flex;
     justify-content: center;
-    
-
 }
 
 .nav>li {
     float: left;
-
 }
 
 .nav li a {
@@ -95,7 +109,6 @@ ol {
     padding: 6px 12px;
     /* padding:10px 12px;  */
     display: block;
-    
 }
 
 .nav li a:hover {
@@ -109,7 +122,6 @@ ol {
     z-index: 1;
     background-color: #fff;
     padding: 0px 0px;
-
 }
 
 .nav li:hover>ul {
@@ -126,8 +138,6 @@ ol {
     top: 0px;
 }
 
-
-
 /* producto contenedor */
 .producto img {
     /* width: 100%;
@@ -137,50 +147,52 @@ ol {
 
 .producto .card {
     margin-bottom: 20px;
-  }
+}
 
 
 .producto .btn {
     margin-bottom: 10px;
     background-color: #810404;
     border-color: #810404;
-    
+
 }
 
-.producto .btn:hover  {
+.producto .btn:hover {
     margin-bottom: 10px;
     background-color: #a32727;
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 2px #810404;
-  
-    
+
+
 }
 
-.producto .btn:visited, .btn:focus, .btn:active, .btn.active {
+.producto .btn:visited,
+.btn:focus,
+.btn:active,
+.btn.active {
     margin-bottom: 10px;
     background-color: #a32727;
     border-color: #810404;
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 2px #810404;
-    
+
 }
 
 /* footer */
 
-
 footer {
     color: black;
     width: 100%;
-    margin:auto;
+    margin: auto;
     font-family: Comic Sans MS;
     font-weight: bold;
     font-size: 15px;
     margin-bottom: 0px;
-    margin-top:20px;
+    margin-top: 20px;
 }
 
 footer h3 {
     margin-bottom: 10px;
-    margin:auto;
-    margin-bottom:-10px;
+    margin: auto;
+    margin-bottom: -10px;
     font-family: Comic Sans MS;
 
 }
@@ -208,19 +220,15 @@ footer a:visited {
 footer a:hover {
 
     color: #810404;
-
 }
 
 footer a:active {
     text-decoration: none;
-
 }
 
-.footer2{
-    margin:auto;
-    width:100%;
+.footer2 {
+    margin: auto;
+    width: 100%;
     display: flex;
     justify-content: center;
-    
 }
-

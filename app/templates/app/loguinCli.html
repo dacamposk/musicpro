@@ -1,25 +1,37 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registro nuevo usuario</title>
-</head>
-<body>
-    <div class="container">
-        <h1>login</h1>
+{% extends 'app/base.html' %}
+{% load static %}
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+
+
+
+
+<div class="container">
+  <div class="d-flex justify-content-center">
+    <div class="card" style="width: 30rem;">
+      <h3 style="text-align:center; margin-top:10px;">Ingresa Tus Credenciales</h3>
+      <div class="card-body">
         <form action="" method="post" id="formulario">
-            {% csrf_token %}
+          {% csrf_token %}
           <div class="form-group">
-            {{ form }}
+            {{ form|crispy }}
           </div>
-          <input type="submit" value="Enviar" class="btn btn-danger" id="enviar">
+          <br>
+          <input type="submit" value="Iniciar Sesión" class="btn btn-success" id="enviar">
           <input type="reset" value="Limpiar" class="btn btn-primary" id="limpiar">
+          <br>
+          <a href="{%url 'RegistroCli'%}">¿No tienes cuenta?</a>
+          <br>
+          <a href="{%url 'home'%}">Ir a la Página Principal</a>
+          <br>
+          <br>
           <div id="error" class="alert alert-danger" role="alert"></div>
         </form>
         <div class="alert alert-success" role="alert">{{mensaje}}</div>
       </div>
-<a href="{% url 'RegistroCli' %}">No tienes cuenta registrate</a>
-</body>
-</html>
+    </div>
+  </div>
+</div>
+
+{% endblock %}
