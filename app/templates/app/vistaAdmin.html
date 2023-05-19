@@ -1,0 +1,30 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block contenido %}
+
+    
+<div class="container">
+    <div class="d-flex justify-content-center">
+      <div class="card" style="width: 80rem;">
+        <h3 style="text-align:center; margin-top:10px;">Panel de Administración</h3>
+        <div style="margin:auto; text-align:center;">
+        <a href="{% url 'CrearUsuario' %}">Añadir Nuevo Colaborador</a>
+        <br>
+        <a href="{% url 'CrearUsuario' %}">Eliminar Colaborador</a>
+        <br>
+        <a href="{% url 'CrearUsuario' %}">Agregar Productos</a>
+        <br>
+        <a href="{% url 'CrearUsuario' %}">Eliminar Productos</a>
+        <br>
+        <a href="{% url 'CrearUsuario' %}">Modificar Productos</a>
+    </div>
+        </div>
+      </div>
+    </div>
+  </div>
+ 
+</body>
+</html>
+
+
+{% endblock %}

@@ -40,7 +40,6 @@ class Producto(models.Model):
     Subcategoria = models.ForeignKey(SubCategoria,on_delete=models.CASCADE,blank=True,null=True)
     marca = models.ForeignKey(Marca,on_delete=models.CASCADE)
 
-    
     def __str__(self) -> str:
         return self.nombre   
 

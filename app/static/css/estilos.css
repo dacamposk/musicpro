@@ -40,11 +40,6 @@ header {
     color: black
 }
 
-
-label.required:after {
-    content: "" !important;
-}
-
 /* anuncio header*/
 .contenedor-anuncio {
     background-color: #810404;

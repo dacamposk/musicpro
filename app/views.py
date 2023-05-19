@@ -1,6 +1,6 @@
 from django.shortcuts import render, redirect
 from .forms import LoginCli,RegistroClie,RegistroEmp
-from django.contrib.auth import authenticate,login
+from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import User
 
@@ -37,7 +37,7 @@ def CrearUsuario(request):
     return render(request, 'registration/registro.html', data)
 
 def adminView (request):
-    return render(request, 'app/administrador.html')
+    return render(request, 'app/vistaAdmin.html')
 
 
 def loginCli (request):
@@ -70,5 +70,3 @@ def RegistroCli (request):
                 return redirect(to='home')
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
-
-

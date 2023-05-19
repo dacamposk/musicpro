@@ -12,7 +12,7 @@ class RegistroEmp(forms.ModelForm):
     tipo = forms.ChoiceField(choices= rol)
     class Meta:
         model = User
-        fields =  ['password','email','username']
+        fields =  ['username','email','password']
         widgets = {
             'email': forms.EmailInput(
             attrs={

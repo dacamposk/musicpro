@@ -30,7 +30,13 @@
                 Bienvenido/a: <a href="#">{{user.email}}</a>
                 &nbsp;
                 <a href="{% url 'logout' %}">Cerrar Sesion </a>
-            </li>
+         
+            {% if user.is_staff %}
+            &nbsp;
+          <a href="{%url 'adminView' %}" >Panel de Admin</a>
+            {% endif %}
+       </li>
+    
             {% else %}
             <li>
                 <a href="{% url 'loginCli' %}">Iniciar sesion </a>
@@ -39,7 +45,8 @@
         </div>
 
         <div class="contenedor-logo">
-            <img class="logo" src="{% static 'img/logo.png' %}" alt="logo">
+            <a href="{%url 'home' %}" >
+            <img href class="logo" src="{% static 'img/logo.png' %}" alt="logo"></a>
         </div>
         <ul class="nav">
             <li><a href="">INSTRUMENTOS DE CUERDA</a>
