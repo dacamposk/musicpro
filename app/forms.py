@@ -29,6 +29,7 @@ class RegistroEmp(forms.ModelForm):
             }
 
             ),
+             'password': forms.PasswordInput()
             
         }
             
@@ -52,10 +53,10 @@ class RegistroClie(forms.ModelForm):
             }
 
             ),
+            'password': forms.PasswordInput()
             
         }
 
 class LoginCli(forms.Form):
     email = forms.CharField(label='Email')
-    contrasena = forms.CharField(label='Contraseña')
-
+    contrasena = forms.CharField(label='Contraseña' ,widget= forms.PasswordInput)

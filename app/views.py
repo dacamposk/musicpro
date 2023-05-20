@@ -45,10 +45,12 @@ def loginCli (request):
     if request.method == 'POST':
         formulario = LoginCli(data= request.POST)
         if formulario.is_valid():
-        
-            user = authenticate(    username= formulario.cleaned_data["email"],password= formulario.cleaned_data['contrasena'])
-            login(request,user)
-            return redirect(to='home')
+            user = authenticate(username= formulario.cleaned_data["email"],password= formulario.cleaned_data['contrasena'])
+            if user is not None:
+                login(request,user)
+                return redirect(to='home')
+            else :
+                pass #Falta ponner mensaje de alerta o similar
         data["form"] = formulario
         
     return render(request, 'app/loguinCli.html',data)
