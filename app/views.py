@@ -3,11 +3,17 @@ from .forms import LoginCli,RegistroClie,RegistroEmp
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import User
+from . models import *
 
 # Create your views here.
 
 def home (request):
-    return render(request, 'app/home.html')
+    productos = Producto.objects.all().filter(is_avaliable=True)
+
+    context = {
+        'productos': productos,
+    }
+    return render(request, 'app/home.html', context)
 
 
 def CrearUsuario(request):

@@ -5,6 +5,13 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Invitado)
 admin.site.register(Categoria)
-admin.site.register(Marca)
 admin.site.register(SubCategoria)
-admin.site.register(Producto)
+admin.site.register(TipoInstrumento)
+admin.site.register(Marca)
+
+
+class ProductoAdmin(admin.ModelAdmin):
+    list_display = ('nombre', 'precio', 'stock', 'modified_date')
+
+
+admin.site.register(Producto,ProductoAdmin)

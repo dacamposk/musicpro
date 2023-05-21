@@ -3,45 +3,13 @@ import datetime
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
 # Create your models here.
 
-
+# Usuarios
 class Invitado(models.Model):
     email = models.CharField(max_length=50,primary_key=True)
     telefono = models.CharField(max_length=50)
     ubicacion = models.CharField(max_length=50)
     contraseña = models.CharField(max_length=30)
     fechaPedido = models.DateTimeField()
-
-class SubCategoria(models.Model):
-    idCategoria = models.IntegerField(primary_key=True,verbose_name='Id de categoria')
-    nombreSubCategoria = models.CharField(max_length=50, verbose_name='nombre subcategoria')
-    def __str__(self) -> str:
-        return self.nombreSubCategoria
-
-class Categoria(models.Model):
-    idCategoria = models.IntegerField(primary_key=True,verbose_name='Id de categoria')
-    nombreCategoria = models.CharField(max_length=50, verbose_name='nombre de la categoria')
-    def __str__(self) -> str:
-        return self.nombreCategoria
-
-
-class Marca(models.Model):
-    idMarca = models.IntegerField(primary_key=True,verbose_name='marca')
-    marca = models.CharField(max_length=50, verbose_name='nombre Marca')
-    def __str__(self) -> str:
-        return self.nombreCategoria
-
-class Producto(models.Model):
-    SKU = models.IntegerField(primary_key=True ,verbose_name='SKU')      
-    nombre =  models.CharField(max_length=80 ,verbose_name='nombre')      
-    valor = models.IntegerField(verbose_name='valor')
-    stock = models.IntegerField(verbose_name='stock')
-    descripcion = models.TextField(verbose_name='descripcion')
-    categoria = models.ForeignKey(Categoria,on_delete=models.CASCADE)
-    Subcategoria = models.ForeignKey(SubCategoria,on_delete=models.CASCADE,blank=True,null=True)
-    marca = models.ForeignKey(Marca,on_delete=models.CASCADE)
-
-    def __str__(self) -> str:
-        return self.nombre   
 
 class customUserManager (BaseUserManager):
     def create_user(self,email,username,password = None):
@@ -138,6 +106,57 @@ class User(AbstractBaseUser,PermissionsMixin):
         return True
 
 
-    
-    
+# Categorias
+
+class Categoria(models.Model):
+    nombreCategoria = models.CharField(max_length=50, verbose_name='nombre de la categoria', unique=True)
+
+    class Meta:
+        verbose_name = 'category'
+        verbose_name_plural = 'categories'
+
+    def __str__(self) -> str:
+        return self.nombreCategoria
+
+class SubCategoria(models.Model):
+    nombreSubCategoria = models.CharField(max_length=50, verbose_name='nombre subcategoria')
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+
+    class Meta:
+        verbose_name = 'sub category'
+        verbose_name_plural = 'sub categories'
+
+    def __str__(self) -> str:
+        return self.nombreSubCategoria
+
+class TipoInstrumento(models.Model):
+    nombreTipoInstrumento = models.CharField(max_length=50, verbose_name='nombre tipo instrumento', blank=True)
+    subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE)
+
+    def __str__(self) -> str:
+        return self.nombreTipoInstrumento
+
+class Marca(models.Model):
+    nombreMarca = models.CharField(max_length=50, verbose_name='nombre Marca', unique=True)
+    def __str__(self) -> str:
+        return self.nombreMarca
+
+class Producto(models.Model):
+    SKU = models.IntegerField(primary_key=True ,verbose_name='SKU')      
+    nombre =  models.CharField(max_length=80 ,verbose_name='nombre')      
+    descripcion = models.TextField(verbose_name='descripcion')
+    precio = models.IntegerField(verbose_name='precio')
+    imagen=models.ImageField(upload_to='img/productos')
+    stock = models.IntegerField(verbose_name='stock')
+    Categoria= models.ForeignKey(Categoria,on_delete=models.CASCADE, )
+    SubCategoria= models.ForeignKey(SubCategoria,on_delete=models.CASCADE)
+    TipoInstrumento= models.ForeignKey(TipoInstrumento,on_delete=models.CASCADE, blank=True)
+    marca = models.ForeignKey(Marca,on_delete=models.CASCADE)
+    is_avaliable = models.BooleanField(default=True)
+    create_date = models.DateTimeField(auto_now_add=True)
+    modified_date = models.DateTimeField(auto_now=True)
+
+    def __str__(self) -> str:
+        return self.nombre   
+
 
