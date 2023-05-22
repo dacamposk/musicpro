@@ -150,7 +150,7 @@ class Producto(models.Model):
     stock = models.IntegerField(verbose_name='stock')
     Categoria= models.ForeignKey(Categoria,on_delete=models.CASCADE, )
     SubCategoria= models.ForeignKey(SubCategoria,on_delete=models.CASCADE)
-    TipoInstrumento= models.ForeignKey(TipoInstrumento,on_delete=models.CASCADE, blank=True)
+    TipoInstrumento= models.ForeignKey(TipoInstrumento,on_delete=models.CASCADE, blank=True, null=True)
     marca = models.ForeignKey(Marca,on_delete=models.CASCADE)
     is_avaliable = models.BooleanField(default=True)
     create_date = models.DateTimeField(auto_now_add=True)

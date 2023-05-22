@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from .forms import LoginCli,RegistroClie,RegistroEmp
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -78,3 +78,21 @@ def RegistroCli (request):
                 return redirect(to='home')
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
+
+def Store (request, SubCategoria_nombreSubCategoria=None):
+    categorias = None
+    productos = None
+
+    if SubCategoria_nombreSubCategoria != None:
+        categorias = get_object_or_404(Categoria, nombreSubCategoria = SubCategoria_nombreSubCategoria)
+        productos = Producto.objects.filter(SubCategoria = categorias, is_avaliable = True)
+        producto_count = productos.count()
+    else:
+        productos = Producto.objects.all().filter(is_avaliable=True)
+        producto_count = productos.count()
+
+
+    context = {
+        'productos': productos,
+    }
+    return render(request, 'app/tienda/store.html', context)
