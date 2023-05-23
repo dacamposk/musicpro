@@ -110,6 +110,8 @@ class User(AbstractBaseUser,PermissionsMixin):
 
 class Categoria(models.Model):
     nombreCategoria = models.CharField(max_length=50, verbose_name='nombre de la categoria', unique=True)
+    descripcion = models.CharField(max_length=255, blank = True)
+    slug = models.CharField(max_length=100, unique = True)
 
     class Meta:
         verbose_name = 'category'
@@ -120,6 +122,8 @@ class Categoria(models.Model):
 
 class SubCategoria(models.Model):
     nombreSubCategoria = models.CharField(max_length=50, verbose_name='nombre subcategoria')
+    descripcion = models.CharField(max_length=255, blank = True)
+    slug = models.CharField(max_length=100, unique = True)
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
 
     class Meta:
@@ -131,32 +135,37 @@ class SubCategoria(models.Model):
 
 class TipoInstrumento(models.Model):
     nombreTipoInstrumento = models.CharField(max_length=50, verbose_name='nombre tipo instrumento', blank=True)
+    descripcion = models.CharField(max_length=255, blank = True)
+    slug = models.CharField(max_length=100, unique = True)
     subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
         return self.nombreTipoInstrumento
 
+
 class Marca(models.Model):
     nombreMarca = models.CharField(max_length=50, verbose_name='nombre Marca', unique=True)
+    descripcion = models.CharField(max_length=255, blank = True)
+    slug = models.CharField(max_length=100, unique = True)
     def __str__(self) -> str:
         return self.nombreMarca
 
 class Producto(models.Model):
     SKU = models.IntegerField(primary_key=True ,verbose_name='SKU')      
-    nombre =  models.CharField(max_length=80 ,verbose_name='nombre')      
+    nombreProducto =  models.CharField(max_length=80 ,verbose_name='nombre')     
+    slug = models.CharField(max_length=200, unique = True)
     descripcion = models.TextField(verbose_name='descripcion')
     precio = models.IntegerField(verbose_name='precio')
     imagen=models.ImageField(upload_to='img/productos')
     stock = models.IntegerField(verbose_name='stock')
-    Categoria= models.ForeignKey(Categoria,on_delete=models.CASCADE, )
+    categoria= models.ForeignKey(Categoria,on_delete=models.CASCADE, )
     SubCategoria= models.ForeignKey(SubCategoria,on_delete=models.CASCADE)
     TipoInstrumento= models.ForeignKey(TipoInstrumento,on_delete=models.CASCADE, blank=True, null=True)
     marca = models.ForeignKey(Marca,on_delete=models.CASCADE)
-    is_avaliable = models.BooleanField(default=True)
+    is_available = models.BooleanField(default=True)
     create_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
 
     def __str__(self) -> str:
-        return self.nombre   
-
+        return self.nombreProducto   
 

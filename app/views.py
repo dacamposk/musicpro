@@ -8,7 +8,7 @@ from . models import *
 # Create your views here.
 
 def home (request):
-    productos = Producto.objects.all().filter(is_avaliable=True)
+    productos = Producto.objects.all().filter(is_available=True)
 
     context = {
         'productos': productos,
@@ -79,17 +79,17 @@ def RegistroCli (request):
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
 
-def Store (request, SubCategoria_nombreSubCategoria=None):
+def store (request, categoria_slug=None):
     categorias = None
     productos = None
 
-    if SubCategoria_nombreSubCategoria != None:
-        categorias = get_object_or_404(Categoria, nombreSubCategoria = SubCategoria_nombreSubCategoria)
-        productos = Producto.objects.filter(SubCategoria = categorias, is_avaliable = True)
-        producto_count = productos.count()
+    if categoria_slug != None:
+        categorias = get_object_or_404(Categoria, slug = categoria_slug )
+        productos = Producto.objects.filter(categoria = categorias, is_available = True)
+
     else:
-        productos = Producto.objects.all().filter(is_avaliable=True)
-        producto_count = productos.count()
+        productos = Producto.objects.all().filter(is_available=True)
+      
 
 
     context = {

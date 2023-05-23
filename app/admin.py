@@ -4,14 +4,39 @@ from .models import *
 # Register your models here.
 admin.site.register(User)
 admin.site.register(Invitado)
-admin.site.register(Categoria)
-admin.site.register(SubCategoria)
-admin.site.register(TipoInstrumento)
-admin.site.register(Marca)
+
+
+
+
+class CategoriaAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('nombreCategoria',)}
+    list_display = ('nombreCategoria', 'slug')
+
+admin.site.register(Categoria,CategoriaAdmin)
+
+class SubCategoriaAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('nombreSubCategoria',)}
+    list_display = ('nombreSubCategoria', 'slug')
+
+admin.site.register(SubCategoria,SubCategoriaAdmin)
+
+class TipoInstrumentoAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('nombreTipoInstrumento',)}
+    list_display = ('nombreTipoInstrumento', 'slug')
+
+admin.site.register(TipoInstrumento,TipoInstrumentoAdmin)
+
+class MarcaAdmin(admin.ModelAdmin):
+    prepopulated_fields = {'slug': ('nombreMarca',)}
+    list_display = ('nombreMarca', 'slug')
+
+admin.site.register(Marca, MarcaAdmin)
 
 
 class ProductoAdmin(admin.ModelAdmin):
-    list_display = ('nombre', 'precio', 'stock', 'modified_date')
+    list_display = ('nombreProducto', 'precio', 'stock', 'modified_date')
+    prepopulated_fields = {'slug': ('nombreProducto',)}
 
 
 admin.site.register(Producto,ProductoAdmin)
+
