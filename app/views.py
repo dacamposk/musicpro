@@ -4,6 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import User
 from . models import *
+from .models import SubCategoria
 
 # Create your views here.
 
@@ -79,20 +80,30 @@ def RegistroCli (request):
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
 
-def store (request, categoria_slug=None):
+def store (request, categoria_slug=None, subcategoria_slug=None, tipo_instrumento_slug=None):
     categorias = None
     productos = None
+    subcategoria = None
+    tipo_instrumento = None
 
     if categoria_slug != None:
-        categorias = get_object_or_404(Categoria, slug = categoria_slug )
-        productos = Producto.objects.filter(categoria = categorias, is_available = True)
-
+        categorias = get_object_or_404(Categoria, slug=categoria_slug)
+        if subcategoria_slug is not None:
+            subcategoria = get_object_or_404(SubCategoria, slug=subcategoria_slug)
+            if tipo_instrumento_slug is not None:
+                tipo_instrumento = get_object_or_404(TipoInstrumento, slug=tipo_instrumento_slug)
+                productos = Producto.objects.filter(categoria=categorias, subcategoria=subcategoria, tipoinstrumento=tipo_instrumento, is_available=True)
+            else:
+                productos = Producto.objects.filter(categoria=categorias, subcategoria=subcategoria, is_available=True)
+        else:
+            productos = Producto.objects.filter(categoria=categorias, is_available=True)
+        producto_count = productos.count()
     else:
         productos = Producto.objects.all().filter(is_available=True)
-      
-
+        producto_count = productos.count()
 
     context = {
         'productos': productos,
+        'producto_count': producto_count,
     }
     return render(request, 'app/tienda/store.html', context)

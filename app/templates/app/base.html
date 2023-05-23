@@ -24,19 +24,19 @@
             ¡Hemos actualizado nuestras ofertas!
         </div>
 
-        <div class= "sesion">
+        <div class="sesion">
             {% if user.is_authenticated %}
             <li>
                 Bienvenido/a: <a href="#">{{user.email}}</a>
                 &nbsp;
                 <a href="{% url 'logout' %}">Cerrar Sesion </a>
-         
-            {% if user.is_staff %}
-            &nbsp;
-          <a href="{%url 'adminView' %}" >Panel de Admin</a>
-            {% endif %}
-       </li>
-    
+
+                {% if user.is_staff %}
+                &nbsp;
+                <a href="{%url 'adminView' %}">Panel de Admin</a>
+                {% endif %}
+            </li>
+
             {% else %}
             <li>
                 <a href="{% url 'loginCli' %}">Iniciar sesion </a>
@@ -45,40 +45,45 @@
         </div>
 
         <div class="contenedor-logo">
-            <a href="{%url 'home' %}" >
-            <img href class="logo" src="{% static 'img/logo.png' %}" alt="logo"></a>
+            <a href="{%url 'home' %}">
+                <img href class="logo" src="{% static 'img/logo.png' %}" alt="logo"></a>
         </div>
         <ul class="nav">
-            <li><a href="">INSTRUMENTOS DE CUERDA</a>
+            <li><a href="">TIENDA</a></li>
+            <li><a href="{% url 'productos_por_categoria' 'instrumentos-de-cuerda' %}">INSTRUMENTOS DE CUERDA</a>
                 <ul>
-                    <li><a href="">Guitarras</a>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'instrumentos-de-cuerda' 'guitarras' %}">Guitarras</a>
                         <ul>
-                            <li><a href="">Guitarras Cuerpo Solido</a></li>
-                            <li><a href="">Guitarras Acústicas</a></li>
-                            <li><a href="">Guitarras Eléctricas</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'guitarras' 'guitarra-cuerpo-solido' %}">Guitarras
+                                    Cuerpo Solido</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'guitarras' 'guitarra-acustica' %}">Guitarras
+                                    Acústicas</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'guitarras' 'guitarra-electrica' %}">Guitarras
+                                    Eléctricas</a></li>
                         </ul>
                     </li>
                     <li><a href="">Bajos</a>
                         <ul>
-                            <li><a href="">Bajos Cuatro Cuerdas</a></li>
-                            <li><a href="">Bajos Cinco Cuerdas</a></li>
-                            <li><a href="">Bajos Activos</a></li>
-                            <li><a href="">Bajos Pasivos</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'bajos' 'bajo-cuatro-cuerdas' %}">Bajos Cuatro Cuerdas</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'bajos' 'bajo-cinco-cuerdas' %}">Bajos Cinco Cuerdas</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'bajos' 'bajo-activo' %}">Bajos Activos</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'bajos' 'bajo-pasivo' %}">Bajos Pasivos</a></li>
                         </ul>
                     </li>
-                    <li><a href="">Pianos</a>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'instrumentos-de-cuerda' 'pianos' %}">Pianos</a>
                         <ul>
-                            <li><a href="">Piano de media cola</a></li>
-                            <li><a href="">Piano de cola entera</a></li>
-                            <li><a href="">Pianolas</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'pianos' 'piano-de-media-cola' %}">Piano de media cola</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'pianos' 'piano-de-cola-entera' %}">Piano de cola entera</a></li>
+                            <li><a href="{% url 'productos_por_categoria_subcategoria_tipo_instrumento' 'instrumentos-de-cuerda' 'pianos' 'pianolas' %}">Pianolas</a></li>
                         </ul>
                     </li>
                 </ul>
             </li>
-            <li><a href="">PERCURSIÓN</a>
+            <li><a href="{% url 'productos_por_categoria' 'percusion' %}">PERCURSIÓN</a>
                 <ul>
 
-                    <li><a href=""> Baterías Acústicas</a>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'percusion' 'bateria-acustica' %}">
+                            Baterías Acústicas</a>
                         <ul>
                             <li><a href="">Tama</a></li>
                             <li><a href="">Pearl</a></li>
@@ -86,7 +91,7 @@
                             <li><a href="">Mapex</a></li>
                         </ul>
                     </li>
-                    <li><a href=""> Batería Electrónica</a>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'percusion' 'bateria-electronica' %}"> Batería Electrónica</a>
                         <ul>
                             <li><a href="">Roland</a></li>
                             <li><a href="">Alesis</a></li>
@@ -94,9 +99,9 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="">AMPLIFICADORES</a>
+            <li><a href="{% url 'productos_por_categoria' 'amplificadores' %}">AMPLIFICADORES</a>
                 <ul>
-                    <li><a href="">Cabezales</a>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'amplificadores' 'cabezales' %}">Cabezales</a>
                         <ul>
                             <li><a href="">ENGL</a></li>
                             <li><a href="">Marshall</a></li>
@@ -104,7 +109,7 @@
                             <li><a href="">EVH</a></li>
                         </ul>
                     </li>
-                    <li><a href="">Cajas</a>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'amplificadores' 'cajas' %}">Cajas</a>
                         <ul>
                             <li><a href="">ENGL</a></li>
                             <li><a href="">Marshall</a></li>
@@ -116,15 +121,15 @@
                     </li>
                 </ul>
             </li>
-            <li><a href="">ACCESORIOS</a>
+            <li><a href="{% url 'productos_por_categoria' 'accesorios' %}">ACCESORIOS</a>
                 <ul>
-                    <li><a href="">Audifonos</a></li>
-                    <li><a href="">Monitores</a></li>
-                    <li><a href="">Paralantes</a></li>
-                    <li><a href="">Cables</a></li>
-                    <li><a href="">Microfonos</a></li>
-                    <li><a href="">Interfaces</a></li>
-                    <li><a href="">Mixers</a></li>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'accesorios' 'audifonos' %}">Audifonos</a></li>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'accesorios' 'monitores' %}">Monitores</a></li>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'accesorios' 'parlantes' %}">Parlantes</a></li>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'accesorios' 'cables' %}">Cables</a></li>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'accesorios' 'microfonos' %}">Microfonos</a></li>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'accesorios' 'interfaces' %}">Interfaces</a></li>
+                    <li><a href="{% url 'productos_por_categoria_subcategoria' 'accesorios' 'mixers' %}">Mixers</a></li>
                 </ul>
 
 
