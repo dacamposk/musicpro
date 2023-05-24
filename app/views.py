@@ -10,11 +10,11 @@ from .models import SubCategoria
 
 def home (request):
     productos = Producto.objects.all().filter(is_available=True)
+    categorias = Categoria.objects.all()
+    SubCat = SubCategoria.objects.all()
 
-    context = {
-        'productos': productos,
-    }
-    return render(request, 'app/home.html', context)
+    context = {'productos': productos,'categorias':categorias}
+    return render(request, 'app/base.html', context)
 
 
 def CrearUsuario(request):
@@ -80,30 +80,39 @@ def RegistroCli (request):
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
 
-def store (request, categoria_slug=None, subcategoria_slug=None, tipo_instrumento_slug=None):
-    categorias = None
-    productos = None
-    subcategoria = None
-    tipo_instrumento = None
+def store (request, id):
 
-    if categoria_slug != None:
-        categorias = get_object_or_404(Categoria, slug=categoria_slug)
-        if subcategoria_slug is not None:
-            subcategoria = get_object_or_404(SubCategoria, slug=subcategoria_slug)
-            if tipo_instrumento_slug is not None:
-                tipo_instrumento = get_object_or_404(TipoInstrumento, slug=tipo_instrumento_slug)
-                productos = Producto.objects.filter(categoria=categorias, subcategoria=subcategoria, tipoinstrumento=tipo_instrumento, is_available=True)
-            else:
-                productos = Producto.objects.filter(categoria=categorias, subcategoria=subcategoria, is_available=True)
-        else:
-            productos = Producto.objects.filter(categoria=categorias, is_available=True)
-        producto_count = productos.count()
-    else:
-        productos = Producto.objects.all().filter(is_available=True)
-        producto_count = productos.count()
+    tipo = None
+    subcat = SubCategoria.objects.filter(categoria=id)
+    productos = Producto.objects.filter(categoria=id)
+    categorias = Categoria.objects.all()
 
     context = {
+        'tipo':tipo,
+        'subCat':subcat,
+        'categorias':categorias,
         'productos': productos,
-        'producto_count': producto_count,
     }
     return render(request, 'app/tienda/store.html', context)
+
+def subCatfilter (request,id,subID):
+
+    categorias = Categoria.objects.all()
+    subcat = SubCategoria.objects.filter(categoria_id=id)
+    productos = Producto.objects.filter(subcategoria=subID)
+    tipo = TipoInstrumento.objects.filter(subcategoria= subID) 
+    print(id)
+
+    context = {
+        'tipo':tipo,
+        'subCat':subcat,
+        'categorias':categorias,
+        'productos': productos,
+    }
+    return render(request, 'app/tienda/store.html', context)
+
+def detalle(request,  id):
+       datos = Producto.objects.filter(SKU=id)
+       producto = {'producto':datos}
+       
+       return render(request, 'app/tienda/detalle.html', producto)

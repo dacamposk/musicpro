@@ -151,7 +151,7 @@ class Marca(models.Model):
         return self.nombreMarca
 
 class Producto(models.Model):
-    SKU = models.IntegerField(primary_key=True ,verbose_name='SKU')      
+    SKU = models.IntegerField(primary_key=True, verbose_name='SKU')      
     nombreProducto =  models.CharField(max_length=80 ,verbose_name='nombre')     
     slug = models.CharField(max_length=200, unique = True)
     descripcion = models.TextField(verbose_name='descripcion')

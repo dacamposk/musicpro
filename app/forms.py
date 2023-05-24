@@ -57,6 +57,7 @@ class RegistroClie(forms.ModelForm):
             
         }
 
+  
 class LoginCli(forms.Form):
     email = forms.CharField(label='Email')
     contrasena = forms.CharField(label='Contraseña' ,widget= forms.PasswordInput)

@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=
+    , initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+
+    <div class="container">
+        <h1>Listado de Productos</h1>
+        <li>
+        </li>
+        <div class="row">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">SKU</th>
+                  <th scope="col">nombre</th>
+                  <th scope="col">precio</th>
+                  <th scope="col">categoria</th>
+                  <th scope="col">stock</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+                <tbody>
+                  {% for ve in producto %}
+                  <tr>
+                    <td>{{ve.SKU}}</td>
+                    <td>{{ve.nombreProducto}}</td>
+                    <td>{{ve.precio}}</td>
+                    <td>{{ve.categoria}}</td>
+                    <td>{{ve.stock}}</td>
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
