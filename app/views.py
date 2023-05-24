@@ -14,7 +14,7 @@ def home (request):
     SubCat = SubCategoria.objects.all()
 
     context = {'productos': productos,'categorias':categorias}
-    return render(request, 'app/base.html', context)
+    return render(request, 'app/home.html', context)
 
 
 def CrearUsuario(request):
