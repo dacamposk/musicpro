@@ -2,7 +2,6 @@
 <html lang="es">
 
 <head>
-    <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Music Pro</title>
@@ -48,26 +47,17 @@
             <a href="{%url 'home' %}">
                 <img href class="logo" src="{% static 'img/logo.png' %}" alt="logo"></a>
 
-              
+
         </div>
 
-          <!-- inicio de las categorias-->
-
-
-       
+        <!-- inicio de las categorias-->
         <ul class="nav nav-pills nav-justified mb-3 mx-5" id="ex1" role="tablist">
 
             {% for ve in categorias %}
-            <li > <a href="{% url 'store' ve.id %}"> {{ve.nombreCategoria}}</a>
-            
-            </li>
-           
-              </li>
+            <li> <a href="{% url 'store' ve.id %}"> {{ve.nombreCategoria}}</a></li>
             {% endfor %}
         </ul>
         <hr>
-
-
     </header>
 
     <div class="contenido">

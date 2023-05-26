@@ -82,6 +82,31 @@ header {
     max-height: 200px;
 }
 
+/* card detalle productos */
+
+.detalle_producto img {
+    width: 70%; /* Establecer el ancho al 100% del contenedor padre */
+    height: auto; /* Mantener la relación de aspecto original */
+    display: block; /* Convertir la imagen en un bloque */
+    margin: 0 auto; /* Establecer márgenes automáticos (horizontal) */
+  }
+
+  .detalle_producto .btn {
+    margin-bottom: 10px;
+    background-color: #810404;
+    border-color: #810404;
+}
+
+  .detalle_producto .hr {
+
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80%; /* Ancho del hr */
+
+  }
+
 
 /* div home -> garantias - envios etc. */
 .sellos-de-calidad {

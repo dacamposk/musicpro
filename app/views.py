@@ -4,7 +4,7 @@ from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import User
 from . models import *
-from .models import SubCategoria
+from .models import SubCategoria, Categoria
 
 # Create your views here.
 
@@ -86,12 +86,16 @@ def store (request, id):
     subcat = SubCategoria.objects.filter(categoria=id)
     productos = Producto.objects.filter(categoria=id)
     categorias = Categoria.objects.all()
+    producto_count = productos.count()
+
 
     context = {
         'tipo':tipo,
         'subCat':subcat,
         'categorias':categorias,
         'productos': productos,
+        'producto_count': producto_count,
+
     }
     return render(request, 'app/tienda/store.html', context)
 
@@ -100,19 +104,59 @@ def subCatfilter (request,id,subID):
     categorias = Categoria.objects.all()
     subcat = SubCategoria.objects.filter(categoria_id=id)
     productos = Producto.objects.filter(subcategoria=subID)
-    tipo = TipoInstrumento.objects.filter(subcategoria= subID) 
-    print(id)
+    tipo = TipoInstrumento.objects.filter(subcategoria= subID)
+    producto_count = productos.count()
+ 
+    
+    # print(id)
 
     context = {
         'tipo':tipo,
         'subCat':subcat,
         'categorias':categorias,
-        'productos': productos,
+        'productos': productos,  
+        'producto_count': producto_count,
     }
     return render(request, 'app/tienda/store.html', context)
 
-def detalle(request,  id):
+
+def DetalleProducto(request,  id):
        datos = Producto.objects.filter(SKU=id)
        producto = {'producto':datos}
        
-       return render(request, 'app/tienda/detalle.html', producto)
+       return render(request, 'app/tienda/detalle_producto.html', producto)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+# def DetalleProducto(request, categoria_slug, producto_slug ):
+       
+#     try:
+#         single_producto = Producto.objects.get(categoria_slug=categoria_slug, slug=producto_slug)
+#         datos = Producto.objects.filter(SKU=id)
+#         producto = {'producto':datos}
+ 
+#     except Exception as e:
+#        raise e
+
+#     context = {
+#         'single_producto': single_producto,
+#     }
+       
+#     return render(request, 'app/tienda/detalle_producto.html', context)
+

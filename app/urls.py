@@ -10,5 +10,5 @@ urlpatterns = [
     path('registrate', RegistroCli, name="RegistroCli"),
     path('store/<id>', store, name="store"),
     path('store/<id>/<subID>', subCatfilter, name="subCatfilter"),
-    path('detalle/<id>', detalle, name="detalle"),
+    path('detalle/<id>', DetalleProducto, name="detalle"),
 ]
