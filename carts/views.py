@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from app.models import Producto
 from carts.models import Cart, CartItem
 

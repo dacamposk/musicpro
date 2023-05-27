@@ -1,3 +1,5 @@
+from typing import Dict, Tuple
+from autoslug import AutoSlugField
 from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
@@ -77,10 +79,15 @@ class customUserManager (BaseUserManager):
         usuario.is_vendedor =True
         usuario.save()
         return usuario
+    
+        
+   
 
 class User(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField('Correo',unique=True)
     username = models.CharField('nombre',max_length=255)
+    apellido = models.CharField('apellido',max_length=255 ,null=True)
+    telefono = models.CharField('telefono',max_length=255 ,null=True)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=False)
     is_bodeguero = models.BooleanField(default=False)
@@ -109,9 +116,9 @@ class User(AbstractBaseUser,PermissionsMixin):
 # Categorias
 
 class Categoria(models.Model):
-    nombreCategoria = models.CharField(max_length=50, verbose_name='nombre de la categoria', unique=True)
+    nombreCategoria = models.CharField(max_length=50,primary_key=True, verbose_name='nombre de la categoria', unique=True)
     descripcion = models.CharField(max_length=255, blank = True)
-    slug = models.CharField(max_length=100, unique = True)
+    slug = AutoSlugField(populate_from='nombreCategoria')   
 
     class Meta:
         verbose_name = 'category'
@@ -121,10 +128,11 @@ class Categoria(models.Model):
         return self.nombreCategoria
 
 class SubCategoria(models.Model):
-    nombreSubCategoria = models.CharField(max_length=50, verbose_name='nombre subcategoria')
+    nombreSubCategoria = models.CharField(max_length=50,primary_key=True, verbose_name='nombre subcategoria')
     descripcion = models.CharField(max_length=255, blank = True)
-    slug = models.CharField(max_length=100, unique = True)
+    slug = AutoSlugField(populate_from='nombreSubCategoria')   
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
+    slugcat = AutoSlugField(populate_from='categoria',null=True)   
 
     class Meta:
         verbose_name = 'sub category'
@@ -134,9 +142,9 @@ class SubCategoria(models.Model):
         return self.nombreSubCategoria
 
 class TipoInstrumento(models.Model):
-    nombreTipoInstrumento = models.CharField(max_length=50, verbose_name='nombre tipo instrumento', blank=True)
+    nombreTipoInstrumento = models.CharField(max_length=50,primary_key=True ,verbose_name='nombre tipo instrumento', blank=True)
     descripcion = models.CharField(max_length=255, blank = True)
-    slug = models.CharField(max_length=100, unique = True)
+    slug = AutoSlugField(populate_from='nombreTipoInstrumento') 
     subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -144,19 +152,19 @@ class TipoInstrumento(models.Model):
 
 
 class Marca(models.Model):
-    nombreMarca = models.CharField(max_length=50, verbose_name='nombre Marca', unique=True)
+    nombreMarca = models.CharField(max_length=50,primary_key=True ,verbose_name='nombre Marca', unique=True)
     descripcion = models.CharField(max_length=255, blank = True)
-    slug = models.CharField(max_length=100, unique = True)
+    slug = AutoSlugField(populate_from='descripcion',null=True) 
     def __str__(self) -> str:
         return self.nombreMarca
 
 class Producto(models.Model):
     SKU = models.IntegerField(primary_key=True, verbose_name='SKU')      
-    nombreProducto =  models.CharField(max_length=80 ,verbose_name='nombre')     
-    slug = models.CharField(max_length=200, unique = True)
+    nombreProducto =  models.CharField(max_length=80 ,verbose_name='nombre', unique=True)  
+    slug = AutoSlugField(populate_from='nombreProducto',null=True)    
     descripcion = models.TextField(verbose_name='descripcion')
     precio = models.IntegerField(verbose_name='precio')
-    imagen=models.ImageField(upload_to='img/productos')
+    imagen=models.CharField(max_length=500)
     stock = models.IntegerField(verbose_name='stock')
     categoria= models.ForeignKey(Categoria,on_delete=models.CASCADE, )
     subcategoria= models.ForeignKey(SubCategoria,on_delete=models.CASCADE)
@@ -165,7 +173,10 @@ class Producto(models.Model):
     is_available = models.BooleanField(default=True)
     create_date = models.DateTimeField(auto_now_add=True)
     modified_date = models.DateTimeField(auto_now=True)
+   
 
     def __str__(self) -> str:
         return self.nombreProducto   
+
+
 

@@ -1,6 +1,6 @@
 from django import forms
-from .models import User
-
+from .models import Categoria, Marca, Producto, SubCategoria, TipoInstrumento, User
+from django.forms import ModelForm
 rol= [
     ('',''),
     ('bodeguero','bodeguero'),
@@ -61,3 +61,34 @@ class RegistroClie(forms.ModelForm):
 class LoginCli(forms.Form):
     email = forms.CharField(label='Email')
     contrasena = forms.CharField(label='Contraseña' ,widget= forms.PasswordInput)
+
+class productoForm (ModelForm):
+    class Meta :
+        model = Producto
+        fields= '__all__'
+
+
+class CategoriaForm (forms.ModelForm):
+    class Meta :
+        model = Categoria
+        fields= '__all__'
+
+class marcaForm (forms.ModelForm):
+    class Meta :
+        model = Marca
+        fields= '__all__'
+
+
+class subCatForm (forms.ModelForm):
+    class Meta :
+        model = SubCategoria
+        fields= '__all__'
+
+
+class tipoiForm (forms.ModelForm):
+    class Meta :
+        model = TipoInstrumento
+        fields= '__all__'
+
+
+

@@ -1,5 +1,5 @@
-from django.shortcuts import get_object_or_404, render, redirect
-from .forms import LoginCli,RegistroClie,RegistroEmp
+from django.shortcuts import  render, redirect
+from .forms import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
 from .models import User
@@ -80,11 +80,12 @@ def RegistroCli (request):
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
 
-def store (request, id):
+def store (request, slug):
 
     tipo = None
-    subcat = SubCategoria.objects.filter(categoria=id)
-    productos = Producto.objects.filter(categoria=id)
+    catslug = Categoria.objects.get(slug = slug)
+    subcat = SubCategoria.objects.filter(categoria=catslug)
+    productos = Producto.objects.filter(categoria=catslug)
     categorias = Categoria.objects.all()
     producto_count = productos.count()
 
@@ -98,17 +99,20 @@ def store (request, id):
 
     }
     return render(request, 'app/tienda/store.html', context)
-
-def subCatfilter (request,id,subID):
-
+# filtro de subcategoria
+def subCatfilter (request,slugcat,subcatslug):
+     # Trae todo
     categorias = Categoria.objects.all()
-    subcat = SubCategoria.objects.filter(categoria_id=id)
-    productos = Producto.objects.filter(subcategoria=subID)
-    tipo = TipoInstrumento.objects.filter(subcategoria= subID)
+
+    #obtiene la subcategoria seleccionada
+    subcatfilter =  SubCategoria.objects.get(slug=subcatslug) 
+
+    # filtrar
+    subcat = SubCategoria.objects.filter(slugcat=slugcat)
+    productos = Producto.objects.filter(subcategoria=subcatfilter)
+    tipo = TipoInstrumento.objects.filter(subcategoria= subcatfilter)
     producto_count = productos.count()
- 
     
-    # print(id)
 
     context = {
         'tipo':tipo,
@@ -121,7 +125,7 @@ def subCatfilter (request,id,subID):
 
 
 def DetalleProducto(request,  id):
-       datos = Producto.objects.filter(SKU=id)
+       datos = Producto.objects.filter(slug=id)
        producto = {'producto':datos}
        
        return render(request, 'app/tienda/detalle_producto.html', producto)
@@ -129,8 +133,101 @@ def DetalleProducto(request,  id):
 
 
 
+# CRUD funciones
+
+# Render crud  y trae todos los productos y categorias
+def crud (request):
+    producto  = Producto.objects.all()
+    categoria  = Categoria.objects.all()
+    subcat  = SubCategoria.objects.all()
+    marca  = Marca.objects.all()
+    tipoins  = TipoInstrumento.objects.all()
+    contex = {'productos':producto,
+              'categorias':categoria,
+              'tipoi':tipoins,
+              'marcas':marca,
+              'subcat':subcat}
+    return render(request,'Tcrud/crud.html',contex)
+
+# Agrega un nuevo producto
+def agreProducto(request):
+    datos = {'form': productoForm()}
+    print(datos)
+    if request.method == 'POST':
+        formulario = productoForm(request.POST)
+        if formulario.is_valid:
+            formulario.save()
+            datos['mensaje'] = "Datos guardados correctamente"
+            return redirect('crud')
+            
+    return render(request, 'Tcrud/agreProducto.html', datos)
 
 
+def agreCategoria (request): 
+    datos = {'form': CategoriaForm()}
+    if request.method == 'POST':
+        formulario = CategoriaForm(request.POST)
+        if formulario.is_valid:
+            formulario.save()
+            datos['mensaje'] = "Datos guardados correctamente"
+            return redirect('crud')
+    return render(request,'Tcrud/agreCategoria.html',datos)
+
+def agreMarca (request): 
+    datos = {'form': marcaForm()}
+    print(datos)
+    if request.method == 'POST':
+        formulario = marcaForm(request.POST)
+        if formulario.is_valid:
+            formulario.save()
+            datos['mensaje'] = "Datos guardados correctamente"
+            return redirect('crud')
+    return render(request,'Tcrud/agreMarca.html',datos)
+
+def agreTipoIns (request): 
+    datos = {'form': tipoiForm()}
+    if request.method == 'POST':
+        formulario = tipoiForm(request.POST)
+        if formulario.is_valid:
+            formulario.save()
+            datos['mensaje'] = "Datos guardados correctamente"
+            return redirect('crud')
+    return render(request,'Tcrud/agreTipoIns.html',datos)
+
+def agreSubcat (request): 
+    datos = {'form': subCatForm()}
+    if request.method == 'POST':
+        formulario = subCatForm(request.POST)
+        if formulario.is_valid:
+            formulario.save()
+            datos['mensaje'] = "Datos guardados correctamente"
+            return redirect('crud')
+    return render(request,'Tcrud/agreSubcat.html',datos)
+
+
+# CRUD funciones modificar
+
+def Mod_Producto(request, SKU):
+    producto = Producto.objects.get(SKU=SKU)
+    datos = {
+        'form': productoForm(instance=producto)
+    }
+    if request.method == 'POST':
+        formulario = productoForm(data=request.POST, instance=producto)
+        if formulario.is_valid:
+            formulario.save()
+            datos['mensaje'] = "Modificados correctamente"
+            return redirect('crud')
+    return render(request, 'Tcrud/modProducto.html', datos)
+
+
+
+# CRUD funciones delete
+
+def delete_Producto(request,SKU):
+    producto = Producto.objects.get(SKU=SKU)
+    producto.delete()
+    return redirect(to="crud")
 
 
 
