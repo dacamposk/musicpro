@@ -76,7 +76,8 @@ class CategoriaForm (forms.ModelForm):
 class marcaForm (forms.ModelForm):
     class Meta :
         model = Marca
-        fields= '__all__'
+        fields= ['nombreMarca','descripcion']
+        exclude = ['slug']
 
 
 class subCatForm (forms.ModelForm):

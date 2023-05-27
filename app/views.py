@@ -124,6 +124,32 @@ def subCatfilter (request,slugcat,subcatslug):
     return render(request, 'app/tienda/store.html', context)
 
 
+
+
+def tipoisntruFilter (request,slugcat,subcatslug):
+     # Trae todo
+    categorias = Categoria.objects.all()
+
+    #obtiene la subcategoria seleccionada
+    subcatfilter =  SubCategoria.objects.get(slug=subcatslug) 
+
+    # filtrar
+    subcat = SubCategoria.objects.filter(slugcat=slugcat)
+    productos = Producto.objects.filter(subcategoria=subcatfilter)
+    tipo = TipoInstrumento.objects.filter(subcategoria= subcatfilter)
+    producto_count = productos.count()
+    
+
+    context = {
+        'tipo':tipo,
+        'subCat':subcat,
+        'categorias':categorias,
+        'productos': productos,  
+        'producto_count': producto_count,
+    }
+    return render(request, 'app/tienda/store.html', context)
+
+
 def DetalleProducto(request,  id):
        datos = Producto.objects.filter(slug=id)
        producto = {'producto':datos}
