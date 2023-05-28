@@ -22,22 +22,55 @@
     <div class="col-xs col-sm-6 col-md col-lg-3">
         <div class="producto">
             <div class="card">
-                <div class="body-card" >
-                    <div class="text-center"><img src="{{ p.imagen.url}}" class="img-fluid" >
+                <div class="body-card">
+                    <div class="text-center"><img src="{{ p.imagen.url}}" class="img-fluid">
                     </div>
 
                     <h6 class="text-center ">{{p.marca}}</h6>
                     <h4 class="text-center text-truncate">{{p.nombreProducto}}</h4>
                     <h5 class="text-center ">${{p.precio | intcomma }}</h5>
                     <!-- Boton Ver Producto -->
-                    <a href="{% url 'detalle' p.SKU %}"><div class="text-center"> <button  type="button"  class="btn btn-success " >
-                        Ver Producto</button> </a></div>
+                    <a href="{% url 'detalle' p.SKU %}">
+                        <div class="text-center"> <button type="button" class="btn btn-success ">
+                                Ver Producto</button>
+                    </a>
                 </div>
+
             </div>
         </div>
     </div>
-    {% endfor %}
-
 </div>
+{% endfor %}
 
+<div class="row">
+    <div class="col-xs col-sm-6 col-md col-lg-4">
+
+        <div class="sellos-de-calidad">
+            <img src="{% static 'img/garantia.png' %}" class="img-fluid">
+            <br>
+            <h5>Garantia</h5>
+            <h7>Todos nuestros productos cuentan con garantia <br> de hasta 3 meses.</h7>
+        </div>
+    </div>
+
+    <div class="col-xs col-sm-6 col-md col-lg-4">
+        <div class="sellos-de-calidad">
+            <img src="{% static 'img/envios.png' %}" class="img-fluid">
+            <br>
+            <h5>Envíos a todo Chile</h5>
+            <h7>Contamos con envios a todo el territorio nacional.</h7>
+        </div>
+    </div>
+    <div class="col-xs col-sm-6 col-md col-lg-4">
+        <div class="sellos-de-calidad">
+            <img src="{% static 'img/tienda.png' %}" class="img-fluid">
+            <br>
+            <h5>Tienda Fisica</h5>
+            <h7>Contamos con distintas sucursales a lo largo de todo santiago.</h7>
+        </div>
+    </div>
+<br>
+<br>
+<br>
+<br>
 {% endblock %}

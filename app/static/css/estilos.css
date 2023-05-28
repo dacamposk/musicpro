@@ -75,7 +75,7 @@ header {
     text-overflow: ellipsis;
     margin-left:20px;
     margin-right:20px;
-    
+    margin-top:10px;
 }
 
 .producto .body-card img {
@@ -116,7 +116,8 @@ header {
     padding-top: 15px;
     font-weight: bold;
     text-align: center;
-    margin-top: 20px;
+    margin-top: 50px;
+    margin-bottom:30px;
 }
 
 .sellos-de-calidad h7 {
@@ -273,3 +274,39 @@ footer a:active {
     display: flex;
     justify-content: center;
 }
+
+/* ====================== carrito detalle ==================== */
+.table-shopping-cart.table img {
+    max-height: 80px;
+}
+
+.input-group .form-control {
+    height: 40px; 
+  }
+  
+  .input-group-prepend .btn {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  
+  .input-group-append .btn {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  
+  .input-group .form-control {
+    border-radius: 0;
+  }
+
+  .input-group .btn:focus {
+    outline: none;
+    box-shadow: none;
+  }
+
+  .input-group .form-control {
+    height: 40px; 
+    border-radius: 5px; 
+  }
+  .button-size {
+    height: 40px;
+  }

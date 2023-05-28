@@ -77,8 +77,9 @@
                     <h4 class="text-center text-truncate">{{p.nombreProducto}}</h4>
                     <h5 class="text-center ">${{p.precio | intcomma}}</h5>
                     <!-- Boton Ver Producto -->
-                    <a href="{% url 'detalle' p.slug %}"><div class="text-center"> <button  type="button"  class="btn btn-success " >
-                            Ver Producto</button> </a></div>
+                    <a href="{% url 'detalle' p.SKU %}"><div class="text-center"> <button  type="button"  class="btn btn-success " >
+                        Ver Producto</button> </a></div>
+            
                 
                            
                 </div>

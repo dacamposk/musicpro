@@ -164,7 +164,7 @@ class Producto(models.Model):
     slug = models.CharField(max_length=100)   
     descripcion = models.TextField(verbose_name='descripcion')
     precio = models.IntegerField(verbose_name='precio')
-    imagen=models.CharField(max_length=500)
+    imagen=models.ImageField(upload_to='img/productos' , null=True)
     stock = models.IntegerField(verbose_name='stock')
     categoria= models.ForeignKey(Categoria,on_delete=models.CASCADE, )
     subcategoria= models.ForeignKey(SubCategoria,on_delete=models.CASCADE)

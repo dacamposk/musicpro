@@ -149,14 +149,16 @@ def tipoisntruFilter (request,slugcat,subcatslug):
     }
     return render(request, 'app/tienda/store.html', context)
 
+def DetalleProducto(request, id):
+    producto = Producto.objects.get(SKU=id)
+    return render(request, 'app/tienda/detalle_producto.html', {'producto': producto})
 
-def DetalleProducto(request,  id):
-       datos = Producto.objects.filter(slug=id)
-       producto = {'producto':datos}
+
+# def DetalleProducto(request,  id):
+#        datos = Producto.objects.filter(slug=id)
+#        producto = {'producto':datos}
        
-       return render(request, 'app/tienda/detalle_producto.html', producto)
-
-
+#        return render(request, 'app/tienda/detalle_producto.html', producto)
 
 
 # CRUD funciones
@@ -180,11 +182,13 @@ def agreProducto(request):
     datos = {'form': productoForm()}
     print(datos)
     if request.method == 'POST':
-        formulario = productoForm(request.POST)
-        if formulario.is_valid:
+        formulario = productoForm(data=request.POST, files=request.FILES)
+        if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
             return redirect('crud')
+        else:
+            datos ["form"] = formulario
             
     return render(request, 'Tcrud/agreProducto.html', datos)
 
@@ -193,7 +197,7 @@ def agreCategoria (request):
     datos = {'form': CategoriaForm()}
     if request.method == 'POST':
         formulario = CategoriaForm(request.POST)
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
             return redirect('crud')
@@ -204,7 +208,7 @@ def agreMarca (request):
     print(datos)
     if request.method == 'POST':
         formulario = marcaForm(request.POST)
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
             return redirect('crud')
@@ -214,7 +218,7 @@ def agreTipoIns (request):
     datos = {'form': tipoiForm()}
     if request.method == 'POST':
         formulario = tipoiForm(request.POST)
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
             return redirect('crud')
@@ -224,7 +228,7 @@ def agreSubcat (request):
     datos = {'form': subCatForm()}
     if request.method == 'POST':
         formulario = subCatForm(request.POST)
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
             return redirect('crud')
@@ -240,13 +244,11 @@ def Mod_Producto(request, SKU):
     }
     if request.method == 'POST':
         formulario = productoForm(data=request.POST, instance=producto)
-        if formulario.is_valid:
+        if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Modificados correctamente"
             return redirect('crud')
     return render(request, 'Tcrud/modProducto.html', datos)
-
-
 
 # CRUD funciones delete
 
@@ -262,24 +264,4 @@ def delete_Producto(request,SKU):
 
 
 
-
-
-
-
-
-# def DetalleProducto(request, categoria_slug, producto_slug ):
-       
-#     try:
-#         single_producto = Producto.objects.get(categoria_slug=categoria_slug, slug=producto_slug)
-#         datos = Producto.objects.filter(SKU=id)
-#         producto = {'producto':datos}
- 
-#     except Exception as e:
-#        raise e
-
-#     context = {
-#         'single_producto': single_producto,
-#     }
-       
-#     return render(request, 'app/tienda/detalle_producto.html', context)
 

@@ -72,6 +72,8 @@ class CategoriaForm (forms.ModelForm):
     class Meta :
         model = Categoria
         fields= '__all__'
+    
+    
 
 class marcaForm (forms.ModelForm):
     class Meta :

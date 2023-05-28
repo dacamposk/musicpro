@@ -5,9 +5,6 @@ from .models import *
 admin.site.register(User)
 admin.site.register(Invitado)
 
-
-
-
 class CategoriaAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nombreCategoria',)}
     list_display = ('nombreCategoria', 'slug')

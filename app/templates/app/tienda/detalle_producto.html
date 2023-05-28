@@ -4,48 +4,52 @@
 
 
 {% load humanize %}
-{% for p in producto %}
+
 <div class="card">
   <div class="row no-gutters">
     <aside class="col-md-6">
       <article class="detalle_producto">
-        <div >
-          <img src="{{ p.imagen.url}}" class="img-fluid">
-        </div> <!-- img-big-wrap.// -->
+          <div>
+            <img src="{{ producto.imagen.url}}" class="img-fluid">
+          </div> <!-- img-big-wrap.// -->
 
-      </article> <!-- gallery-wrap .end// -->
+        </article> <!-- gallery-wrap .end// -->
     </aside>
-    <main class="col-md-6 border-left" >
+    <main class="col-md-6 border-left">
       <article class="detalle_producto">
-        <h2 class="title">{{p.nombreProducto}}</h2>
+        <h2 class="title">{{producto.nombreProducto}}</h2>
         <div class="mb-3">
-        <var class="price h4">${{p.precio | intcomma}}</var>
+          <var class="price h4">${{producto.precio | intcomma}}</var>
 
 
         </div>
-        <div style="display: inline-block;" ><h5 style="display: inline; margin: 0;"></h5tyle>Marca:</h5> {{p.marca}}</div>
+        <div style="display: inline-block;">
+          <h5 style="display: inline; margin: 0;">
+            </h5tyle>Marca:</h5> {{producto.marca}}
+        </div>
         <br>
         <br>
-        <div><h2>Descripción del Producto</h2></div>
+        <div>
+          <h2>Descripción del Producto</h2>
+        </div>
         <hr>
-        <div>{{p.descripcion}}</div>
-        
+        <div>{{producto.descripcion}}</div>
+
         <br>
-        <div style="display: inline-block;" ><h5 style="display: inline; margin: 0; color:red;"></h5tyle>Stock:  {{p.stock}} </h5></div>
+        <div style="display: inline-block;">
+          <h5 style="display: inline; margin: 0; color:red;">
+            </h5tyle>Stock: {{producto.stock}} </h5>
+        </div>
         <br>
         <br>
-        <div><button class="btn btn-primary btn-lg" type="button">Añadir al carrito</button></div>
+        <div> <a href="{% url 'add_cart' producto.SKU %}">
+            <button class="btn btn-primary btn-lg" type="button">Añadir al carrito</button></div></a>
 
       </article>
+    </main>
 
-    
-       
-     
   </div>
 
-  {% endfor %}
 
 
-
-
-{% endblock %}
+  {% endblock %}
