@@ -24,7 +24,13 @@ header {
     color: #000;
 }
 
-
+#footer-admin {
+    background-color: #810404;
+    margin-top: 18%;
+    width: 100%;
+    height: 100px;
+    text-align: center;
+}
 /* ====================== Inicio de Sesión Enlaces ==================== */
 
 .sesion {
@@ -364,6 +370,8 @@ footer a:active {
     background-color: #810404;
     border-color: #810404;
 }
+
+
 
 
 

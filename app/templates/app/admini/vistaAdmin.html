@@ -1,4 +1,4 @@
-{% extends 'app/base.html' %}
+{% extends 'app/admini/baseadmin.html' %}
 {% load static %}
 {% block contenido %}
 
@@ -17,6 +17,7 @@
         <a href="{% url 'CrearUsuario' %}">Eliminar Productos</a>
         <br>
         <a href="{% url 'CrearUsuario' %}">Modificar Productos</a>
+        <br>
         <a href="{% url 'vistaAdmin' %}">ver usuarios</a>
     </div>
         </div>
