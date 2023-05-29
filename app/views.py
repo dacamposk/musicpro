@@ -215,7 +215,6 @@ def agreCategoria (request):
 
 def agreMarca (request): 
     datos = {'form': marcaForm()}
-    print(datos)
     if request.method == 'POST':
         formulario = marcaForm(request.POST)
         if formulario.is_valid():

@@ -12,7 +12,7 @@ class RegistroEmp(forms.ModelForm):
     tipo = forms.ChoiceField(choices= rol)
     class Meta:
         model = User
-        fields =  ['username','email','password']
+        fields =  ['username','apellido','email','password','telefono']
         widgets = {
             'email': forms.EmailInput(
             attrs={
@@ -36,7 +36,7 @@ class RegistroEmp(forms.ModelForm):
 class RegistroClie(forms.ModelForm):
     class Meta:
         model = User
-        fields =  ['username','email','password']
+        fields =  ['username','apellido','email','password','telefono']
         widgets = {
             'email': forms.EmailInput(
             attrs={
@@ -66,6 +66,7 @@ class productoForm (ModelForm):
     class Meta :
         model = Producto
         fields= '__all__'
+     
 
 
 class CategoriaForm (forms.ModelForm):
@@ -79,6 +80,11 @@ class marcaForm (forms.ModelForm):
     class Meta :
         model = Marca
         fields=  '__all__'
+   
+        
+
+      #tank = forms.IntegerField(widget=forms.HiddenInput(), initial=123) 
+  
 
        
 
