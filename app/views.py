@@ -273,6 +273,26 @@ def delete_Producto(request,SKU):
     return redirect(to="crud")
 
 
+def del_user(request, username):    
+    try:
+        u = User.objects.get(username = username)
+        u.delete()
+        messages.success(request, "The user is deleted")            
+
+    except User.DoesNotExist:
+        messages.error(request, "User doesnot exist")    
+        return render(request, 'front.html')
+
+
+    return render(request, 'front.html') 
+
+
+def vistaAdmin(request):
+    usuarios = User.objects.all()
+    contex = usuarios
+    return render (request, 'adminCrud/Admincrud.html', contex)
+
+
 
 
 
