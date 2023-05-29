@@ -3,6 +3,7 @@ from autoslug import AutoSlugField
 from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
+from django.utils.text import slugify
 # Create your models here.
 
 # Usuarios
@@ -14,25 +15,29 @@ class Invitado(models.Model):
     fechaPedido = models.DateTimeField()
 
 class customUserManager (BaseUserManager):
-    def create_user(self,email,username,password = None):
+    def create_user(self,email,username,apellido,password ,telefono):
         if not email:
             raise ValueError('Debe asignar un email valido')
             
         usuario = self.model(
+            email = email,
             username = username,
-            email = email ,
-            password = password
+            apellido = apellido,
+            password = password,
+            telefono = telefono
               )
         
         usuario.set_password(password)
         usuario.save()
         return usuario
     
-    def create_superuser(self,email, username,password ):
+    def create_superuser(self,email, username,apellido,password,telefono):
         usuario = self.create_user(
             email,
             username = username,
+            apellido = apellido,
             password = password,
+            telefono = telefono
        
             )
        
@@ -41,12 +46,13 @@ class customUserManager (BaseUserManager):
         return usuario
     
 
-    def create_bodeguero(self,email,username,password):
+    def create_bodeguero(self,email,username,apellido,password,telefono):
         usuario = self.create_user(
             email,
             username = username,
+            apellido = apellido,
             password = password,
-       
+            telefono = telefono
             )
         usuario.groups.add(1) 
         usuario.is_bodeguero =True
@@ -55,11 +61,13 @@ class customUserManager (BaseUserManager):
 
 
     
-    def create_contador(self,email, username,password):
+    def create_contador(self,email, username,apellido,password,telefono):
         usuario = self.create_user(
             email,
             username = username,
+            apellido = apellido,
             password = password,
+            telefono = telefono
        
             )
         usuario.groups.add(2) 
@@ -68,12 +76,14 @@ class customUserManager (BaseUserManager):
         return usuario
     
     
-    def create_vendedor(self,email, username,password):
+    def create_vendedor(self,email, username,apellido,password,telefono):
         usuario = self.create_user(
             email,
             username = username,
+            apellido = apellido,
             password = password,
-       
+            telefono = telefono
+            
             )
         usuario.groups.add(3) 
         usuario.is_vendedor =True
@@ -98,7 +108,7 @@ class User(AbstractBaseUser,PermissionsMixin):
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = ['username','apellido','telefono']
 
     class Meta:
         verbose_name = 'User'
