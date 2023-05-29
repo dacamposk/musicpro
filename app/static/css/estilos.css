@@ -36,41 +36,6 @@ header {
 
 }
 
-/* ====================== carrito icono ==================== */
-
-#cart {
-    position: relative;
-    display: inline-block;
-    margin-left: 15px;
-}
-
-#cart img {
-    height: 27px;
-    width: 27px;
-}
-
-#cart-quantity {
-    position: absolute;
-    top: -5px;
-    right: -10px;
-    background: red;
-    color: white;
-    padding: 2px 5px;
-    border-radius: 50%;
-    font-size: 0.7em;
-}
-
-.mt-60 {
-    margin-top: 13px;
-}
-
-.cart-icon:hover {
-    transform: scale(1.1);
-    transition: transform 0.3s ease-in-out;
-}
-
-
-
 /* ====================== Carrusel ==================== */
 
 .slider {
@@ -358,6 +323,39 @@ footer a:active {
     height: 40px;
   }
   
+/* ====================== carrito icono ==================== */
+
+#cart {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+#cart img {
+    height: 27px;
+    width: 27px;
+}
+
+#cart-quantity {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 50%;
+    font-size: 0.7em;
+}
+
+.mt-60 {
+    margin-top: 13px;
+}
+
+.cart-icon:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
 
 
 

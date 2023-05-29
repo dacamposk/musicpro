@@ -3,7 +3,7 @@ from .views import _cart_id
 
 
 def counter(request):
-    cart_cont = 0
+    cart_count = 0
     
     try:
         cart = Cart.objects.filter(cart_id=_cart_id(request))
