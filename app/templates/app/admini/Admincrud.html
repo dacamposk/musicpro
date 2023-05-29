@@ -9,30 +9,29 @@
 <body>
       <!-- table productos-->
       <div class="container">
-        <h1>Listado de Productos</h1>
+        <h1>Listado de Usuarios</h1>
         <li>
-          <a href="{%  url 'agreProducto' %}"> Usuarios</a>
         </li>
         <div class="row">
             <table class="table">
               <thead>
                 <tr>
                   <th scope="col">username</th>
-                  <th scope="col">nombre</th>
-                  <th scope="col">precio</th>
-                  <th scope="col">categoria</th>
-                  <th scope="col">stock</th>
+                  <th scope="col">apellidos</th>
+                  <th scope="col">email</th>
                   <th scope="col">Opciones</th>
+         
                 </tr>
               </thead>
                 <tbody>
-                  {% for ve in contex %}
+                  {% for ve in usuarios %}
                   <tr>
                     <td>{{ve.username}}</td>
-                    <td>{{ve.nombre}}</td>
-                    <td>{{ve.precio}}</td>
-                    <td>{{ve.categoria}}</td>
-                    <td>{{ve.stock}}</td>
+                    <td>{{ve.apellidos}}</td>
+                    <td>{{ve.email}}</td>
+                    <td> <a href="{% url 'del_user' ve.email %}">ELIMINAR</a></td>
+                   
+            
 
 
                   </tr>
