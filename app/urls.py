@@ -19,5 +19,7 @@ urlpatterns = [
     path("nuevo-subcategoria", agreSubcat,name="agreSubcat"),
     path('eliminar/<SKU>',delete_Producto, name="delete_Producto"),
     path('nuevo-producto/<SKU>',Mod_Producto, name="Mod_Producto"),
+    path('vista-user',vistaAdmin, name="vistaAdmin"),
+      path('delete-user/<email>',del_user, name="del_user"),
  
 ]

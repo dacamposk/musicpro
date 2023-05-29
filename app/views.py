@@ -28,15 +28,16 @@ def CrearUsuario(request):
             tipo = formulario.cleaned_data["tipo"]
             email = formulario.cleaned_data["email"]
             username= formulario.cleaned_data["username"]
+            apellido= formulario.cleaned_data["apellido"]
+            telefono= formulario.cleaned_data["telefono"]
             password = formulario.cleaned_data["password"]
-            print(tipo,email,username,password)
             # funcion que llama al manager custom de user para crear un usuario bodeguero, revisar models customuser
             if tipo == 'bodeguero' :
-                User.objects.create_bodeguero(email,username,password) 
+                User.objects.create_bodeguero(email,username,apellido,telefono,password) 
             elif tipo == 'vendedor':
-                 User.objects.create_vendedor(email,username,password) 
+                 User.objects.create_vendedor(email,username,apellido,telefono,password) 
             elif tipo == 'contador':
-                User.objects.create_contador(email,username,password) 
+                User.objects.create_contador(email,username,apellido,telefono,password) 
             else:
                 pass
             messages.success(request, 'te has registrado correctamente')
@@ -47,7 +48,7 @@ def CrearUsuario(request):
     return render(request, 'registration/registro.html', data)
 
 def adminView (request):
-    return render(request, 'app/vistaAdmin.html')
+    return render(request, 'app/admini/vistaAdmin.html')
 
 
 def loginCli (request):
@@ -263,6 +264,27 @@ def delete_Producto(request,SKU):
     producto = Producto.objects.get(SKU=SKU)
     producto.delete()
     return redirect(to="crud")
+
+
+def del_user(request, email):    
+    try:
+        u = User.objects.get(email = email)
+        u.delete()
+        messages.success(request, "The user is deleted")     
+        return redirect ('vistaAdmin')       
+
+    except User.DoesNotExist:
+        messages.error(request, "User doesnot exist")    
+        return redirect ('vistaAdmin')
+
+
+
+def vistaAdmin(request):
+    usuarios = User.objects.all()
+
+
+    contex = {'usuarios':usuarios}
+    return render (request,'app/admini/Admincrud.html', contex)
 
 
 

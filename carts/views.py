@@ -3,8 +3,6 @@ from app.models import Producto
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 
-# Create your views here.
-
 def _cart_id(request):
     cart = request.session.session_key 
     if not cart:
