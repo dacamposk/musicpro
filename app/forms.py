@@ -95,4 +95,3 @@ class tipoiForm (forms.ModelForm):
         fields= '__all__'
 
 
-

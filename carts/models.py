@@ -21,4 +21,20 @@ class CartItem(models.Model):
 
     def __unicode__(self):
         return self.producto
-    
+
+from django.db import models
+
+class Order(models.Model):
+    PICKUP = 'PU'
+    DELIVERY = 'DE'
+
+    DELIVERY_OPTIONS = [
+        (PICKUP, 'Retiro en tienda'),
+        (DELIVERY, 'Entrega a domicilio'),
+    ]
+
+    delivery_option = models.CharField(
+        max_length=2,
+        choices=DELIVERY_OPTIONS,
+        default=PICKUP,
+    )

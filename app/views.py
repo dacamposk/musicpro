@@ -89,7 +89,7 @@ def store (request, slug):
     catslug = Categoria.objects.get(slug = slug)
     subcat = SubCategoria.objects.filter(categoria=catslug)
     productos = Producto.objects.filter(categoria=catslug)
-    paginator = Paginator(productos, 1)
+    paginator = Paginator(productos, 8)
     page = request.GET.get('page')
     paged_productos = paginator.get_page(page)
     categorias = Categoria.objects.all()
@@ -167,14 +167,6 @@ def DetalleProducto(request, id):
         'int_cart': in_cart
     }
     return render(request, 'app/tienda/detalle_producto.html',context)
-
-
-
-# def DetalleProducto(request,  id):
-#        datos = Producto.objects.filter(slug=id)
-#        producto = {'producto':datos}
-       
-#        return render(request, 'app/tienda/detalle_producto.html', producto)
 
 
 # CRUD funciones
@@ -272,9 +264,6 @@ def delete_Producto(request,SKU):
     producto = Producto.objects.get(SKU=SKU)
     producto.delete()
     return redirect(to="crud")
-
-
-
 
 
 

@@ -10,6 +10,11 @@ body {
     background-color: white;
 }
 
+label:after {
+    content: "" !important;
+}
+/* ====================== Header ==================== */
+
 header {
     width: 100%;
     background-color: #fff;
@@ -18,6 +23,7 @@ header {
     font-size: 15px;
     color: #000;
 }
+
 
 /* ====================== Inicio de Sesión Enlaces ==================== */
 
@@ -107,7 +113,7 @@ header {
 
 
 .producto .card{
-    height: 350px; /* Ajusta el valor según tus necesidades */
+    height: 350px;
     width:100%;
 }
 
@@ -128,10 +134,10 @@ header {
 
 
 .detalle_producto img {
-    width: 70%; /* Establecer el ancho al 100% del contenedor padre */
-    height: auto; /* Mantener la relación de aspecto original */
-    display: block; /* Convertir la imagen en un bloque */
-    margin: 0 auto; /* Establecer márgenes automáticos (horizontal) */
+    width: 70%; 
+    height: auto; 
+    display: block; 
+    margin: 0 auto
   }
 
   .detalle_producto .btn {
@@ -254,14 +260,13 @@ ol {
 }
 
 .producto .btn:visited,
-.btn:focus,
-.btn:active,
-.btn.active {
+.producto .btn:focus,
+.producto .btn:active,
+.producto .btn.active {
     margin-bottom: 10px;
     background-color: #a32727;
     border-color: #810404;
     box-shadow: inset 0 3px 5px rgba(0, 0, 0, 0.125), 0 0 0 2px #810404;
-
 }
 
 /* ====================== Footer ==================== */
@@ -327,35 +332,25 @@ footer a:active {
     max-height: 80px;
 }
 
-.input-group .form-control {
-    height: 40px; 
+.input-spinner {
+    width: 125px;
+    flex-wrap: nowrap;
+    display: inline-flex;
+    vertical-align: middle;
   }
-  
-  .input-group-prepend .btn {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
+  .input-spinner input.form-control {
+    text-align: center;
+    max-width: 46px;
+    font-weight: bold;
+    flex-basis: 46px;
+    border-color: #e4e4e4;
+    flex-grow: 0;
   }
-  
-  .input-group-append .btn {
-    border-top-left-radius: 0;
-    border-bottom-left-radius: 0;
-  }
-  
-  .input-group .form-control {
-    border-radius: 0;
-  }
-
-  .input-group .btn:focus {
-    outline: none;
-    box-shadow: none;
-  }
-
-  .input-group .form-control {
-    height: 40px; 
-    border-radius: 5px; 
-  }
-  .button-size {
-    height: 40px;
+  .input-spinner .btn {
+    width: 42px;
+    text-align: center;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
   }
   
 

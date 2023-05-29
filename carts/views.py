@@ -84,3 +84,30 @@ def cart(request, total=0, quantity=0, cart_items=None):
 
                                 
     return render (request, 'app/tienda/cart.html', context)
+
+
+
+# store/views.py
+
+from django.shortcuts import render, redirect
+from .forms import OrderForm
+from .models import Order
+
+def checkout_form(request):
+    if request.method == 'POST':
+        form = OrderForm(request.POST)
+        if form.is_valid():
+            delivery_option = form.cleaned_data.get('delivery_option')
+            form.save()
+            if delivery_option == Order.PICKUP:
+                return redirect('select_store')  # Redirige a la vista
+            else:  
+                return redirect('home')  # Redirige a la vista 
+    else:
+        form = OrderForm()
+
+    return render(request, 'app/tienda/checkout_form.html', {'form': form})
+
+def checkout(request):
+        return render(request, 'app/tienda/checkout.html')
+
