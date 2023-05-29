@@ -7,6 +7,7 @@ from django.contrib import messages
 from .models import User
 from . models import *
 from .models import SubCategoria, Categoria
+from django.core.paginator import EmptyPage, PageNotAnInteger,Paginator
 
 # Create your views here.
 
@@ -88,17 +89,22 @@ def store (request, slug):
     catslug = Categoria.objects.get(slug = slug)
     subcat = SubCategoria.objects.filter(categoria=catslug)
     productos = Producto.objects.filter(categoria=catslug)
+    paginator = Paginator(productos, 1)
+    page = request.GET.get('page')
+    paged_productos = paginator.get_page(page)
     categorias = Categoria.objects.all()
     producto_count = productos.count()
     context = {
         'tipo':tipo,
         'subCat':subcat,
         'categorias':categorias,
-        'productos': productos,
+        'productos': paged_productos,
         'producto_count': producto_count,
 
     }
     return render(request, 'app/tienda/store.html', context)
+
+
 # filtro de subcategoria
 def subCatfilter (request,slugcat,subcatslug):
      # Trae todo

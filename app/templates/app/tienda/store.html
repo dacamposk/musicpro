@@ -5,88 +5,122 @@
 
 <section class="section-content padding-y">
     <div class="container">
-    
-    <div class="row">
-        <aside class="col-md-3">
-            
-    <div class="card">
-        <article class="filter-group">
-            <header class="card-header">
-                <h6 class="title">Subcategorias</h6>
-            </header>
-            <div class="filter-content collapse show" id="collapse_1" style="">
-                <div class="card-body">
-                    {% for sub in subCat %}
-                    <ul class="list-menu">
-                    <li><a href="{% url 'subCatfilter' sub.slugcat sub.slug  %}">{{sub.nombreSubCategoria}}</a></li>
-                    </ul>
-                    {% endfor %}
-                </div> <!-- card-body.// -->
-            </div>
 
-            {% if not tipo %}
- 
-            {% else %}
-        </article> <!-- filter-group  .// -->
-        <hr>
-        <article class="filter-group">
-            <header class="card-header">
-                <h6 class="title">Tipos</h6>
-            </header>
-            <div class="filter-content collapse show" id="collapse_4" style="">
-                {% for t in tipo %}
-                <div class="card-body">
-                    <label><input type="checkbox" id="cbox1" value="first_checkbox"> {{t.nombreTipoInstrumento}} <a href=""></a></label><br>
-                  <label class="checkbox-btn">
-                    
-                  </label>
-                 
-                  </label>
-            </div><!-- card-body.// -->
+        <div class="row">
+            <aside class="col-md-3">
+
+                <div class="card">
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <h6 class="title">Subcategorias</h6>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_1" style="">
+                            <div class="card-body">
+                                {% for sub in subCat %}
+                                <ul class="list-menu">
+                                    <li><a
+                                            href="{% url 'subCatfilter' sub.slugcat sub.slug  %}">{{sub.nombreSubCategoria}}</a>
+                                    </li>
+                                </ul>
+                                {% endfor %}
+                            </div> <!-- card-body.// -->
+                        </div>
+
+                        {% if not tipo %}
+
+                        {% else %}
+                    </article> <!-- filter-group  .// -->
+                    <hr>
+                    <article class="filter-group">
+                        <header class="card-header">
+                            <h6 class="title">Tipos</h6>
+                        </header>
+                        <div class="filter-content collapse show" id="collapse_4" style="">
+                            {% for t in tipo %}
+                            <div class="card-body">
+                                <label><input type="checkbox" id="cbox1" value="first_checkbox">
+                                    {{t.nombreTipoInstrumento}} <a href=""></a></label><br>
+                                <label class="checkbox-btn">
+
+                                </label>
+
+                                </label>
+                            </div><!-- card-body.// -->
 
 
-            {% endfor %}
-            </div>
-            <hr>
-        </article> <!-- filter-group .// -->
-        {% endif %}
-       
-    </div> <!-- card.// -->
-    
-        </aside> <!-- col.// -->
-        <main class="col-md-9">
-    
-    <header class="border-bottom mb-4 pb-3">
-            <div class="form-inline">
-                <span class="mr-md-auto">{{ producto_count }} Productos Encontrados</span>
-                
-            </div>
-    </header><!-- sect-heading -->
+                            {% endfor %}
+                        </div>
+                        <hr>
+                    </article> <!-- filter-group .// -->
+                    {% endif %}
 
-{% load humanize %}
-<div class="row">
-    {% for p in productos %}
-    <div class="col-xs col-sm-6 col-md col-lg-3">
-        <div class="producto">
-            <div class="card">
-                <div class="body-card" >
-                    <div class="text-center"><img src="{{ p.imagen.url}}"  class="img-fluid" >
+                </div> <!-- card.// -->
+
+            </aside> <!-- col.// -->
+            <main class="col-md-9">
+
+                <header class="border-bottom mb-4 pb-3">
+                    <div class="form-inline">
+                        <span class="mr-md-auto">{{ producto_count }} Productos Encontrados</span>
+
                     </div>
+                </header><!-- sect-heading -->
 
-                    <h6 class="text-center ">{{p.marca}}</h6>
-                    <h4 class="text-center text-truncate">{{p.nombreProducto}}</h4>
-                    <h5 class="text-center ">${{p.precio | intcomma}}</h5>
-                    <!-- Boton Ver Producto -->
-                    <a href="{% url 'detalle' p.SKU %}"><div class="text-center"> <button  type="button"  class="btn btn-success " >
-                        Ver Producto</button> </a></div>
-            
-                
-                           
+                {% load humanize %}
+                <div class="row">
+                    {% for p in productos %}
+                    <div class="col-xs col-sm-6 col-md col-lg-3">
+                        <div class="producto">
+                            <div class="card">
+                                <div class="body-card">
+                                    <div class="text-center"><img src="{{ p.imagen.url}}" class="img-fluid">
+                                    </div>
+
+                                    <h6 class="text-center ">{{p.marca}}</h6>
+                                    <h4 class="text-center text-truncate">{{p.nombreProducto}}</h4>
+                                    <h5 class="text-center ">${{p.precio | intcomma}}</h5>
+                                    <!-- Boton Ver Producto -->
+                                    <a href="{% url 'detalle' p.SKU %}">
+                                        <div class="text-center"> <button type="button" class="btn btn-success ">
+                                                Ver Producto</button>
+                                    </a>
+                                </div>
+
+
+
+                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
-    </div>
-    {% endfor %}
+                {% endfor %}
+                {% if productos.has_other_pages %}
+                <nav class="mt-4" aria-label="Page navigation sample">
+                    <ul class="pagination">
+                        {%if productos.has_previous%}
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{productos.previous_page_numer}}">Previous</a></li>
+                        {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
+                        {% endif %}
+                        {% for i in productos.paginator.page_range %}
+                        {%if productos.number == i %}
+                        <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
+                        {% else %}
+                        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
+                        {% endif %}
+                        {% endfor %}
 
-</div>
-    {% endblock %}
+
+                        {%if productos.has_next%}
+                        <li class="page-item"><a class="page-link"
+                                href="?page={{productos.next_page_number}}">Siguiente</a></li>
+                        {% else %}
+                        <li class="page-item disabled"><a class="page-link" href="#">Siguiente</a></li>
+
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% endif %}
+
+        </div>
+        {% endblock %}
