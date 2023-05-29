@@ -14,6 +14,8 @@
     {% load static %}
 
     <link rel="stylesheet" href="{% static 'css/estilos.css' %}">
+    <script src="{% static 'js/carrito.js' %}"></script>
+
 
 </head>
 
@@ -23,7 +25,7 @@
             ¡Hemos actualizado nuestras ofertas!
         </div>
 
-        <div class="sesion">
+        <div class="sesion mt-60" >
             {% if user.is_authenticated %}
             <li>
                 Bienvenido/a: <a href="#">{{user.email}}</a>
@@ -41,6 +43,12 @@
                 <a href="{% url 'loginCli' %}">Iniciar sesion </a>
             </li>
             {% endif %}
+
+            <div id="cart" class="cart-icon">
+                <a href="{% url 'cart' %}"><img src="{% static 'img/icons/carrito.png' %}" alt="Carrito"></a>
+                <div id="cart-quantity">{{ cart_count }}</div>
+            </div>
+    
         </div>
 
         <div class="contenedor-logo">
@@ -77,22 +85,22 @@
                     <hr>
                     <ul class="list-inline">
                         <li>
-                            <img src="{% static 'img/footer/ubicacion.png' %}" class="img-fluid">
+                            <img src="{% static 'img/icons/ubicacion.png' %}" class="img-fluid">
                             Santiago - Providencia
                         </li>
                         <li>
-                            <img src="{% static 'img/footer/horario.png' %}" class="img-fluid">
+                            <img src="{% static 'img/icons/horario.png' %}" class="img-fluid">
                             Horario de Atención: <br>De lunes a viernes
                             10:00 a 15:00 <br> y de 16:00 a 21:00
                             </a>
                         </li>
                         <li>
-                            <img src="{% static 'img/footer/atencion.png' %}" class="img-fluid">
+                            <img src="{% static 'img/icons/atencion.png' %}" class="img-fluid">
                             + 9 99570080
                             </a>
                         </li>
                         <li>
-                            <img src="{% static 'img/footer/correo.png' %}" class="img-fluid">
+                            <img src="{% static 'img/icons/correo.png' %}" class="img-fluid">
 
                             <a target="_self" href="#">musicpro@gmail.com</a>
                         </li>

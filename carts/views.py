@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import get_object_or_404, render, redirect
 from app.models import Producto
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
@@ -39,6 +39,27 @@ def add_cart(request,producto_sku):
     return redirect('cart')
 
 
+def remove_cart(request, producto_sku):
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+    producto = get_object_or_404(Producto, SKU = producto_sku)
+    cart_item = CartItem.objects.get(producto=producto, cart=cart)
+    if cart_item.quantity>1:
+        cart_item.quantity -=1
+        cart_item.save()
+    else:
+        cart_item.delete()
+
+    return redirect('cart')
+    
+def remove_cart_item(request, producto_sku):
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+    producto = get_object_or_404(Producto, SKU = producto_sku)
+    cart_item = CartItem.objects.get(producto=producto, cart=cart)
+    cart_item.delete()
+    return redirect('cart')
+
+
+
 
 def cart(request, total=0, quantity=0, cart_items=None):
     try:
@@ -47,13 +68,18 @@ def cart(request, total=0, quantity=0, cart_items=None):
         for cart_item in cart_items:
             total +=(cart_item.producto.precio * cart_item.quantity)
             quantity += cart_item.quantity
+        tax = int((19*total) / 100)
+        grand_total = total + tax
+
     except ObjectDoesNotExist:
         pass ##ignora la excepcion
 
     context = {
         'total': total,
         'quantity ':quantity,
-        'cart_items': cart_items
+        'cart_items': cart_items,
+        'tax': tax,
+        'grand_total': grand_total
     }
 
                                 

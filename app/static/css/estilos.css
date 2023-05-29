@@ -1,3 +1,5 @@
+/* ====================== General ==================== */
+
 * {
     margin: 0;
     padding: 0;
@@ -17,7 +19,8 @@ header {
     color: #000;
 }
 
-/* inicio sesión y carrito*/
+/* ====================== Inicio de Sesión Enlaces ==================== */
+
 .sesion {
     font-size: 15px;
     display: flex;
@@ -33,14 +36,51 @@ header {
 
 }
 
-/* carrosel*/
+/* ====================== carrito icono ==================== */
+
+#cart {
+    position: relative;
+    display: inline-block;
+    margin-left: 15px;
+}
+
+#cart img {
+    height: 27px;
+    width: 27px;
+}
+
+#cart-quantity {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background: red;
+    color: white;
+    padding: 2px 5px;
+    border-radius: 50%;
+    font-size: 0.7em;
+}
+
+.mt-60 {
+    margin-top: 13px;
+}
+
+.cart-icon:hover {
+    transform: scale(1.1);
+    transition: transform 0.3s ease-in-out;
+}
+
+
+
+/* ====================== Carrusel ==================== */
+
 .slider {
     width: 90%;
     margin: auto;
     color: black
 }
 
-/* anuncio header*/
+/* ====================== Contendor Anuncio Header ==================== */
+
 .contenedor-anuncio {
     background-color: #810404;
     color: white;
@@ -55,14 +95,16 @@ header {
 }
 
 
-/* div principal del body*/
+/* ====================== Contendor Principal ==================== */
+
 .contenido {
     background-color: #fff;
     width: 90%;
     margin: auto;
 }
 
-/* card productos */
+/* ====================== Tarjeta Productos ==================== */
+
 
 .producto .card{
     height: 350px; /* Ajusta el valor según tus necesidades */
@@ -82,7 +124,8 @@ header {
     max-height: 200px;
 }
 
-/* card detalle productos */
+/* ====================== Página Detalle Producto ==================== */
+
 
 .detalle_producto img {
     width: 70%; /* Establecer el ancho al 100% del contenedor padre */
@@ -108,7 +151,8 @@ header {
   }
 
 
-/* div home -> garantias - envios etc. */
+/* ====================== Sellos de Calidad ==================== */
+
 .sellos-de-calidad {
     background-color: #cfcfcf;
     border-radius: 10px;
@@ -128,7 +172,8 @@ header {
     background-color: #d6d6d6;
 }
 
-/* Menu*/
+/* ====================== NavBar ==================== */
+
 ul,
 ol {
     list-style: none;
@@ -180,7 +225,8 @@ ol {
     top: 0px;
 }
 
-/* producto contenedor */
+/* ====================== Contenedor de Producto ==================== */
+
 .producto img {
     /* width: 100%;
     height: 100%; */
@@ -218,7 +264,8 @@ ol {
 
 }
 
-/* footer */
+/* ====================== Footer ==================== */
+
 
 footer {
     color: black;
@@ -310,4 +357,12 @@ footer a:active {
   .button-size {
     height: 40px;
   }
+  
+
+
+
+
+
+
+
   

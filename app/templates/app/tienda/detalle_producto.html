@@ -9,11 +9,11 @@
   <div class="row no-gutters">
     <aside class="col-md-6">
       <article class="detalle_producto">
-          <div>
-            <img src="{{ producto.imagen.url}}" class="img-fluid">
-          </div> <!-- img-big-wrap.// -->
+        <div>
+          <img src="{{ producto.imagen.url}}" class="img-fluid">
+        </div> <!-- img-big-wrap.// -->
 
-        </article> <!-- gallery-wrap .end// -->
+      </article> <!-- gallery-wrap .end// -->
     </aside>
     <main class="col-md-6 border-left">
       <article class="detalle_producto">
@@ -36,15 +36,24 @@
         <div>{{producto.descripcion}}</div>
 
         <br>
+        {% if producto.stock > 0 %}
+        
         <div style="display: inline-block;">
           <h5 style="display: inline; margin: 0; color:red;">
-            </h5tyle>Stock: {{producto.stock}} </h5>
+          </h5tyle>Stock: {{producto.stock}} </h5>
+          {% else %}
+          <div style="display: inline-block;">
+          <h5 style="display: inline; margin: 0; color:red;">
+          {% endif %}
         </div>
         <br>
         <br>
+        {% if producto.stock <= 0 %}
+        <h5>Producto fuera de stock</h5>
+        {% else %}
         <div> <a href="{% url 'add_cart' producto.SKU %}">
             <button class="btn btn-primary btn-lg" type="button">Añadir al carrito</button></div></a>
-
+        {% endif %}
       </article>
     </main>
 

@@ -1,4 +1,6 @@
 from django.shortcuts import  render, redirect
+from carts.models import CartItem
+from carts.views import _cart_id
 from .forms import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -88,8 +90,6 @@ def store (request, slug):
     productos = Producto.objects.filter(categoria=catslug)
     categorias = Categoria.objects.all()
     producto_count = productos.count()
-
-
     context = {
         'tipo':tipo,
         'subCat':subcat,
@@ -150,8 +150,18 @@ def tipoisntruFilter (request,slugcat,subcatslug):
     return render(request, 'app/tienda/store.html', context)
 
 def DetalleProducto(request, id):
-    producto = Producto.objects.get(SKU=id)
-    return render(request, 'app/tienda/detalle_producto.html', {'producto': producto})
+    try:
+        producto = Producto.objects.get(SKU=id)
+        in_cart = CartItem.objects.filter(cart__cart_id=_cart_id(request),producto=producto).exists()
+    except Exception as e:
+        raise e
+    
+    context={
+        'producto': producto,
+        'int_cart': in_cart
+    }
+    return render(request, 'app/tienda/detalle_producto.html',context)
+
 
 
 # def DetalleProducto(request,  id):
