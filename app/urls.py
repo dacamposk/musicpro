@@ -1,7 +1,10 @@
-from django.urls import path
+from django.urls import path, include
 from .views import *
- 
 from . import views
+from rest_framework import routers
+
+router = routers.DefaultRouter()
+router.register('producto', ProductoViewset)
 
 urlpatterns = [
     path('', home, name="home"),
@@ -23,4 +26,5 @@ urlpatterns = [
     path('vista-user',vistaAdmin, name="vistaAdmin"),
     path('delete-user/<email>',del_user, name="del_user"),
     path('dashboard/',cli_dashboard, name="cli-dashboard"),
+    path('api/', include(router.urls)),
 ]

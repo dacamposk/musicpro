@@ -11,8 +11,14 @@ from django.core.paginator import EmptyPage, PageNotAnInteger,Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from carts.views import _cart_id
 from carts.models import Cart, CartItem
+from .serializers import ProductoSerializer
+from rest_framework import viewsets
 
-# Create your views here.
+class ProductoViewset(viewsets.ModelViewSet):
+    queryset = Producto.objects.all()
+    serializer_class = ProductoSerializer
+
+
 
 def home (request):
     productos = Producto.objects.all().filter(is_available=True)
