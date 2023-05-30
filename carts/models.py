@@ -1,10 +1,6 @@
 from django.db import models
-<<<<<<< HEAD
-from app.models import Producto, User
-=======
 from app.models import Producto
 from app.models import User
->>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
 
 # Create your models here.
 

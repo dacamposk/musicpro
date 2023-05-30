@@ -3,10 +3,6 @@ from app.models import Producto,User
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
 
-<<<<<<< HEAD
-=======
-
->>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
 def _cart_id(request):
     cart = request.session.session_key 
     if not cart:
@@ -134,40 +130,4 @@ def checkout(request, total=0, quantity=0, cart_items=None):
     return render (request, 'app/tienda/checkout.html', context)
 
 
-<<<<<<< HEAD
-def checkout2(request, total=0, quantity=0, cart_items=None):
-    tax=0
-    try:
-        cart = Cart.objects.get(cart_id=_cart_id(request))
-        cart_items = CartItem.objects.filter(cart=cart, is_active=True)
-        for cart_item in cart_items:
-            total +=(cart_item.producto.precio * cart_item.quantity)
-            quantity += cart_item.quantity
-        tax = int((19*total) / 100)
-        grand_total = total + tax
-
-    except ObjectDoesNotExist:
-        pass ##ignora la excepcion
-    tt  = {
-            'total': total,
-
-    }
-
-    cant={
-            'quantity':quantity,
-    }
-
-    item = {
-        'cart_items':cart_items
-    }
-
-
-    return tt, cant,item 
-
-
-
-
-
-=======
->>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
 

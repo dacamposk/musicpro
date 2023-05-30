@@ -194,11 +194,6 @@ class Comuna(models.Model):
     nombre  = models.CharField(primary_key=True,max_length=80)
     region= models.ForeignKey(Region,on_delete=models.CASCADE)
 
-class Sucursal(models.Model):
-    nombre  = models.CharField(primary_key=True,max_length=80) 
-    calle = models.CharField(max_length=300)
-    numero = models.CharField(max_length=10)
-    comuna = models.ForeignKey(Comuna,on_delete=models.CASCADE)
 
 
 class Sucursal(models.Model):

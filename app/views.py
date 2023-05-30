@@ -1,6 +1,6 @@
 from django.shortcuts import  render, redirect
 from carts.models import CartItem ,Cart
-from carts.views import _cart_id, checkout, checkout2
+from carts.views import _cart_id, checkout
 from .forms import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
