@@ -1,0 +1,129 @@
+{% extends 'app/base.html' %}
+{% load static %}
+{% block contenido %}
+
+
+{% load humanize %}
+
+<section class="section-content padding-y bg">
+  <div class="container">
+
+
+    <div class="row">
+      <aside class="col-lg-8">
+        <div class="card">
+            <h5 class="card-header"> Direccion de Facturación</h5>
+            <div class="card-body">
+                <p> {{order.full_name}}</p>
+                <p> {{order.full_address}}</p>
+                <p> {{order.city}}</p>
+                <p> {{order.country}}</p>
+                <p> {{order.email}}</p>
+                <p> {{order.phone}}</p>
+
+                {% if order.order_note %}
+                <b>Detalle de la orden: </b>{{order.order_note}}
+
+                {% endif %}
+            </div>
+     
+        </div> <!-- card.// -->
+
+        <div class="card">
+            <h5 class="card-header"> Metodo de pago</h5>
+            <div class="card-body">
+                <p> este es metodo pago</p>
+            </div>
+     
+        </div> <!-- card.// -->
+
+        <div class="card">
+            <h5 class="card-header"> Revision de productos</h5>
+            <div class="card-body">
+                <table class="table table-borderless table-shopping-cart">
+                    <thead class="text-muted">
+                      <tr class="small text-uppercase">
+                        <th scope="col" width="300">Producto</th>
+                        <th scope="col" width="150">Cantidad</th>
+                        <th scope="col" width="150">Precio</th>
+                        <th scope="col" class="text-right" width="200"> </th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {% for cart_item in cart_items %}
+        
+                      <tr>
+                        <td>
+                          <figure class="itemside align-items-center">
+                            <div class="aside"><img src="{{ cart_item.producto.imagen.url}}" class="img-sm" style="height:50px;"></div>
+                            <figcaption class="info">
+                              <a href="{{ cart_item.producto.get_url }}"
+                                class="title text-dark">{{cart_item.producto.nombreProducto}}</a>
+                              <p class="text-muted small">{{ cart_item.producto.marca}}</p>
+                            </figcaption>
+                          </figure>
+                        </td>
+                        <td>
+                          </head>
+        
+                          <body>
+                            <div class="col">
+                              <label>{{ cart_item.quantity}}</label>
+                            </div>
+                        </td>
+                        <td>
+                          <div class="price-wrap">
+                            <var class="price">
+                              <h6>${{ cart_item.sub_total | intcomma}}</h6>
+                            </var>
+                            <small class="text-muted"> ${{ cart_item.producto.precio | intcomma}} c/u </small>
+                          </div>
+                        </td>
+                      </tr>
+                      {% endfor %}
+        
+                    
+        
+                    </tbody>
+                  </table>
+                
+            </div>
+     
+        </div> <!-- card.// -->
+
+      </aside> <!-- col.// -->
+      <aside class="col-lg-4">
+
+        <div class="card">
+          <div class="card-body">
+            <dl class="dlist-align">
+              <dt>Precio Total:</dt>
+              <dd class="text-right">${{total|intcomma}}</dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Impuesto:</dt>
+              <dd class="text-right"> ${{tax |intcomma}} </dd>
+            </dl>
+            <dl class="dlist-align">
+              <dt>Total:</dt>
+              <dd class="text-right text-dark b"><strong>${{grand_total |intcomma}}</strong></dd>
+            </dl>
+            <hr>
+            <p class="text-center mb-3">
+              <img src="{% static 'img/icons/payments.png' %}" height="26">
+            </p>
+            <a href="{% url 'checkout' %}" class="btn btn-primary btn-block">Ir al Checkout</a>
+            <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Confirmar pago</a>
+        
+          </div> <!-- card-body.// -->
+        </div> <!-- card.// -->
+
+      </aside> <!-- col.// -->
+
+
+    </div> <!-- row.// -->
+   
+  </div> <!-- container .//  -->
+</section>
+
+{% endblock %}

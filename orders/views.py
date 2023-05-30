@@ -5,6 +5,10 @@ from .models import Order
 from app.models import User
 import datetime
 
+
+def payments(request):
+    return render (request,'orders/payments.html')
+
 def place_order(request, total =0,quantity=0):
     current_user = request.user
     cart_items = CartItem.objects.filter(user=current_user)
@@ -40,7 +44,7 @@ def place_order(request, total =0,quantity=0):
             data.city = form.cleaned_data['city']
             data.order_note = form.cleaned_data['order_note']
             data.order_total = grand_total
-            data.is_ordered = True
+            data.is_ordered = False
             data.tax = tax
             data.ip = request.META.get('REMOTE_ADDR')
             data.save()
@@ -54,6 +58,18 @@ def place_order(request, total =0,quantity=0):
             order_number = current_date + str(data.id)
             data.order_number = order_number
             data.save()
-            return redirect('home')
-    else:
+
+
+            order = Order.objects.get(user= current_user,is_ordered = False,order_number=order_number)
+
+            context ={
+                'order':order,
+                'total': total,
+                'tax':tax,
+                'grad_total':grand_total,
+                'cart_items': cart_items,
+            }
+
+            return render(request,'orders/payments.html',context)
+        
         return redirect('checkout')
