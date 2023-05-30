@@ -1,7 +1,8 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from app.models import Producto
+from app.models import Producto,User
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+
 
 def _cart_id(request):
     cart = request.session.session_key 
@@ -56,9 +57,6 @@ def remove_cart_item(request, producto_sku):
     cart_item.delete()
     return redirect('cart')
 
-
-
-
 def cart(request, total=0, quantity=0, cart_items=None):
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
@@ -80,14 +78,16 @@ def cart(request, total=0, quantity=0, cart_items=None):
         'grand_total': grand_total
     }
 
-                                
     return render (request, 'app/tienda/cart.html', context)
 
 
+def ver_producto(request):
+    current_user = request.user    
+  
+    return (request)
 
 # store/views.py
 
-from django.shortcuts import render, redirect
 from .forms import OrderForm
 from .models import Order
 

@@ -1,5 +1,6 @@
 from django.db import models
 from app.models import Producto
+from app.models import User
 
 # Create your models here.
 
@@ -10,7 +11,11 @@ class Cart(models.Model):
     def _str_(self):
         return self.cart_id
     
+    def __str__(self):  
+        return str(self.cart_id)  
+    
 class CartItem(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE,null=True)
     producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE)
     quantity = models.IntegerField()
@@ -21,6 +26,9 @@ class CartItem(models.Model):
 
     def __unicode__(self):
         return self.producto
+    
+    def __str__(self):  
+        return str(self.producto)  
 
 from django.db import models
 
@@ -38,3 +46,4 @@ class Order(models.Model):
         choices=DELIVERY_OPTIONS,
         default=PICKUP,
     )
+
