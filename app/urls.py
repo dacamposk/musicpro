@@ -21,7 +21,12 @@ urlpatterns = [
     path('eliminar/<SKU>',delete_Producto, name="delete_Producto"),
     path('nuevo-producto/<SKU>',Mod_Producto, name="Mod_Producto"),
     path('vista-user',vistaAdmin, name="vistaAdmin"),
+<<<<<<< HEAD
      path('ver-user/',ver, name="ver"),
       path('delete-user/<email>',del_user, name="del_user"),
  
+=======
+    path('delete-user/<email>',del_user, name="del_user"),
+    path('dashboard/',cli_dashboard, name="cli-dashboard"),
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
 ]

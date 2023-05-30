@@ -12,6 +12,7 @@
           <h4 class="card-title mb-4">Dirreción de Facturación</h4>
 
 
+<<<<<<< HEAD
           <form action="" method="post">
             <div class="form-row">
               <div class="col-md-6 form-group">
@@ -21,6 +22,18 @@
               <div class="col-md-6 form-group">
                 <label for="">Apellido</label>
                 <input type="text" name="apellido" class="form-control">
+=======
+          <form action="{% url 'place_order' %}" method="post">
+            {% csrf_token %}
+            <div class="form-row">
+              <div class="col-md-6 form-group">
+                <label for="">Nombre</label>
+                <input type="text" name="first_name" class="form-control">
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="">Apellido</label>
+                <input type="text" name="last_name" class="form-control">
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
               </div>
             </div>
             <div class="form-row">
@@ -30,33 +43,57 @@
               </div>
               <div class="col-md-6 form-group">
                 <label for="">Teléfono</label>
+<<<<<<< HEAD
                 <input type="text" name="telefono" class="form-control">
+=======
+                <input type="text" name="phone" class="form-control">
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6 form-group">
                 <label for="">Dirección</label>
+<<<<<<< HEAD
                 <input type="text" name="direccion_1" class="form-control">
               </div>
               <div class="col-md-6 form-group">
                 <label for="">Número</label>
                 <input type="text" name="direccion_2" class="form-control">
+=======
+                <input type="text" name="address_line_1" class="form-control">
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="">Número</label>
+                <input type="text" name="address_line_2" class="form-control">
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6 form-group">
                 <label for="">Región</label>
+<<<<<<< HEAD
                 <input type="text" name="ciudad" class="form-control">
               </div>
               <div class="col-md-6 form-group">
                 <label for="">Ciudad</label>
                 <input type="text" name="ciudad" class="form-control">
+=======
+                <input type="text" name="region" class="form-control">
+              </div>
+              <div class="col-md-6 form-group">
+                <label for="">Ciudad</label>
+                <input type="text" name="city" class="form-control">
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
               </div>
             </div>
             <div class="form-row">
               <div class="col-md-6 form-group">
                 <label for="">Indicaciones Adicionales</label>
+<<<<<<< HEAD
                 <textarea name="descripcion" cols="40" rows="5"></textarea>
+=======
+                <textarea name="order_note" cols="40" rows="5"></textarea>
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
               </div>
             </div>
 
@@ -93,9 +130,14 @@
                   </figure>
                 </td>
                 <td>
+<<<<<<< HEAD
 
                   </head>
 
+=======
+                  </head>
+
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
                   <body>
                     <div class="col">
                       <label>{{ cart_item.quantity}}</label>
@@ -106,7 +148,11 @@
                     <var class="price">
                       <h6>${{ cart_item.sub_total | intcomma}}</h6>
                     </var>
+<<<<<<< HEAD
                     <small class="text-muted"> ${{ cart_item.producto.precio | intcomma}} cada uno </small>
+=======
+                    <small class="text-muted"> ${{ cart_item.producto.precio | intcomma}} c/u </small>
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
                   </div>
                 </td>
               </tr>
@@ -116,8 +162,16 @@
 
             </tbody>
           </table>
+<<<<<<< HEAD
           <a href="./place-order.html" class="btn btn-primary btn-block"> Pagar</a>
           <a href="{% url 'home' %}" class="btn btn-light btn-block">Seguir Comprando</a>
+=======
+          <button type="submit" name="submit" class="btn btn-primary btn-block">Guardar</button>
+
+          <a href="./place-order.html" class="btn btn-primary btn-block"> Pagar</a>
+          <a href="{% url 'home' %}" class="btn btn-light btn-block">Seguir Comprando</a>
+        </form>
+>>>>>>> e68df7457a23bbc56ed5002172001b7d93ef341f
         </div>
       </div>
 

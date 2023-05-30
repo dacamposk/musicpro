@@ -5,7 +5,6 @@ import datetime
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
 from django.shortcuts import redirect
 from django.utils.text import slugify
-# Create your models here.
 
 # Usuarios
 class Invitado(models.Model):
@@ -91,9 +90,6 @@ class customUserManager (BaseUserManager):
         usuario.save()
         return usuario
     
-        
-   
-
 class User(AbstractBaseUser,PermissionsMixin):
     email = models.EmailField('Correo',unique=True)
     username = models.CharField('nombre',max_length=255)
@@ -125,9 +121,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     def has_module_perms(self, app_label) :
         return True
 
-
 # Categorias
-
 class Categoria(models.Model):
     nombreCategoria = models.CharField(max_length=50,primary_key=True, verbose_name='nombre de la categoria', unique=True)
     descripcion = models.CharField(max_length=255, blank = True)
@@ -207,6 +201,15 @@ class Sucursal(models.Model):
     comuna = models.ForeignKey(Comuna,on_delete=models.CASCADE)
 
 
+class Sucursal(models.Model):
+    nombre  = models.CharField(primary_key=True,max_length=80) 
+    calle = models.CharField(max_length=300)
+    numero = models.CharField(max_length=10)
+    comuna = models.ForeignKey(SubCategoria,on_delete=models.CASCADE)
+
+
+    def __str__(self) -> str:
+        return self.nombre  
 
 class TipoPago(models.Model):
     nombrePago = models.CharField(primary_key=True,max_length=80)

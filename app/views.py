@@ -8,6 +8,9 @@ from .models import User
 from . models import *
 from .models import SubCategoria, Categoria
 from django.core.paginator import EmptyPage, PageNotAnInteger,Paginator
+from django.contrib.auth.decorators import login_required, permission_required
+from carts.views import _cart_id
+from carts.models import Cart, CartItem
 
 # Create your views here.
 
@@ -58,6 +61,17 @@ def loginCli (request):
         if formulario.is_valid():
             user = authenticate(username= formulario.cleaned_data["email"],password= formulario.cleaned_data['contrasena'])
             if user is not None:
+                try:
+                    cart = Cart.objects.get(cart_id=_cart_id(request))
+                    is_cart_item_exist = CartItem.objects.filter(cart=cart).exists()
+                    if is_cart_item_exist:
+                        cart_item = CartItem.objects.filter(cart=cart)
+                        for item in cart_item:
+                            item.user = user
+                            item.save()
+                except:
+                    pass
+
                 login(request,user)
                 return redirect(to='home')
             else :
@@ -297,12 +311,13 @@ def del_user(request, email):
 
 def vistaAdmin(request):
     usuarios = User.objects.all()
-
-
     contex = {'usuarios':usuarios}
     return render (request,'app/admini/Admincrud.html', contex)
 
+# @login_required(login_url='login')
 
+def cli_dashboard(request):
+    return render(request,'app/cliente_dashboard.html')
 
 
 
