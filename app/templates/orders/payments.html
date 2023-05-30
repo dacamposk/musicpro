@@ -112,8 +112,21 @@
             <p class="text-center mb-3">
               <img src="{% static 'img/icons/payments.png' %}" height="26">
             </p>
-            <a href="{% url 'checkout' %}" class="btn btn-primary btn-block">Ir al Checkout</a>
-            <a href="{% url 'checkout' %}" class="btn btn-primary btn-block"> Confirmar pago</a>
+            <div class="container">
+              
+              <form action="" method="POST">{% csrf_token %}
+                <input type="hidden" name="token_ws" value="{{ response.token }}">
+                <input type="hidden" name="username" value="{{ request.user.username }}">
+                <h3 class="mt-4">Total:</h3>
+                <h3>$ {{ total }}</h3>
+                <input type="submit" class="btn btn-primary" value="pago">
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <input type="submit" class="btn btn-primary"   value="pago">
         
           </div> <!-- card-body.// -->
         </div> <!-- card.// -->

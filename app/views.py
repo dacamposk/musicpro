@@ -338,3 +338,6 @@ def ver(request):
     return redirect('crud')
 
 
+
+
+
