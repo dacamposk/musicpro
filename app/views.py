@@ -1,6 +1,6 @@
 from django.shortcuts import  render, redirect
-from carts.models import CartItem
-from carts.views import _cart_id
+from carts.models import CartItem ,Cart
+from carts.views import _cart_id, checkout, checkout2
 from .forms import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -80,6 +80,22 @@ def RegistroCli (request):
                 username= formulario.cleaned_data["username"]
                 password = formulario.cleaned_data["password"]
                 User.objects.create_user(email,username,password) 
+                return redirect(to='home')
+            data["form"] = formulario
+    return render(request, 'registration/registroCli.html',data)
+
+
+def asdasdas (request):
+    
+    if request.method == 'GET':
+       data = { 'form' : Ordenform()}
+       return render(request, 'registration/registroCli.html',data)
+    
+    else:
+        if request.method == 'POST':
+            formulario = Ordenform(data= request.POST)
+            if formulario.is_valid():
+                email = formulario.cleaned_data["email"]
                 return redirect(to='home')
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
@@ -289,5 +305,21 @@ def vistaAdmin(request):
 
 
 
+
+def ver(request):
+    user = request.user
+    dueño = Cart.objects.get(user=user)
+    item = CartItem.objects.filter(cart=dueño)
+
+    for valor in item.values():
+        print(valor)
+    orden = Orden('default','ae@a.com','2323','valparaiso',222,'redcompra',232323)
+    orden.save()
+
+
+    #datos = Cart.objects.get()
+
+
+    return redirect('crud')
 
 

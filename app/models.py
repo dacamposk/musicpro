@@ -1,8 +1,9 @@
-from typing import Dict, Tuple
+from typing import Dict, Iterable, Optional, Tuple
 from autoslug import AutoSlugField
 from django.db import models
 import datetime
 from django.contrib.auth.models import AbstractBaseUser,PermissionsMixin,BaseUserManager
+from django.shortcuts import redirect
 from django.utils.text import slugify
 # Create your models here.
 
@@ -116,6 +117,8 @@ class User(AbstractBaseUser,PermissionsMixin):
 
     def get_full_name(self):
         return self.username
+    
+
     def has_perm(self, perm, obj = None ):
         return True
     
@@ -187,6 +190,53 @@ class Producto(models.Model):
 
     def __str__(self) -> str:
         return self.nombreProducto   
+    
+
+
+class Region(models.Model):
+    nombre = models.CharField(primary_key=True,max_length=80)
+
+class Comuna(models.Model):
+    nombre  = models.CharField(primary_key=True,max_length=80)
+    region= models.ForeignKey(Region,on_delete=models.CASCADE)
+
+class Sucursal(models.Model):
+    nombre  = models.CharField(primary_key=True,max_length=80) 
+    calle = models.CharField(max_length=300)
+    numero = models.CharField(max_length=10)
+    comuna = models.ForeignKey(Comuna,on_delete=models.CASCADE)
 
 
 
+class TipoPago(models.Model):
+    nombrePago = models.CharField(primary_key=True,max_length=80)
+
+    def str(self) -> str:
+        return self.nombrePago
+
+class Orden(models.Model):
+    numero_orden= models.CharField(primary_key=True,max_length=222)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ubicacion = models.CharField(max_length=80, null=True)
+    sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
+    total = models.IntegerField()
+    tipoPago = models.ForeignKey(TipoPago, on_delete=models.CASCADE)
+    tax = models.IntegerField(null=True)
+
+
+    def str(self) -> str:
+        return self.numero_orden
+    
+
+ 
+
+class Detalle_orden(models.Model):
+    numero_orden = models.ForeignKey(Orden, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
+    cantidad = models.IntegerField()
+
+    def str(self) -> str:
+        return self.numero_orden
+    
+ 
