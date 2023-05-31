@@ -4,167 +4,54 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-
+    
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-+0n0xVW2eSR5OomGNYDnhzAbDsOXxcvSN1TPprVMTNDbiYZCxYbOOl7+AMvyTG2x" crossorigin="anonymous">
-
+    
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'css/stylecrud.css' %}">
     <title>Listado de productos</title>
   </head>
   <body>
 
-<a href="{% url 'ver'  %}">ver</a>
-     
-    <!-- table productos-->
-    <div class="container">
-        <h1>Listado de Productos</h1>
-        <li>
-          <a href="{%  url 'agreProducto' %}"> Nuevo Producto</a>
-        </li>
-        <div class="row">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">SKU</th>
-                  <th scope="col">nombre</th>
-                  <th scope="col">precio</th>
-                  <th scope="col">categoria</th>
-                  <th scope="col">stock</th>
-                  <th scope="col">Opciones</th>
-                </tr>
-              </thead>
-                <tbody>
-                  {% for ve in productos %}
-                  <tr>
-                    <td>{{ve.nombreProducto}}</td>
-                    <td>{{ve.nombre}}</td>
-                    <td>{{ve.precio}}</td>
-                    <td>{{ve.categoria}}</td>
-                    <td>{{ve.stock}}</td>
-                    <td><a href="{% url 'Mod_Producto' ve.SKU %}">Modificar</a></td>
-                    <td><a href="{% url 'delete_Producto' ve.SKU %}">Eliminar</a></td>
-
-                  </tr>
-                  {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-  
-    <!-- table categorias-->
-    <div class="container">
-        <h1>Listado de categorias</h1>
-        <li>
-          <a href="{%  url 'agreCategoria' %}"> Nueva Categoria</a>
-        </li>
-        <div class="row">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Nombre Categoria</th>
-                  <th scope="col">Opciones</th>
-                </tr>
-              </thead>
-                <tbody>
-                  {% for ve in categorias %}
-                  <tr>
-                    <td>{{ve.nombreCategoria}}</td>
-
-                  </tr>
-                  {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-
-
-
+    <header>
+      <div class="container-fluid" id="header-crud">
+        
+      </div>
     
-    <!-- table subcategorias-->
-    <div class="container">
-      <h1>Listado de subcategorias</h1>
-      <li>
-        <a href="{%  url 'agreSubcat' %}"> Nueva Sub Categoria</a>
-      </li>
-      <div class="row">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Nombre Sub categoria</th>
-                <th scope="col">Opciones</th>
-              </tr>
-            </thead>
-              <tbody>
-                {% for ve in subcat %}
-                <tr>
-                  <td>{{ve.nombreSubCategoria}}</td>
+     </header>
+       
+     <div class="sidebar">
+      <h2>Usuarios</h2>
+      <ul>
+          <li><a href="{%url 'productosList' %}"> Productos</a></li>
+          <li><a href="{%url 'categoriasList' %}"> Categorias</a></li>
+          <li><a href="{%url 'subcateList' %}"> Subcategorias</a></li>
+          <li><a href="{%url 'MarcaList' %}"> Marcas</a></li>
+          <li><a href="{%url 'categoriasList' %}"> Tipo de instrumento</a></li>
+          <li><a href="{% url 'vistaAdmin' %}">ver usuarios</a></li>
 
-                </tr>
-                {% endfor %}
-              </tbody>
-          </table>
-      </div>
+      </ul>
   </div>
-
-    <div class="container ">
-        <div>
-           
-
-          
-    <!-- table marca-->
-    <div class="container">
-      <h1>Listado de marcas</h1>
-      <li>
-        <a href="{%  url 'agreMarca' %}"> Nueva Marca</a>
-      </li>
-      <div class="row">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Nombre Marca</th>
-                <th scope="col">Opciones</th>
-              </tr>
-            </thead>
-              <tbody>
-                {% for ve in marcas %}
-                <tr>
-                  <td>{{ve.nombreMarca}}</td>
-
-                </tr>
-                {% endfor %}
-              </tbody>
-          </table>
-      </div>
-  </div>
-
-
-  
-    <!-- table tipo instrumento-->
-    <div class="container">
-      <h1>Listado de tipos de instrumento</h1>
-      <li>
-        <a href="{%  url 'agreTipoIns' %}"> Nueva tipo de instrumento</a>
-      </li>
-      <div class="row">
-          <table class="table">
-            <thead>
-              <tr>
-                <th scope="col">Nombre tipo instrumento</th>
-                <th scope="col">Opciones</th>
-              </tr>
-            </thead>
-              <tbody>
-                {% for ve in tipoi %}
-                <tr>
-                  <td>{{ve.nombreTipoInstrumento}}</td>
-
-                </tr>
-                {% endfor %}
-              </tbody>
-          </table>
-      </div>
-  </div>
-            
+    <div class="row">
+    
+ 
+    
+ 
+   
      
+    </div>
+
+
+
+
+     <div>
+      
+      {% block contenido %}
+      {% endblock %}
+     </div>
+            
+
 
         </div>
     </div>

@@ -1,0 +1,42 @@
+{% extends 'Tcrud/crud.html' %}
+{% load static %}
+{% block contenido %}
+
+  
+    <!-- table productos-->
+    <div class="container">
+        <h1>Listado de Productos</h1>
+        <li>
+          <a href="{%  url 'agreProducto' %}"> Nuevo Producto</a>
+        </li>
+        <div class="row">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">SKU</th>
+                  <th scope="col">nombre</th>
+                  <th scope="col">precio</th>
+                  <th scope="col">categoria</th>
+                  <th scope="col">stock</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+                <tbody>
+                  {% for ve in productos %}
+                  <tr>
+                    <td>{{ve.nombreProducto}}</td>
+                    <td>{{ve.nombre}}</td>
+                    <td>{{ve.precio}}</td>
+                    <td>{{ve.categoria}}</td>
+                    <td>{{ve.stock}}</td>
+                    <td><a href="{% url 'Mod_Producto' ve.SKU %}">Modificar</a></td>
+                    <td><a href="{% url 'delete_Producto' ve.SKU %}">Eliminar</a></td>
+
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+{% endblock %}

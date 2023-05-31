@@ -327,21 +327,49 @@ def cli_dashboard(request):
 
 
 
-def ver(request):
-    user = request.user
-    dueño = Cart.objects.get(user=user)
-    item = CartItem.objects.filter(cart=dueño)
+def categoriasList(request):
+    categoria  = Categoria.objects.all()
+    contex = {
+              'categorias':categoria
+         }
 
-    for valor in item.values():
-        print(valor)
-    orden = Orden('default','ae@a.com','2323','valparaiso',222,'redcompra',232323)
-    orden.save()
+    return render(request,"Tcrud/Listas/categorias.html",contex)
 
 
-    #datos = Cart.objects.get()
+
+def productosList(request):
+    producto  = Producto.objects.all()
+    contex = {
+              'productos':producto
+         }
+
+    return render(request,"Tcrud/Listas/productos.html",contex)
+
+def MarcaList(request):
+    marca  = Marca.objects.all()
+    contex = {
+              'marcas':marca
+         }
+
+    return render(request,"Tcrud/Listas/marcas.html",contex)
 
 
-    return redirect('crud')
+def subcateList(request):
+    subcat  = SubCategoria.objects.all()
+    contex = {
+              'subcat':subcat
+         }
+
+    return render(request,"Tcrud/Listas/subcategorias.html",contex)
+
+
+def tipoinsList(request):
+    tipo  = TipoInstrumento.objects.all()
+    contex = {
+              'tipo':tipo
+         }
+
+    return render(request,"Tcrud/Listas/tipoitem.html",contex)
 
 
 

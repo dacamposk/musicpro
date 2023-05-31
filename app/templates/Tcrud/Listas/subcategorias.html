@@ -1,0 +1,31 @@
+{% extends 'Tcrud/crud.html' %}
+{% load static %}
+{% block contenido %}
+
+    <!-- table subcategorias-->
+    <div class="container">
+        <h1>Listado de subcategorias</h1>
+        <li>
+          <a href="{%  url 'agreSubcat' %}"> Nueva Sub Categoria</a>
+        </li>
+        <div class="row">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th scope="col">Nombre Sub categoria</th>
+                  <th scope="col">Opciones</th>
+                </tr>
+              </thead>
+                <tbody>
+                  {% for ve in subcat %}
+                  <tr>
+                    <td>{{ve.nombreSubCategoria}}</td>
+  
+                  </tr>
+                  {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+  
+ {% endblock %}
