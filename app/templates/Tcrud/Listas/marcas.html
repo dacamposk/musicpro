@@ -23,6 +23,9 @@
         <tr>
           <td>{{ve.nombreMarca}}</td>
 
+          <td><a href="{% url 'delete_marca' ve.nombreMarca %}" class="btn btn-danger btn-sm">Eliminar</a></td>
+
+
         </tr>
         {% endfor %}
       </tbody>

@@ -231,7 +231,7 @@ def agreProducto(request):
         if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
-            return redirect('crud')
+            return redirect('productosList')
         else:
             datos ["form"] = formulario
             
@@ -255,8 +255,15 @@ def agreMarca (request):
         if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
-            return redirect('crud')
+            return redirect('MarcaList')
     return render(request,'Tcrud/agreMarca.html',datos)
+
+
+def delete_marca(request,id):
+    marca= Marca.objects.get(nombreMarca=id)
+    marca.delete()
+    return redirect(to="MarcaList")
+
 
 def agreTipoIns (request): 
     datos = {'form': tipoiForm()}
@@ -265,8 +272,10 @@ def agreTipoIns (request):
         if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
-            return redirect('crud')
+            return redirect('tipoinsList')
     return render(request,'Tcrud/agreTipoIns.html',datos)
+
+
 
 def agreSubcat (request): 
     datos = {'form': subCatForm()}
@@ -275,7 +284,7 @@ def agreSubcat (request):
         if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Datos guardados correctamente"
-            return redirect('crud')
+            return redirect('subcateList')
     return render(request,'Tcrud/agreSubcat.html',datos)
 
 
@@ -335,9 +344,9 @@ def categoriasList(request):
 
     return render(request,"Tcrud/Listas/categorias.html",contex)
 
-
-def delete_Categoria(request,SKU):
-    categoria = Categoria.objects.get(SKU=SKU)
+@permission_required('app.add_producto')
+def delete_categoria(request,id):
+    categoria = Categoria.objects.get(nombreCategoria=id)
     categoria.delete()
     return redirect(to="categoriasList")
 
@@ -368,16 +377,23 @@ def subcateList(request):
 
     return render(request,"Tcrud/Listas/subcategorias.html",contex)
 
+def delete_subcategoria(request,id):
+    subcategoria = SubCategoria.objects.get(nombreSubCategoria=id)
+    subcategoria.delete()
+    return redirect(to="subcateList")
 
 def tipoinsList(request):
     tipo  = TipoInstrumento.objects.all()
     contex = {
               'tipo':tipo
          }
-
     return render(request,"Tcrud/Listas/tipoitem.html",contex)
 
 
+def delete_tipoinstrumento(request,id):
+    tipoinstrumento = TipoInstrumento.objects.get(nombreTipoInstrumento=id)
+    tipoinstrumento.delete()
+    return redirect(to="tipoinsList")
 
 
 

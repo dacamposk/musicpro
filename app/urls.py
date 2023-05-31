@@ -29,9 +29,13 @@ urlpatterns = [
     path('delete-user/<email>',del_user, name="del_user"),
     path('dashboard/',cli_dashboard, name="cli-dashboard"),
     path('crud/categorias/',categoriasList, name="categoriasList"),
+    path('categoria/eliminar/<id>',delete_categoria, name="delete_categoria"),
     path('crud/Marcas/',MarcaList, name="MarcaList"),
+    path('marca/eliminar/<id>',delete_marca, name="delete_marca"),
     path('crud/Subcategorias/',subcateList, name="subcateList"),
+    path('sub-categoria/eliminar/<id>',delete_subcategoria, name="delete_subcategoria"),
     path('crud/Productos/',productosList, name="productosList"),
     path('crud/Tipo-Instrumento/',tipoinsList, name="tipoinsList"),
+    path('tipo-inst/eliminar/<id>',delete_tipoinstrumento, name="delete_tipoinstrumento"),
     path('api/', include(router.urls)),
 ]

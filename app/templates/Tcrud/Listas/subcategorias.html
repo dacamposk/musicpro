@@ -2,31 +2,35 @@
 {% load static %}
 {% block contenido %}
 
-    <!-- table subcategorias-->
-    <div class="container">
-        <h1>Listado de Subcategorias</h1>
+<!-- table subcategorias-->
+<div class="container">
+  <h1>Listado de Subcategorias</h1>
 
-        <a href="{%  url 'agreSubcat' %}" type="button" class="btn btn-primary ">Añadir SubCategoria</a>
-        <br>
-        <br>
-        <div class="row">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Nombre Sub categoria</th>
-                  <th scope="col">Opciones</th>
-                </tr>
-              </thead>
-                <tbody>
-                  {% for ve in subcat %}
-                  <tr>
-                    <td>{{ve.nombreSubCategoria}}</td>
-  
-                  </tr>
-                  {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-  
- {% endblock %}
+  <a href="{%  url 'agreSubcat' %}" type="button" class="btn btn-primary ">Añadir SubCategoria</a>
+  <br>
+  <br>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre Sub categoria</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ve in subcat %}
+        <tr>
+          <td>{{ve.nombreSubCategoria}}</td>
+          <td><a href="{% url 'delete_subcategoria' ve.nombreSubCategoria %}" class="btn btn-danger btn-sm">Eliminar</a>
+          </td>
+
+
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+{% endblock %}

@@ -23,7 +23,8 @@
         {% for ve in categorias %}
         <tr>
           <td>{{ve.nombreCategoria}}</td>
-          <td><a href="{% url 'delete_Categoria' ve.SKU %}">Eliminar</a></td>
+          <td><a href="{% url 'delete_categoria' ve.nombreCategoria %}" class="btn btn-danger btn-sm">Eliminar</a></td>
+
 
 
         </tr>

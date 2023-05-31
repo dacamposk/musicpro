@@ -11,26 +11,29 @@
             <table class="table">
               <thead>
                 <tr>
+                  <th scope="col"></th>
                   <th scope="col">SKU</th>
-                  <th scope="col">nombre</th>
-                  <th scope="col">precio</th>
-                  <th scope="col">categoria</th>
-                  <th scope="col">stock</th>
+                  <th scope="col">Nombre</th>
+                  <th scope="col">Precio</th>
+                  <th scope="col">Categoria</th>
+                  <th scope="col">Stock</th>
                   <th scope="col">Opciones</th>
+                  
                 </tr>
               </thead>
                 <tbody>
                   {% load humanize %}
                   {% for ve in productos %}
                   <tr>
+                    <td><img src="{{ ve.imagen.url}}" class="img-fluid" style="height:80px;"></td>
                     <td>{{ve.nombreProducto}}</td>
                     <td>{{ve.nombre}}</td>
                     <td>${{ve.precio}}</td>
                     <td>{{ve.categoria}}</td>
                     <td>{{ve.stock}}</td>
-                    <td><a href="{% url 'Mod_Producto' ve.SKU %}">Modificar</a></td>
-                    <td><a href="{% url 'delete_Producto' ve.SKU %}">Eliminar</a></td>
-
+                    <td> <a href="{% url 'Mod_Producto' ve.SKU %}"class="btn btn-info btn-sm" >Modificar</a> 
+                      <a href="{% url 'delete_Producto' ve.SKU %}" class="btn btn-danger btn-sm">Eliminar</a></td>
+                    <td></td>
                   </tr>
                   {% endfor %}
                 </tbody>
