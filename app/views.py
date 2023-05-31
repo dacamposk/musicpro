@@ -1,6 +1,7 @@
 from django.shortcuts import  render, redirect
 from carts.models import CartItem ,Cart
 from carts.views import _cart_id, checkout
+from orders.models import Order, OrderProduct
 from .forms import *
 from django.contrib.auth import authenticate, login
 from django.contrib import messages
@@ -10,7 +11,6 @@ from .models import SubCategoria, Categoria
 from django.core.paginator import EmptyPage, PageNotAnInteger,Paginator
 from django.contrib.auth.decorators import login_required, permission_required
 from carts.views import _cart_id
-from carts.models import Cart, CartItem
 from .serializers import ProductoSerializer
 from rest_framework import viewsets
 
@@ -105,20 +105,7 @@ def RegistroCli (request):
     return render(request, 'registration/registroCli.html',data)
 
 
-def Registro(request):
-    
-    if request.method == 'GET':
-       data = { 'form' : Ordenform()}
-       return render(request, 'registration/registroCli.html',data)
-    
-    else:
-        if request.method == 'POST':
-            formulario = Ordenform(data= request.POST)
-            if formulario.is_valid():
-                email = formulario.cleaned_data["email"]
-                return redirect(to='home')
-            data["form"] = formulario
-    return render(request, 'registration/registroCli.html',data)
+
 
 def store (request, slug):
 
@@ -394,6 +381,28 @@ def delete_tipoinstrumento(request,id):
     tipoinstrumento = TipoInstrumento.objects.get(nombreTipoInstrumento=id)
     tipoinstrumento.delete()
     return redirect(to="tipoinsList")
+
+def vendedorView(request):
+    ordenes = Order.objects.all()
+    print(ordenes)
+    contex = {
+              'ordenes':ordenes
+         }
+
+    return render(request,"app/admini/vendedor/vendedor.html",contex)
+
+
+def detalleOrder(request,order):
+
+    items = OrderProduct.objects.filter(order=order)
+    contex = {
+              'items':items,
+                'order':order
+         }
+
+    return render(request,"app/admini/vendedor/detalleorder.html",contex)
+
+
 
 
 

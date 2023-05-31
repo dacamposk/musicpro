@@ -1,0 +1,37 @@
+{% extends 'app/admini/baseadmin.html' %}
+{% load static %}
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+  <h1>Listado de ordenes</h1>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">user</th>
+          <th scope="col">numero de orden</th>
+          <th scope="col">email</th>
+          <th scope="col">estado</th>
+          <th scope="col">Opciones</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for ve in ordenes %}
+        <tr>
+          <td>{{ve.user.username}}</td>
+          <td>{{ve.order_number}}</td>
+          <td>{{ve.email}}</td>
+          <td>{{ve.status}}</td>
+          <td><a href="{% url 'detalleOrder' ve.order_number %}">Detalle</a></td>
+  
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

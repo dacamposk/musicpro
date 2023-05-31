@@ -49,8 +49,6 @@ def place_order(request, total=0, quantity=0):
             data.is_ordered = False
             data.tax = tax
             data.ip = request.META.get('REMOTE_ADDR')
-            data.save()
-
             yr = int(datetime.date.today().strftime('%Y'))
             mt = int(datetime.date.today().strftime('%m'))
             dt = int(datetime.date.today().strftime('%d'))
@@ -62,10 +60,12 @@ def place_order(request, total=0, quantity=0):
             data.order_number = order_number
             data.save()
             grand_total = int(grand_total)
-
+            order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
+            
             for cart_item in cart_items:
+            
                 order_product = OrderProduct()
-                order_product.order = data
+                order_product.order = order
                 order_product.user = current_user
                 order_product.producto = cart_item.producto
                 order_product.quantity = cart_item.quantity
@@ -73,7 +73,7 @@ def place_order(request, total=0, quantity=0):
                 order_product.ordered = False  
                 order_product.save()
 
-            order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
+        
 
             context = {
                 'order': order,
