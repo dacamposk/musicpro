@@ -14,8 +14,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="{% static 'core/img/favicon.ico'%}">
-  <title>Caprichosa's</title>
+  <title>Pagar</title>
   <!-- CSS -->
   <link rel="stylesheet" href="{% static 'core/css/styles.css'%}">
   <!-- Font Awesome -->
@@ -27,10 +26,10 @@
 </head>
 
 <body class="pagar">
-  <header>
-    <nav class="navbar fixed-top navbar-expand-lg">
+  <header style="background-color:#810404;">
+    <nav class="navbar fixed-top navbar-expand-lg mx-auto d-block" style="background-color:rgb(88, 11, 11)">
       <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img class="px-4" src="{% static 'core/img/logo.svg'%}" alt="Logo" height="60"></a>
+        <a class="navbar-brand" href="/"><img class="px-4" height="100"></a>
         <button class="navbar-toggler"
         type="button"
         data-mdb-toggle="collapse"
@@ -41,14 +40,7 @@
           <span class="navbar-toggler-icon"></i></span>
         </button>
         <div class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-          <ul class="navbar-nav">
-            <li class="nav-item">
-              <a class="nav-link" href="#">Contacto</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Nosotros</a>
-            </li>
-          </ul>
+    
         </div>
       </div>
     </nav>
@@ -62,17 +54,14 @@
 
 
 
+  {% load humanize %}
 <section>
 <div class="container">
     <div class="card ">
         <div class="card-body">
-          <h5 class="card-title">Productos que va a comprar:</h5>
+          <h5 class="card-title">Serás redirigido a una página externa.</h5>
           <table class="table">
             <thead>
-              <tr>
-                <th>Nombre</th>
-                <th>Cantidad</th>
-              </tr>
             </thead>
             <tbody>
               {% for key, value in request.session.carro.items %}

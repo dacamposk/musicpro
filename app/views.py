@@ -300,7 +300,7 @@ def Mod_Producto(request, SKU):
         if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Modificados correctamente"
-            return redirect('crud')
+            return redirect('productosList')
     return render(request, 'Tcrud/modProducto.html', datos)
 
 # CRUD funciones delete

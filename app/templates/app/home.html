@@ -4,18 +4,29 @@
 
 <div class="contenido">
     <div class="slider">
-        <div>
-            <img src="img/banner/banner1.jpg" alt="">
-        </div>
-        <div>
-            <img src="img/banner/banner2.png" alt="">
-        </div>
-        <div>
-            <img src="img/banner/banner2.png" alt="">
-        </div>
-    </div>
-</div>
+        <div class="slides">
+          <div class="slide">
+            <img src="#" alt="Imagen 2">
 
+        </div>
+        <div class="slide">
+          <img src="#" alt="Imagen 2">
+        </div>
+        <div class="slide">
+          <img src="#" alt="Imagen 2">
+            <!-- <img src="{% static 'img/imagen3.png' %}" alt="Imagen 2">
+
+          </div>
+          <div class="slide">
+            <img src="{% static 'img/imagen3.png' %}" alt="Imagen 2">
+          </div>
+          <div class="slide">
+            <img src="{% static 'img/imagen2.jpg' %}" alt="Imagen 2"> -->
+        </div>
+        </div>
+        <button class="prev" onclick="previousSlide()">&#10094;</button>
+        <button class="next" onclick="nextSlide()">&#10095;</button>
+      </div>
 {% load humanize %}
 <div class="row">
     {% for p in productos %}
