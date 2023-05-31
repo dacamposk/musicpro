@@ -3,13 +3,11 @@ from .models import *
 
 # Register your models here.
 admin.site.register(User)
-admin.site.register(TipoPago)
 admin.site.register(Comuna)
 admin.site.register(Region)
 admin.site.register(Invitado)
 admin.site.register(Sucursal)
-admin.site.register(Orden)
-admin.site.register(Detalle_orden)
+
 class CategoriaAdmin(admin.ModelAdmin):
     prepopulated_fields = {'slug': ('nombreCategoria',)}
     list_display = ('nombreCategoria', 'slug')

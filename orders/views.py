@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from carts.models import Cart, CartItem
 from carts.views import _cart_id
 from .forms import OrderForm
-from .models import Order
+from .models import Order, OrderProduct
 from app.models import User
 import datetime
 from transbank.webpay.webpay_plus.transaction import Transaction
@@ -12,7 +12,7 @@ from transbank.error.transbank_error import TransbankError
 def payments(request):
     return render (request,'orders/payments.html')
 
-def place_order(request, total =0,quantity=0):
+def place_order(request, total=0, quantity=0):
     current_user = request.user
     cart = Cart.objects.get(cart_id=_cart_id(request))
     cart_items = CartItem.objects.filter(cart=cart)
@@ -24,23 +24,23 @@ def place_order(request, total =0,quantity=0):
     tax = 0
 
     for cart_item in cart_items:
-        total+=(cart_item.producto.precio * cart_item.quantity)
+        total += (cart_item.producto.precio * cart_item.quantity)
         quantity += cart_item.quantity
-    
-    tax =(19*total)/100
+
+    tax = (19 * total) / 100
     grand_total = total + tax
 
-    if request.method =='POST':
+    if request.method == 'POST':
         form = OrderForm(request.POST)
         if form.is_valid():
             data = Order()
             data.user = current_user
             data.first_name = form.cleaned_data['first_name']
-            data.last_name= form.cleaned_data['last_name']
+            data.last_name = form.cleaned_data['last_name']
             data.phone = form.cleaned_data['phone']
             data.email = form.cleaned_data['email']
-            data.address_line_1 = form.cleaned_data[ 'address_line_1']
-            data.address_line_2=form.cleaned_data[ 'address_line_2']
+            data.address_line_1 = form.cleaned_data['address_line_1']
+            data.address_line_2 = form.cleaned_data['address_line_2']
             data.region = form.cleaned_data['region']
             data.city = form.cleaned_data['city']
             data.order_note = form.cleaned_data['order_note']
@@ -61,27 +61,31 @@ def place_order(request, total =0,quantity=0):
             data.save()
             grand_total = int(grand_total)
 
-            order = Order.objects.get(user= current_user,is_ordered = False,order_number=order_number)
+            for cart_item in cart_items:
+                order_product = OrderProduct()
+                order_product.order = data
+                order_product.user = current_user
+                order_product.producto = cart_item.producto
+                order_product.quantity = cart_item.quantity
+                order_product.product_price = cart_item.producto.precio
+                order_product.ordered = False  
+                order_product.save()
 
-            context ={
-                'order':order,
+            order = Order.objects.get(user=current_user, is_ordered=False, order_number=order_number)
+
+            context = {
+                'order': order,
                 'total': total,
-                'tax':tax,
-                'grand_total':grand_total,
+                'tax': tax,
+                'grand_total': grand_total,
                 'cart_items': cart_items,
             }
 
-            return render(request,'orders/payments.html',context)
-        
-        
+            return render(request, 'orders/payments.html', context)
+
         print('NO POST')
-        
-        return redirect('checkout')
 
-
-
-
-
+    return redirect('checkout')
 def pago(request,total):
     total = total
     buy_order = str(1)
@@ -104,13 +108,28 @@ def pago(request,total):
         return render(request, 'orders/pagar.html', context)
     
 
+from django.utils import timezone
+from .models import Payment
+
+
 def terminar(request):
     token = request.GET.get("token_ws")
     try:
         response = Transaction().commit(token) 
-        return render(request, 'orders/terminar.html',{"token": token,"response": response})
+
+        payment = Payment()
+        payment.user = request.user  
+        payment.payment_id = token  
+        payment.payment_method = "RedCompra"  
+        payment.ammount_id = response['amount']  
+        payment.status = response['status']  
+        payment.created_at = timezone.now()  
+        payment.save()
+
+        return render(request, 'orders/terminar.html', {"token": token, "response": response})
+
     except TransbankError as e:
-        error =e.message
+        error = e.message
         print(e.message)
         print(token)
-        return render(request, 'orders/terminar.html', {"error":error})
+        return render(request, 'orders/terminar.html', {"error": error})

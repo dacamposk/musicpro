@@ -208,35 +208,3 @@ class Sucursal(models.Model):
     def __str__(self) -> str:
         return self.nombre  
 
-class TipoPago(models.Model):
-    nombrePago = models.CharField(primary_key=True,max_length=80)
-
-    def str(self) -> str:
-        return self.nombrePago
-
-class Orden(models.Model):
-    numero_orden= models.CharField(primary_key=True,max_length=222)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    ubicacion = models.CharField(max_length=80, null=True)
-    sucursal = models.ForeignKey(Sucursal, on_delete=models.CASCADE)
-    total = models.IntegerField()
-    tipoPago = models.ForeignKey(TipoPago, on_delete=models.CASCADE)
-    tax = models.IntegerField(null=True)
-
-
-    def str(self) -> str:
-        return self.numero_orden
-    
-
- 
-
-class Detalle_orden(models.Model):
-    numero_orden = models.ForeignKey(Orden, on_delete=models.CASCADE)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
-    producto = models.ForeignKey(Producto, on_delete=models.CASCADE)
-    cantidad = models.IntegerField()
-
-    def str(self) -> str:
-        return self.numero_orden
-    
- 
