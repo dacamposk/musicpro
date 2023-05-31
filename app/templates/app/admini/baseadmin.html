@@ -39,28 +39,53 @@
     <div class="sidebar">
         <h2>Colaboradores</h2>
         <ul>
+            {% if user.is_staff %}
             <li><a href="{%url 'CrearUsuario' %}">Añadir Nuevo Colaborador</a></li>
             <li><a href="{% url 'vistaAdmin' %}">Eliminar Colaborador</a></li>
+            {% endif %}
+            {% if user.is_bodeguero or user.is_staff %}
             <h2>Administrar</h2>
             <li><a href="{% url 'productosList' %}">Productos</a></li>
             <li><a href="{% url 'categoriasList' %}">Categorías</a></li>
             <li><a href="{% url 'subcateList' %}">SubCategorias</a></li>
             <li><a href="{% url 'tipoinsList' %}">Tipo de Instrumentos</a></li>
             <li><a href="{% url 'MarcaList' %}">Marcas</a></li>
+            {% endif %}
             <hr>
-            <li><a href="{% url 'vendedorView' %}">vendedor view</a></li>
+            {% if user.is_vendedor or user.is_staff %}
+            <h2>Solicitudes</h2>
+            <li><a href="{% url 'vendedorView' %}">Lista de Ordenes de Compra</a></li>
+            {% endif %}
 
      
         </ul>
     </div>
     <div class="content">
 
+    
+         
         {% block contenido %}
+        
+
+
+    
+
         {% endblock %}
 
     </div>
 </body>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+{% if messages %}
+{% for m in messages %}
+<script>
+    Swal.fire({
+        "title": "felicitaciones",
+        "text": "{{m}}",
+        "icon": "success"
+    })
+</script>
+{% endfor %}
+{% endif %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/bxslider/4.2.12/jquery.bxslider.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

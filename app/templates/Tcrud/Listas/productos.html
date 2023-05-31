@@ -1,6 +1,30 @@
 {% extends 'Tcrud/crud.html' %}
 {% load static %}
+
+
 {% block contenido %}
+
+
+<script>
+  function eliminarProducto(SKU) {
+      Swal.fire({
+          title: "¿Estás seguro?",
+          text: "Esta acción no se puede deshacer",
+          icon: "question",
+          showCancelButton: true,
+          cancelButtonText: "No, Cancelar",
+          confirmButtonText: "Sí, Eliminar",
+          reverseButtons: true,
+          confirmButtonColor: "#dc3545"
+      }).then(function(result) {
+          if (result.isConfirmed) {
+            window.location.href = "/crud/Productos/eliminar/" + SKU + "/";
+
+
+          }
+      });
+  }
+</script>
 
     <div class="container">
         <h1>Listado de Productos</h1>
@@ -32,7 +56,10 @@
                     <td>{{ve.categoria}}</td>
                     <td>{{ve.stock}}</td>
                     <td> <a href="{% url 'Mod_Producto' ve.SKU %}"class="btn btn-info btn-sm" >Modificar</a> 
-                      <a href="{% url 'delete_Producto' ve.SKU %}" class="btn btn-danger btn-sm">Eliminar</a></td>
+                      <a href="#" onclick="eliminarProducto({{ ve.SKU }})" class="btn btn-danger btn-sm">Eliminar</a>
+
+                      {% comment %} <a href="{% url 'delete_Producto' ve.SKU %}" class="btn btn-danger btn-sm">Eliminar</a></td> {% endcomment %}
+
                     <td></td>
                   </tr>
                   {% endfor %}
