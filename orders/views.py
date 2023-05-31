@@ -129,7 +129,7 @@ def terminar(request,order):
         payment.payment_id = token  
         payment.payment_method = "RedCompra"  
         payment.ammount_id = response['amount']  
-        payment.status = response['status']  
+        payment.status = response['status']   
         payment.created_at = timezone.now()  
         payment.save()
 
