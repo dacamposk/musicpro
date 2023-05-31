@@ -21,7 +21,7 @@
         {% for ve in usuarios %}
         <tr>
           <td>{{ve.username}}</td>
-          <td>{{ve.apellidos}}</td>
+          <td>{{ve.apellido}}</td>
           <td>{{ve.email}}</td>
           <td><a href="{% url 'del_user' ve.email %}" class="btn btn-danger btn-sm">Eliminar</a></td>
 
