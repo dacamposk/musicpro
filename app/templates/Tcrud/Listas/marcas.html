@@ -2,6 +2,29 @@
 {% load static %}
 {% block contenido %}
 
+
+
+<script>
+  function eliminarMarca(nombreMarca) {
+      Swal.fire({
+          title: "¿Estás seguro?",
+          text: "Esta acción no se puede deshacer",
+          icon: "question",
+          showCancelButton: true,
+          cancelButtonText: "No, Cancelar",
+          confirmButtonText: "Sí, Eliminar",
+          reverseButtons: true,
+          confirmButtonColor: "#dc3545"
+      }).then(function(result) {
+          if (result.isConfirmed) {
+            window.location.href = "/crud/marca/eliminar/" + nombreMarca + "/";
+
+
+          }
+      });
+  }
+</script>
+
 <!-- table marca-->
 <div class="container">
   <h1>Listado de marcas</h1>
@@ -23,7 +46,8 @@
         <tr>
           <td>{{ve.nombreMarca}}</td>
 
-          <td><a href="{% url 'delete_marca' ve.nombreMarca %}" class="btn btn-danger btn-sm">Eliminar</a></td>
+          <td><a href="#" onclick="eliminarMarca('{{ ve.nombreMarca }}')" class="btn btn-danger btn-sm">Eliminar</a></td>
+      
 
 
         </tr>

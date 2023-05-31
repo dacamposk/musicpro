@@ -98,8 +98,12 @@ def RegistroCli (request):
             if formulario.is_valid():
                 email = formulario.cleaned_data["email"]
                 username= formulario.cleaned_data["username"]
+                apellido= formulario.cleaned_data["apellido"]
+                telefono= formulario.cleaned_data["telefono"]
                 password = formulario.cleaned_data["password"]
-                User.objects.create_user(email,username,password) 
+                User.objects.create_user(email,username,apellido,password,telefono) 
+                messages.success(request, "Te has registrado corectamente")
+
                 return redirect(to='home')
             data["form"] = formulario
     return render(request, 'registration/registroCli.html',data)
@@ -218,7 +222,7 @@ def agreProducto(request):
         formulario = productoForm(data=request.POST, files=request.FILES)
         if formulario.is_valid():
             formulario.save()
-            datos['mensaje'] = "Datos guardados correctamente"
+            messages.success(request, "Producto agregado corectamente")
             return redirect('productosList')
         else:
             datos ["form"] = formulario
@@ -232,8 +236,8 @@ def agreCategoria (request):
         formulario = CategoriaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            datos['mensaje'] = "Datos guardados correctamente"
-            return redirect('crud')
+            messages.success(request, "Categoria agregada corectamente")
+            return redirect('categoriasList')
     return render(request,'Tcrud/agreCategoria.html',datos)
 
 def agreMarca (request): 
@@ -242,16 +246,16 @@ def agreMarca (request):
         formulario = marcaForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            datos['mensaje'] = "Datos guardados correctamente"
+            messages.success(request, "Marca agregada correctamente")
             return redirect('MarcaList')
     return render(request,'Tcrud/agreMarca.html',datos)
 
 
-def delete_marca(request,id):
-    marca= Marca.objects.get(nombreMarca=id)
+def delete_marca(request, nombreMarca):
+    marca = Marca.objects.get(nombreMarca=nombreMarca)
     marca.delete()
+    messages.success(request, "Marca Borrada Correctamente")
     return redirect(to="MarcaList")
-
 
 def agreTipoIns (request): 
     datos = {'form': tipoiForm()}
@@ -259,7 +263,8 @@ def agreTipoIns (request):
         formulario = tipoiForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            datos['mensaje'] = "Datos guardados correctamente"
+            messages.success(request, "Tipo Instrumento Agregado Correctamente")
+
             return redirect('tipoinsList')
     return render(request,'Tcrud/agreTipoIns.html',datos)
 
@@ -271,7 +276,7 @@ def agreSubcat (request):
         formulario = subCatForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            datos['mensaje'] = "Datos guardados correctamente"
+            messages.success(request, "SubCategoria Agregada Correctamente")
             return redirect('subcateList')
     return render(request,'Tcrud/agreSubcat.html',datos)
 
@@ -288,6 +293,7 @@ def Mod_Producto(request, SKU):
         if formulario.is_valid():
             formulario.save()
             datos['mensaje'] = "Modificados correctamente"
+            messages.success(request, "Modificado correctamente")
             return redirect('productosList')
     return render(request, 'Tcrud/modProducto.html', datos)
 
