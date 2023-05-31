@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
-from carts.models import CartItem
+from carts.models import Cart, CartItem
+from carts.views import _cart_id
 from .forms import OrderForm
 from .models import Order
 from app.models import User
@@ -13,12 +14,12 @@ def payments(request):
 
 def place_order(request, total =0,quantity=0):
     current_user = request.user
-    cart_items = CartItem.objects.filter(user=current_user)
+    cart = Cart.objects.get(cart_id=_cart_id(request))
+    cart_items = CartItem.objects.filter(cart=cart)
     cart_count = cart_items.count()
-
+    print(cart_items)
     if cart_count == 0:
-       print(cart_count,'fallo',cart_items)
-    print(cart_count,'funciono',cart_items)
+       pass
     grand_total = 0
     tax = 0
 
@@ -31,9 +32,7 @@ def place_order(request, total =0,quantity=0):
 
     if request.method =='POST':
         form = OrderForm(request.POST)
-        print('FUERA')
         if form.is_valid():
-            print(form)
             data = Order()
             data.user = current_user
             data.first_name = form.cleaned_data['first_name']
@@ -60,7 +59,7 @@ def place_order(request, total =0,quantity=0):
             order_number = current_date + str(data.id)
             data.order_number = order_number
             data.save()
-
+            grand_total = int(grand_total)
 
             order = Order.objects.get(user= current_user,is_ordered = False,order_number=order_number)
 
@@ -68,7 +67,7 @@ def place_order(request, total =0,quantity=0):
                 'order':order,
                 'total': total,
                 'tax':tax,
-                'grad_total':grand_total,
+                'grand_total':grand_total,
                 'cart_items': cart_items,
             }
 
@@ -87,7 +86,7 @@ def pago(request,total):
     total = total
     buy_order = str(1)
     session_id = str(1)
-    return_url = 'http://127.0.0.1:8000/terminar/'
+    return_url = 'http://127.0.0.1:8000/orders/terminar/'
 
     amount = total
     total= str('{:,.0f}'.format(total).replace(",", "@").replace(".", ",").replace("@", "."))

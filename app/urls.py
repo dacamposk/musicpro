@@ -1,4 +1,6 @@
 from django.urls import path, include
+
+from orders.views import terminar
 from .views import *
 from . import views
 from rest_framework import routers
