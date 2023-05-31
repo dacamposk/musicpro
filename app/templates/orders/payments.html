@@ -14,15 +14,15 @@
         <div class="card">
             <h5 class="card-header"> Direccion de Facturación</h5>
             <div class="card-body">
-                <p> {{order.full_name}}</p>
-                <p> {{order.full_address}}</p>
-                <p> {{order.city}}</p>
-                <p> {{order.country}}</p>
-                <p> {{order.email}}</p>
-                <p> {{order.phone}}</p>
+                <p> {{orderr.full_name}}</p>
+                <p> {{orderr.full_address}}</p>
+                <p> {{orderr.city}}</p>
+                <p> {{orderr.country}}</p>
+                <p> {{orderr.email}}</p>
+                <p> {{orderr.phone}}</p>
 
-                {% if order.order_note %}
-                <b>Detalle de la orden: </b>{{order.order_note}}
+                {% if orderr.order_note %}
+                <b>Detalle de la orden: </b>{{orderr.order_note}}
 
                 {% endif %}
             </div>
@@ -32,7 +32,7 @@
         <div class="card">
             <h5 class="card-header"> Metodo de pago</h5>
             <div class="card-body">
-                <p> este es metodo pago</p>
+                <p> TrasnBank</p>
             </div>
      
         </div> <!-- card.// -->

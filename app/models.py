@@ -41,7 +41,7 @@ class customUserManager (BaseUserManager):
             telefono = telefono
        
             )
-       
+   
         usuario.is_staff =True
         usuario.save()
         return usuario
@@ -189,6 +189,8 @@ class Producto(models.Model):
     
     def restar_stock(self,Mcant):
         self.stock = self.stock - Mcant
+        self.save()
+
 
 
     

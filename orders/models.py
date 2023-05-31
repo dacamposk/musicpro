@@ -70,6 +70,9 @@ class OrderProduct(models.Model):
     def __str__(self):
         return self.producto.nombreProducto
     
+    def change_status_ordered(self):
+        self.ordered = True
+        self.save()
         
     
     

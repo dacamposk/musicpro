@@ -2,6 +2,7 @@ import random
 from django.shortcuts import render, redirect
 from carts.models import Cart, CartItem
 from carts.views import _cart_id
+from app.models import Producto
 from .forms import OrderForm
 from .models import Order, OrderProduct
 from app.models import User
@@ -78,7 +79,7 @@ def place_order(request, total=0, quantity=0):
         
 
             context = {
-                'order': order,
+                'orderr': order,
                 'total': total,
                 'tax': tax,
                 'grand_total': grand_total,
@@ -119,6 +120,8 @@ def terminar(request,order):
     token = request.GET.get("token_ws")
     order = Order.objects.get(order_number =order)
     carrito = Cart.objects.filter(user = request.user)
+    itemsOrder = OrderProduct.objects.filter(order = order)
+  
 
     try:
         response = Transaction().commit(token) 
@@ -135,8 +138,15 @@ def terminar(request,order):
 
         order.change_ordered_confirm()
 
+
         for i in carrito:
              carrito.delete()
+
+        for i in itemsOrder:
+            item = Producto.objects.get(SKU= i.producto.SKU )
+            item.restar_stock(i.quantity)
+            i.change_status_ordered()
+            
 
         
 
