@@ -40,6 +40,10 @@ class Order(models.Model):
     def full_address(self):
         return f'{self.address_line_1}{self.address_line_2}'
     
+    def change_ordered_confirm(self):
+        self.is_ordered = True
+        self.save()
+    
 
 class Payment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -65,5 +69,7 @@ class OrderProduct(models.Model):
 
     def __str__(self):
         return self.producto.nombreProducto
+    
+        
     
     

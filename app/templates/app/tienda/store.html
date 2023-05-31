@@ -38,13 +38,14 @@
                         <div class="filter-content collapse show" id="collapse_4" >
                             {% for t in tipo %}
                             <div class="card-body">
-                                <label><input type="checkbox" id="cbox1" value="first_checkbox">
-                                    {{t.nombreTipoInstrumento}} <a href=""></a></label><br>
-                                <label class="checkbox-btn">
+                                <div>
+                                   <a href="{% url 'tipoisntruFilter' t.subcategoria.categoria.slug t.subcategoria.slug t.slug %}"> 
+                                    {{t.nombreTipoInstrumento}} 
+                                   </a>
+                                   <br>
+                          
 
-                                </label>
 
-                                </label>
                             </div><!-- card-body.// -->
 
 

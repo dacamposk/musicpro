@@ -8,6 +8,8 @@ from app.models import User
 import datetime
 from transbank.webpay.webpay_plus.transaction import Transaction
 from transbank.error.transbank_error import TransbankError
+from django.utils import timezone
+from .models import Payment
 
 
 def payments(request):
@@ -112,16 +114,11 @@ def pago(request,total,order):
         return render(request, 'orders/pagar.html', context)
     
 
-from django.utils import timezone
-from .models import Payment
-
 
 def terminar(request,order):
     token = request.GET.get("token_ws")
     order = Order.objects.get(order_number =order)
     carrito = Cart.objects.filter(user = request.user)
-
-  
 
     try:
         response = Transaction().commit(token) 
@@ -135,6 +132,8 @@ def terminar(request,order):
         payment.status = response['status']  
         payment.created_at = timezone.now()  
         payment.save()
+
+        order.change_ordered_confirm()
 
         for i in carrito:
              carrito.delete()

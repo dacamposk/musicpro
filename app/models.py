@@ -143,7 +143,7 @@ class SubCategoria(models.Model):
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
     slugcat = AutoSlugField(populate_from='categoria',null=True)   
 
-    class Meta:
+    class Meta:  
         verbose_name = 'sub category'
         verbose_name_plural = 'sub categories'
 
@@ -186,6 +186,11 @@ class Producto(models.Model):
 
     def __str__(self) -> str:
         return self.nombreProducto   
+    
+    def restar_stock(self,Mcant):
+        self.stock = self.stock - Mcant
+
+
     
 
 

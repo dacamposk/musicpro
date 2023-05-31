@@ -156,17 +156,18 @@ def subCatfilter (request,slugcat,subcatslug):
 
 
 
-def tipoisntruFilter (request,slugcat,subcatslug):
-     # Trae todo
+def tipoisntruFilter (request,slugcat,subcatslug, tiposlug):
+     # Trae todo89
     categorias = Categoria.objects.all()
 
     #obtiene la subcategoria seleccionada
     subcatfilter =  SubCategoria.objects.get(slug=subcatslug) 
+    tipoins =  TipoInstrumento.objects.get(slug=tiposlug) 
 
-    # filtrar
+    # filtrar   
     subcat = SubCategoria.objects.filter(slugcat=slugcat)
-    productos = Producto.objects.filter(subcategoria=subcatfilter)
     tipo = TipoInstrumento.objects.filter(subcategoria= subcatfilter)
+    productos = Producto.objects.filter(subcategoria=subcatfilter ,tipoinstrumento= tipoins )
     producto_count = productos.count()
     
 
