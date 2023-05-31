@@ -114,19 +114,9 @@
             </p>
             <div class="container">
               
-              <form action="" method="POST">{% csrf_token %}
-                <input type="hidden" name="token_ws" value="{{ response.token }}">
-                <input type="hidden" name="username" value="{{ request.user.username }}">
-                <h3 class="mt-4">Total:</h3>
-                <h3>$ {{ total }}</h3>
-                <input type="submit" class="btn btn-primary" value="pago">
-              </form>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <input type="submit" class="btn btn-primary"   value="pago">
+      
+      <a href="{% url 'pago' total %}"> PAGAR</a>
+  
         
           </div> <!-- card-body.// -->
         </div> <!-- card.// -->

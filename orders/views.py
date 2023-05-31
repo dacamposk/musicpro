@@ -96,13 +96,13 @@ def pago(request,total):
         context ={'total':total,"response":response}
         print(amount)
 
-        return render(request, 'orders/payments.html', context) 
+        return render(request, 'orders/pagar.html', context) 
     except TransbankError as e:
         print(e.message)
         print(e.message)
         error =e.message
         context ={'total':total,"error":error,}
-        return render(request, 'orders/payments.html', context)
+        return render(request, 'orders/pagar.html', context)
     
 
 def terminar(request):
