@@ -1,3 +1,4 @@
+from django.urls import reverse
 from typing import Dict, Iterable, Optional, Tuple
 from autoslug import AutoSlugField
 from django.db import models
@@ -130,6 +131,7 @@ class Categoria(models.Model):
     class Meta:
         verbose_name = 'category'
         verbose_name_plural = 'categories'
+
 
     def __str__(self) -> str:
         return self.nombreCategoria
