@@ -2,43 +2,33 @@
 {% load static %}
 {% block contenido %}
 
+<!-- table marca-->
+<div class="container">
+  <h1>Listado de marcas</h1>
 
-          
-    <!-- table marca-->
-    <div class="container">
-        <h1>Listado de marcas</h1>
-        <li>
-          <a href="{%  url 'agreMarca' %}"> Nueva Marca</a>
-        </li>
-        <div class="row">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Nombre Marca</th>
-                  <th scope="col">Opciones</th>
-                </tr>
-              </thead>
-                <tbody>
-                  {% for ve in marcas %}
-                  <tr>
-                    <td>{{ve.nombreMarca}}</td>
-  
-                  </tr>
-                  {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
-  
-  
+  <a href="{%  url 'agreMarca' %}" type="button" class="btn btn-primary ">Añadir Marca</a>
+  <br>
+  <br>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre Marca</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ve in marcas %}
+        <tr>
+          <td>{{ve.nombreMarca}}</td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
 {% endblock %}
-
-  
-  
-
-
-    
-
-
-
-  

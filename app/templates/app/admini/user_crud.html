@@ -1,0 +1,37 @@
+{% extends 'app/admini/baseadmin.html' %}
+{% load static %}
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+  <h1>Listado de Usuarios</h1>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">username</th>
+          <th scope="col">apellidos</th>
+          <th scope="col">email</th>
+          <th scope="col">Opciones</th>
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for ve in usuarios %}
+        <tr>
+          <td>{{ve.username}}</td>
+          <td>{{ve.apellidos}}</td>
+          <td>{{ve.email}}</td>
+          <td> <a href="{% url 'del_user' ve.email %}">Eliminar</a></td>
+
+
+
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}

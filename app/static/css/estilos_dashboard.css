@@ -5,6 +5,10 @@ html, body {
     color: #333;
 }
 
+
+.li {
+    text-decoration:None;
+}
 .header {
     width: 100%;
     background-color: #810404;

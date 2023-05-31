@@ -37,16 +37,19 @@
 
     </div>
     <div class="sidebar">
-        <h2>Usuarios</h2>
+        <h2>Colaboradores</h2>
         <ul>
-            <li><a href="{% url 'CrearUsuario' %}">Añadir Nuevo Colaborador</a></li>
-            <li><a href="{% url 'CrearUsuario' %}">Eliminar Colaborador</a></li>
-            <h2>Productos</h2>
-            <li><a href="{% url 'CrearUsuario' %}">Agregar Productos</a></li>
-            <li><a href="{% url 'CrearUsuario' %}">Eliminar Productos</a></li>
-            <li><a href="{% url 'CrearUsuario' %}">Modificar Productos</a></li>
-            <li><a href="{% url 'vistaAdmin' %}">ver usuarios</a></li>
+            <li><a href="{%url 'CrearUsuario' %}">Añadir Nuevo Colaborador</a></li>
+            <li><a href="{% url 'vistaAdmin' %}">Eliminar Colaborador</a></li>
+            <h2>Administrar</h2>
+            <li><a href="{% url 'productosList' %}">Productos</a></li>
+            <li><a href="{% url 'categoriasList' %}">Categorías</a></li>
+            <li><a href="{% url 'subcateList' %}">SubCategorias</a></li>
+            <li><a href="{% url 'tipoinsList' %}">Tipo de Instrumentos</a></li>
+            <li><a href="{% url 'MarcaList' %}">Marcas</a></li>
+       
 
+     
         </ul>
     </div>
     <div class="content">

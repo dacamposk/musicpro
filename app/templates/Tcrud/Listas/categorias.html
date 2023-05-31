@@ -4,28 +4,31 @@
 
 
 <div class="container">
-    <h1>Listado de categorias</h1>
-    <li>
-      <a href="{%  url 'agreCategoria' %}"> Nueva Categoria</a>
-    </li>
-    <div class="row">
-        <table class="table">
-          <thead>
-            <tr>
-              <th scope="col">Nombre Categoria</th>
-              <th scope="col">Opciones</th>
-            </tr>
-          </thead>
-            <tbody>
-              {% for ve in categorias %}
-              <tr>
-                <td>{{ve.nombreCategoria}}</td>
+  <h1>Listado de categorias</h1>
+  
 
-              </tr>
-              {% endfor %}
-            </tbody>
-        </table>
-    </div>
+  <a href="{%  url 'agreCategoria' %}" type="button" class="btn btn-primary ">Añadir Categorias</a>
+  <br>
+  <br>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre Categoria</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ve in categorias %}
+        <tr>
+          <td>{{ve.nombreCategoria}}</td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
 </div>
 
 

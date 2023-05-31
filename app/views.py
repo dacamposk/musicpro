@@ -222,7 +222,7 @@ def crud (request):
               'subcat':subcat}
     return render(request,'Tcrud/crud.html',contex)
 
-# Agrega un nuevo producto
+@permission_required('app.add_producto')
 def agreProducto(request):
     datos = {'form': productoForm()}
     print(datos)
@@ -299,7 +299,7 @@ def Mod_Producto(request, SKU):
 def delete_Producto(request,SKU):
     producto = Producto.objects.get(SKU=SKU)
     producto.delete()
-    return redirect(to="crud")
+    return redirect(to="productosList")
 
 
 def del_user(request, email):    
@@ -318,7 +318,7 @@ def del_user(request, email):
 def vistaAdmin(request):
     usuarios = User.objects.all()
     contex = {'usuarios':usuarios}
-    return render (request,'app/admini/Admincrud.html', contex)
+    return render (request,'app/admini/user_crud.html', contex)
 
 # @login_required(login_url='login')
 
@@ -336,7 +336,13 @@ def categoriasList(request):
     return render(request,"Tcrud/Listas/categorias.html",contex)
 
 
+def delete_Categoria(request,SKU):
+    categoria = Categoria.objects.get(SKU=SKU)
+    categoria.delete()
+    return redirect(to="categoriasList")
 
+
+@permission_required('app.add_producto')
 def productosList(request):
     producto  = Producto.objects.all()
     contex = {

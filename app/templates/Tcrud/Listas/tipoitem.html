@@ -2,31 +2,32 @@
 {% load static %}
 {% block contenido %}
 
-    <!-- table tipo instrumento-->
-    <div class="container">
-        <h1>Listado de tipos de instrumento</h1>
-        <li>
-          <a href="{%  url 'agreTipoIns' %}"> Nueva tipo de instrumento</a>
-        </li>
-        <div class="row">
-            <table class="table">
-              <thead>
-                <tr>
-                  <th scope="col">Nombre tipo instrumento</th>
-                  <th scope="col">Opciones</th>
-                </tr>
-              </thead>
-                <tbody>
-                  {% for ve in tipoi %}
-                  <tr>
-                    <td>{{ve.nombreTipoInstrumento}}</td>
-  
-                  </tr>
-                  {% endfor %}
-                </tbody>
-            </table>
-        </div>
-    </div>
+<!-- table tipo instrumento-->
+<div class="container">
+  <h1>Listado de Tipos de Instrumento</h1>
+  <a href="{%  url 'agreTipoIns' %}" type="button" class="btn btn-primary ">Añadir Producto</a>
+  <br>
+  <br>
 
-  
-    {% endblock %}
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre tipo instrumento</th>
+          <th scope="col">Opciones</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for ve in tipoi %}
+        <tr>
+          <td>{{ve.nombreTipoInstrumento}}</td>
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
+{% endblock %}
