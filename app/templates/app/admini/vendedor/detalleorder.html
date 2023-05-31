@@ -1,0 +1,38 @@
+{% extends 'app/admini/baseadmin.html' %}
+{% load static %}
+{% block contenido %}
+
+{% load crispy_forms_tags %}
+
+<div class="container">
+  <h1>Productos orden : {{ order }}</h1>
+  <div class="row">
+    <table class="table">
+      <thead>
+        <tr>
+          <th scope="col">Nombre producto</th>
+          <th scope="col">Cantidad</th>
+          <th scope="col">Precio</th>
+  
+
+        </tr>
+      </thead>
+      <tbody>
+        {% for ve in items %}
+        <tr>
+          <td>{{ve.producto.nombreProducto}}</td>
+          <td>{{ve.quantity}}</td>
+          <td>{{ve.product_price}}</td>
+   
+  
+
+
+
+
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</div>
+{% endblock %}
