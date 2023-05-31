@@ -1,5 +1,5 @@
 from django import forms
-from .models import Categoria, Marca, Orden, Producto, SubCategoria, TipoInstrumento, User
+from .models import Categoria, Marca, Producto, SubCategoria, TipoInstrumento, User
 from django.forms import ModelForm
 rol= [
     ('',''),
@@ -85,14 +85,6 @@ class marcaForm (forms.ModelForm):
 
       #tank = forms.IntegerField(widget=forms.HiddenInput(), initial=123) 
   
-
-       
-class Ordenform (forms.ModelForm):
-    class Meta :
-        model = Orden
-        fields= '__all__'
-
-
 
 class subCatForm (forms.ModelForm):
     class Meta :
