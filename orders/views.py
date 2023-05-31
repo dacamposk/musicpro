@@ -1,3 +1,4 @@
+import random
 from django.shortcuts import render, redirect
 from carts.models import Cart, CartItem
 from carts.views import _cart_id
@@ -55,8 +56,9 @@ def place_order(request, total=0, quantity=0):
             dt = int(datetime.date.today().strftime('%d'))
             d = datetime.date(yr, mt, dt)
             current_date = d.strftime("%Y%m%d")
+            num = random.randint(1,99999999999)
 
-            order_number = current_date + str(data.id)
+            order_number = current_date + str(num)
             data.order_number = order_number
             data.save()
             grand_total = int(grand_total)
@@ -79,18 +81,20 @@ def place_order(request, total=0, quantity=0):
                 'tax': tax,
                 'grand_total': grand_total,
                 'cart_items': cart_items,
+                'order': order_number,
             }
-
+          
             return render(request, 'orders/payments.html', context)
 
         print('NO POST')
 
     return redirect('checkout')
-def pago(request,total):
+def pago(request,total,order):
+    order = order
     total = total
     buy_order = str(1)
     session_id = str(1)
-    return_url = 'http://127.0.0.1:8000/orders/terminar/'
+    return_url = 'http://127.0.0.1:8000/orders/terminar/'+order
 
     amount = total
     total= str('{:,.0f}'.format(total).replace(",", "@").replace(".", ",").replace("@", "."))
@@ -112,19 +116,30 @@ from django.utils import timezone
 from .models import Payment
 
 
-def terminar(request):
+def terminar(request,order):
     token = request.GET.get("token_ws")
+    order = Order.objects.get(order_number =order)
+    carrito = Cart.objects.filter(user = request.user)
+
+  
+
     try:
         response = Transaction().commit(token) 
 
         payment = Payment()
         payment.user = request.user  
+        payment.order_n = order
         payment.payment_id = token  
         payment.payment_method = "RedCompra"  
         payment.ammount_id = response['amount']  
         payment.status = response['status']  
         payment.created_at = timezone.now()  
         payment.save()
+
+        for i in carrito:
+             carrito.delete()
+
+        
 
         return render(request, 'orders/terminar.html', {"token": token, "response": response})
 
