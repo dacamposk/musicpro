@@ -20,7 +20,6 @@ def add_cart(request,producto_sku):
         )
     cart.save()
 
-
     try:
         cart_item = CartItem.objects.get(producto=producto, cart=cart)
         cart_item.quantity += 1
@@ -57,6 +56,9 @@ def remove_cart_item(request, producto_sku):
     return redirect('cart')
 
 def cart(request, total=0, quantity=0, cart_items=None):
+    tax = 0
+    grand_total = 0
+
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
         cart_items = CartItem.objects.filter(cart=cart, is_active=True)
@@ -65,6 +67,7 @@ def cart(request, total=0, quantity=0, cart_items=None):
             quantity += cart_item.quantity
         tax = int((19*total) / 100)
         grand_total = total + tax
+        
 
     except ObjectDoesNotExist:
         pass ##ignora la excepcion

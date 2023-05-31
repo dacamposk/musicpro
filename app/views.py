@@ -105,7 +105,7 @@ def RegistroCli (request):
     return render(request, 'registration/registroCli.html',data)
 
 
-def asdasdas (request):
+def Registro(request):
     
     if request.method == 'GET':
        data = { 'form' : Ordenform()}
