@@ -16,7 +16,8 @@ def add_cart(request,producto_sku):
         cart = Cart.objects.get(cart_id=_cart_id(request)) #obtiene el carro usando el id del carro en la sesión
     except:
         cart = Cart.objects.create(
-            cart_id = _cart_id(request)
+            cart_id = _cart_id(request),
+            user = request.user
         )
     cart.save()
 
