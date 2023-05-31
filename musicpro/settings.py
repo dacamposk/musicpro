@@ -46,8 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.humanize',
     'carts',
     'orders',
+    'rest_framework',
    
-
 ]
 
 
@@ -55,6 +55,7 @@ CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap4"
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"
 CRISPY_REQUIRED_FIELDS_MARK = ''
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,7 +65,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    
 ]
+
 
 ROOT_URLCONF = 'musicpro.urls'
 
