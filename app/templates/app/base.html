@@ -38,7 +38,6 @@
                 Bienvenido/a: <a href="#">{{user.email}}</a>
                 &nbsp;
                 <a href="{% url 'logout' %}">Cerrar Sesion </a>
-
                 {% if user.is_staff %}
                 &nbsp;
                 <a href="{%url 'adminView' %}">Panel de Admin</a>
@@ -52,7 +51,7 @@
             {% endif %}
 
             <div id="cart" class="cart-icon">
-                <a href="{% url 'cart' %}"><img src="{% static 'img/icons/carrito.png' %}" alt="Carrito"></a>
+                <a href="{% url 'cart' %}"><img src="{% static 'img/icons/carrito.png' %}" alt="Carrito" oncontextmenu="return false;"></a>
                 <div id="cart-quantity">{{ cart_count }}</div>
             </div>
 

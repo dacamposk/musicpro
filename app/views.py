@@ -49,8 +49,8 @@ def CrearUsuario(request):
                 User.objects.create_contador(email,username,apellido,telefono,password) 
             else:
                 pass
-            messages.success(request, 'te has registrado correctamente')
-            return redirect(to='home')
+            messages.success(request, 'Colaborador Registrado Correctamente')
+            return redirect(to='CrearUsuario')
         
         data["form"] = formulario
           
@@ -229,7 +229,7 @@ def agreProducto(request):
             
     return render(request, 'Tcrud/agreProducto.html', datos)
 
-
+@permission_required('app.add_producto')
 def agreCategoria (request): 
     datos = {'form': CategoriaForm()}
     if request.method == 'POST':
@@ -240,6 +240,7 @@ def agreCategoria (request):
             return redirect('categoriasList')
     return render(request,'Tcrud/agreCategoria.html',datos)
 
+@permission_required('app.add_producto')
 def agreMarca (request): 
     datos = {'form': marcaForm()}
     if request.method == 'POST':
@@ -250,13 +251,15 @@ def agreMarca (request):
             return redirect('MarcaList')
     return render(request,'Tcrud/agreMarca.html',datos)
 
-
+@permission_required('app.add_producto')
 def delete_marca(request, nombreMarca):
     marca = Marca.objects.get(nombreMarca=nombreMarca)
     marca.delete()
     messages.success(request, "Marca Borrada Correctamente")
     return redirect(to="MarcaList")
 
+
+@permission_required('app.add_producto')
 def agreTipoIns (request): 
     datos = {'form': tipoiForm()}
     if request.method == 'POST':
@@ -269,7 +272,7 @@ def agreTipoIns (request):
     return render(request,'Tcrud/agreTipoIns.html',datos)
 
 
-
+@permission_required('app.add_producto')
 def agreSubcat (request): 
     datos = {'form': subCatForm()}
     if request.method == 'POST':
@@ -282,7 +285,7 @@ def agreSubcat (request):
 
 
 # CRUD funciones modificar
-
+@permission_required('app.add_producto')
 def Mod_Producto(request, SKU):
     producto = Producto.objects.get(SKU=SKU)
     datos = {
@@ -298,7 +301,7 @@ def Mod_Producto(request, SKU):
     return render(request, 'Tcrud/modProducto.html', datos)
 
 # CRUD funciones delete
-
+@permission_required('app.add_producto')
 def delete_Producto(request,SKU):
     producto = Producto.objects.get(SKU=SKU)
     producto.delete()
@@ -325,11 +328,12 @@ def vistaAdmin(request):
 
 # @login_required(login_url='login')
 
+@permission_required('app.add_producto')
 def cli_dashboard(request):
     return render(request,'app/cliente_dashboard.html')
 
 
-
+@permission_required('app.add_producto')
 def categoriasList(request):
     categoria  = Categoria.objects.all()
     contex = {
@@ -339,8 +343,8 @@ def categoriasList(request):
     return render(request,"Tcrud/Listas/categorias.html",contex)
 
 @permission_required('app.add_producto')
-def delete_categoria(request,id):
-    categoria = Categoria.objects.get(nombreCategoria=id)
+def delete_categoria(request,nombreCategoria):
+    categoria = Categoria.objects.get(nombreCategoria=nombreCategoria)
     categoria.delete()
     return redirect(to="categoriasList")
 
@@ -354,6 +358,7 @@ def productosList(request):
 
     return render(request,"Tcrud/Listas/productos.html",contex)
 
+@permission_required('app.add_producto')
 def MarcaList(request):
     marca  = Marca.objects.all()
     contex = {
@@ -362,7 +367,7 @@ def MarcaList(request):
 
     return render(request,"Tcrud/Listas/marcas.html",contex)
 
-
+@permission_required('app.add_producto')
 def subcateList(request):
     subcat  = SubCategoria.objects.all()
     contex = {
@@ -371,11 +376,14 @@ def subcateList(request):
 
     return render(request,"Tcrud/Listas/subcategorias.html",contex)
 
+@permission_required('app.add_producto')
 def delete_subcategoria(request,id):
     subcategoria = SubCategoria.objects.get(nombreSubCategoria=id)
     subcategoria.delete()
     return redirect(to="subcateList")
 
+
+@permission_required('app.add_producto')
 def tipoinsList(request):
     tipo  = TipoInstrumento.objects.all()
     contex = {
@@ -383,7 +391,7 @@ def tipoinsList(request):
          }
     return render(request,"Tcrud/Listas/tipoitem.html",contex)
 
-
+@permission_required('app.add_producto')
 def delete_tipoinstrumento(request,id):
     tipoinstrumento = TipoInstrumento.objects.get(nombreTipoInstrumento=id)
     tipoinstrumento.delete()

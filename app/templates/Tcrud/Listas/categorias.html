@@ -3,6 +3,27 @@
 {% block contenido %}
 
 
+<script>
+  function eliminarCategoria(nombreCategoria) {
+      Swal.fire({
+          title: "¿Estás seguro?",
+          text: "Esta acción no se puede deshacer",
+          icon: "question",
+          showCancelButton: true,
+          cancelButtonText: "No, Cancelar",
+          confirmButtonText: "Sí, Eliminar",
+          reverseButtons: true,
+          confirmButtonColor: "#dc3545"
+      }).then(function(result) {
+          if (result.isConfirmed) {
+            window.location.href = "/crud/categoria/eliminar/" + nombreCategoria + "/";
+  
+          }
+      });
+  }
+</script>
+
+
 <div class="container">
   <h1>Listado de categorias</h1>
   
@@ -23,9 +44,7 @@
         {% for ve in categorias %}
         <tr>
           <td>{{ve.nombreCategoria}}</td>
-          <td><a href="{% url 'delete_categoria' ve.nombreCategoria %}" class="btn btn-danger btn-sm">Eliminar</a></td>
-
-
+          <td><a href="#" onclick="eliminarCategoria('{{ ve.nombreCategoria }}')" class="btn btn-danger btn-sm">Eliminar</a></td>
 
         </tr>
         {% endfor %}

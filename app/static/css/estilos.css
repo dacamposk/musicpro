@@ -18,11 +18,24 @@ label:after {
 header {
     width: 100%;
     background-color: #fff;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Comic Sans MS;
+
     font-weight: bold;
     font-size: 15px;
     color: #000;
 }
+
+header a:hover {
+
+text-decoration: none;
+color: #810404;
+
+}
+
+.btn-primary:active {
+        color: #810404;
+    
+    }
 
 
 /* ====================== Inicio de Sesión Enlaces ==================== */
@@ -71,6 +84,8 @@ ol {
 
 .nav li a:hover {
     background-color: #810404;
+    border-radius: 5px;
+
 }
 
 .nav li ul {
@@ -109,6 +124,8 @@ ol {
 #cart img {
     height: 27px;
     width: 27px;
+    display: block;
+
 }
 
 #cart-quantity {
@@ -225,6 +242,7 @@ ol {
     text-align: center;
     margin-top: 50px;
     margin-bottom:30px;
+    
 }
 
 .sellos-de-calidad h7 {
