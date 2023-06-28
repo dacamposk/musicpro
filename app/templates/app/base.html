@@ -34,10 +34,13 @@
 
         <div class="sesion mt-60">
             {% if user.is_authenticated %}
+            
             <li>
                 Bienvenido/a: <a href="#">{{user.email}}</a>
                 &nbsp;
                 <a href="{% url 'logout' %}">Cerrar Sesion </a>
+                &nbsp;
+                <a href="{% url 'viewPerfil' %}">Mi perfil </a>
                 {% if user.is_staff %}
                 &nbsp;
                 <a href="{%url 'adminView' %}">Panel de Admin</a>

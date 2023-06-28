@@ -161,7 +161,7 @@ def subCatfilter (request,slugcat,subcatslug):
 
 
 def tipoisntruFilter (request,slugcat,subcatslug, tiposlug):
-     # Trae todo89
+     # Trae todas las categorias
     categorias = Categoria.objects.all()
 
     #obtiene la subcategoria seleccionada
@@ -418,6 +418,36 @@ def detalleOrder(request,order):
     return render(request,"app/admini/vendedor/detalleorder.html",contex)
 
 
+def viewPerfil(request):
+    return render(request,'app/tienda/Perfil/perfil.html')
+
+
+def viewUbis(request):
+    current_user = request.user 
+    ubicacion = UserUbicacion.objects.filter(user = current_user)
+    context = { 
+        'ubicaciones': ubicacion
+    }
+    print(ubicacion)
+    return render(request,'app/tienda/Perfil/ubicaciones.html', context)
+
+
+def newUbi(request): 
+    datos = {'form': ubicacionForm()}
+    if request.method == 'POST':
+        formulario = ubicacionForm(request.POST)
+        if formulario.is_valid():
+            formulario.save()
+            messages.success(request, "SubCategoria Agregada Correctamente")
+    return render(request,'app/tienda/Perfil/nuevaUbi.html',datos)
 
 
 
+def viewOrders(request):
+    current_user = request.user 
+    ordenes = Order.objects.filter(user = current_user)
+    context = { 
+        'orders': ordenes
+    }
+   
+    return render(request,'app/tienda/Perfil/ordenes.html', context)

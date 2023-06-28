@@ -1,0 +1,17 @@
+{% extends 'app/tienda/perfil/perfil.html' %}
+{% load static %}
+{% block contenido %}
+
+<div>
+   <a href="{% url 'newUbi' %}">nueva ubicacion</a>
+</div>
+
+{% for i in ubicaciones %}
+<div class="row">
+    <label for="ci">ciudad :  {{i.ubicacion}}  </label>
+    <label for="ci">comuna :  {{i.comuna}}   </label>
+    <label for="ci">numero :  {{i.numero}}  </label>
+    <label for=""> eliminar</label>
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends 'app/tienda/perfil/perfil.html' %}
+{% load static %}
+{% block contenido %}
+
+
+
+{% for i in orders %}
+<div class="row">
+    <label for="ci">numero :  {{i.order_number}}  </label>
+    <label for="ci">status :  {{i.status}}   </label>
+ <a href="">ver detalle</a>
+</div>
+{% endfor %}
+{% endblock %}

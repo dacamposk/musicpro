@@ -15,6 +15,7 @@ class Invitado(models.Model):
     contraseña = models.CharField(max_length=30)
     fechaPedido = models.DateTimeField()
 
+
 class customUserManager (BaseUserManager):
     def create_user(self,email,username,apellido,password ,telefono):
         if not email:
@@ -103,6 +104,7 @@ class User(AbstractBaseUser,PermissionsMixin):
     is_contador = models.BooleanField(default=False)
     objects = customUserManager()
    
+   
 
     USERNAME_FIELD = 'email'
     EMAIL_FIELD = 'email'
@@ -121,6 +123,32 @@ class User(AbstractBaseUser,PermissionsMixin):
     
     def has_module_perms(self, app_label) :
         return True
+
+
+
+
+class Region(models.Model):
+    nombre = models.CharField(primary_key=True,max_length=80)
+
+class Comuna(models.Model):
+    nombre  = models.CharField(primary_key=True,max_length=80)
+    region= models.ForeignKey(Region,on_delete=models.CASCADE)
+
+
+
+    def __str__(self) -> str:
+        return self.nombre  
+
+
+class UserUbicacion(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    ubicacion = models.CharField(max_length=100)
+    numero = models.IntegerField()
+    comuna = models.ForeignKey(Comuna,on_delete=models.CASCADE)
+    region= models.ForeignKey(Region,on_delete=models.CASCADE)
+   
+   
+
 
 # Categorias
 class Categoria(models.Model):
@@ -193,17 +221,6 @@ class Producto(models.Model):
 
 
     
-
-
-class Region(models.Model):
-    nombre = models.CharField(primary_key=True,max_length=80)
-
-class Comuna(models.Model):
-    nombre  = models.CharField(primary_key=True,max_length=80)
-    region= models.ForeignKey(Region,on_delete=models.CASCADE)
-
-
-
 class Sucursal(models.Model):
     nombre  = models.CharField(primary_key=True,max_length=80) 
     calle = models.CharField(max_length=300)
@@ -211,6 +228,4 @@ class Sucursal(models.Model):
     comuna = models.ForeignKey(SubCategoria,on_delete=models.CASCADE)
 
 
-    def __str__(self) -> str:
-        return self.nombre  
 

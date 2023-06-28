@@ -41,4 +41,9 @@ urlpatterns = [
     path('crud/Tipo-Instrumento/',tipoinsList, name="tipoinsList"),
     path('tipo-inst/eliminar/<id>',delete_tipoinstrumento, name="delete_tipoinstrumento"),
     path('api/', include(router.urls)),
+    #Perfil
+    path('Perfil',viewPerfil, name="viewPerfil"),
+    path('Perfil/ubicaciones',viewUbis, name="viewUbis"),
+    path('Perfil/nueva-ubicacion',newUbi, name="newUbi"),
+    path('Perfil/ordenes',viewOrders, name="viewOrders"),
 ]

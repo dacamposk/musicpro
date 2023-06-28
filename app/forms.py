@@ -1,5 +1,5 @@
 from django import forms
-from .models import Categoria, Marca, Producto, SubCategoria, TipoInstrumento, User
+from .models import Categoria, Marca, Producto, SubCategoria, TipoInstrumento, User, UserUbicacion
 from django.forms import ModelForm
 rol= [
     ('',''),
@@ -98,4 +98,10 @@ class tipoiForm (forms.ModelForm):
         model = TipoInstrumento
         fields= '__all__'
 
+
+class ubicacionForm (forms.ModelForm):
+    class Meta :
+        model = UserUbicacion
+        fields= '__all__'
+       
 
