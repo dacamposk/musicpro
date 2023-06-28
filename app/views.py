@@ -142,8 +142,13 @@ def subCatfilter (request,slugcat,subcatslug):
     subcatfilter =  SubCategoria.objects.get(slug=subcatslug) 
 
     # filtrar
-    subcat = SubCategoria.objects.filter(slugcat=slugcat)
-    productos = Producto.objects.filter(subcategoria=subcatfilter)
+    productos = Producto.objects.filter(subcategoria=subcatfilter) # filtra los producto por subcategoria
+    
+    # devuelve las subcategorias de la categoria seleccionada
+    cat = Categoria.objects.get(slug =slugcat )
+    subcat = SubCategoria.objects.filter(categoria=cat)
+
+    # devuelve los tipos de intrumentos de la subcategoria
     tipo = TipoInstrumento.objects.filter(subcategoria= subcatfilter)
     producto_count = productos.count()
     
@@ -169,7 +174,9 @@ def tipoisntruFilter (request,slugcat,subcatslug, tiposlug):
     tipoins =  TipoInstrumento.objects.get(slug=tiposlug) 
 
     # filtrar   
-    subcat = SubCategoria.objects.filter(slugcat=slugcat)
+    cat = Categoria.objects.get(slug =slugcat )
+    subcat = SubCategoria.objects.filter(categoria=cat)
+    
     tipo = TipoInstrumento.objects.filter(subcategoria= subcatfilter)
     productos = Producto.objects.filter(subcategoria=subcatfilter ,tipoinstrumento= tipoins )
     producto_count = productos.count()
@@ -451,3 +458,13 @@ def viewOrders(request):
     }
    
     return render(request,'app/tienda/Perfil/ordenes.html', context)
+
+def detalleOrder(request,order):
+
+    items = OrderProduct.objects.filter(order=order)
+    contex = {
+              'items':items,
+                'order':order
+         }
+
+    return render(request,"app/admini/vendedor/detalleorder.html",contex)

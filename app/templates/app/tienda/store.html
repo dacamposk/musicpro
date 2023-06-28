@@ -19,7 +19,7 @@
                                 {% for sub in subCat %}
                                 <ul class="list-menu">
                                     <li><a
-                                            href="{% url 'subCatfilter' sub.slugcat sub.slug  %}">{{sub.nombreSubCategoria}}</a>
+                                            href="{% url 'subCatfilter' sub.categoria.slug sub.slug  %}">{{sub.nombreSubCategoria}}</a>
                                     </li>
                                 </ul>
                                 {% endfor %}
