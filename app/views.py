@@ -42,11 +42,11 @@ def CrearUsuario(request):
             password = formulario.cleaned_data["password"]
             # funcion que llama al manager custom de user para crear un usuario bodeguero, revisar models customuser
             if tipo == 'bodeguero' :
-                User.objects.create_bodeguero(email,username,apellido,telefono,password) 
+                User.objects.create_bodeguero(email,username,apellido,password,telefono) 
             elif tipo == 'vendedor':
-                 User.objects.create_vendedor(email,username,apellido,telefono,password) 
+                 User.objects.create_vendedor(email,username,apellido,password,telefono) 
             elif tipo == 'contador':
-                User.objects.create_contador(email,username,apellido,telefono,password) 
+                User.objects.create_contador(email,username,apellido,password,telefono) 
             else:
                 pass
             messages.success(request, 'Colaborador Registrado Correctamente')
@@ -240,7 +240,7 @@ def agreCategoria (request):
             return redirect('categoriasList')
     return render(request,'Tcrud/agreCategoria.html',datos)
 
-@permission_required('app.add_producto')
+
 def agreMarca (request): 
     datos = {'form': marcaForm()}
     if request.method == 'POST':

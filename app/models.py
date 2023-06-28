@@ -126,7 +126,7 @@ class User(AbstractBaseUser,PermissionsMixin):
 class Categoria(models.Model):
     nombreCategoria = models.CharField(max_length=50,primary_key=True, verbose_name='nombre de la categoria', unique=True)
     descripcion = models.CharField(max_length=255, blank = True)
-    slug = models.CharField(max_length=100) 
+    slug = AutoSlugField(populate_from='nombreCategoria',null=True)
 
     class Meta:
         verbose_name = 'category'
@@ -139,9 +139,8 @@ class Categoria(models.Model):
 class SubCategoria(models.Model):
     nombreSubCategoria = models.CharField(max_length=50,primary_key=True, verbose_name='nombre subcategoria')
     descripcion = models.CharField(max_length=255, blank = True)
-    slug = models.CharField(max_length=100) 
-    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)
-    slugcat = AutoSlugField(populate_from='categoria',null=True)   
+    slug = AutoSlugField(populate_from='nombreSubCategoria',null=True) 
+    categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE)   
 
     class Meta:  
         verbose_name = 'sub category'
@@ -153,7 +152,7 @@ class SubCategoria(models.Model):
 class TipoInstrumento(models.Model):
     nombreTipoInstrumento = models.CharField(max_length=50,primary_key=True ,verbose_name='nombre tipo instrumento', blank=True)
     descripcion = models.CharField(max_length=255, blank = True)
-    slug = models.CharField(max_length=100) 
+    slug = AutoSlugField(populate_from='nombreTipoInstrumento',null=True)  
     subcategoria = models.ForeignKey(SubCategoria, on_delete=models.CASCADE)
 
     def __str__(self) -> str:
@@ -163,14 +162,14 @@ class TipoInstrumento(models.Model):
 class Marca(models.Model):
     nombreMarca = models.CharField(max_length=50,primary_key=True ,verbose_name='nombre Marca', unique=True)
     descripcion = models.CharField(max_length=255, blank = True)
-    slug = models.CharField(max_length=100) 
+    slug = AutoSlugField(populate_from='nombreMarca',null=True)
     def __str__(self) -> str:
         return self.nombreMarca
 
 class Producto(models.Model):
     SKU = models.IntegerField(primary_key=True, verbose_name='SKU')      
     nombreProducto =  models.CharField(max_length=80 ,verbose_name='nombre', unique=True)  
-    slug = models.CharField(max_length=100)   
+    slug = AutoSlugField(populate_from='nombreProducto',null=True)  
     descripcion = models.TextField(verbose_name='descripcion')
     precio = models.IntegerField(verbose_name='precio')
     imagen=models.ImageField(upload_to='img/productos' , null=True)

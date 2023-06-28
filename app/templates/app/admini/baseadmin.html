@@ -43,14 +43,14 @@
             <li><a href="{%url 'CrearUsuario' %}">Añadir Nuevo Colaborador</a></li>
             <li><a href="{% url 'vistaAdmin' %}">Eliminar Colaborador</a></li>
             {% endif %}
-            {% if user.is_bodeguero or user.is_staff %}
+     
             <h2>Administrar</h2>
             <li><a href="{% url 'productosList' %}">Productos</a></li>
             <li><a href="{% url 'categoriasList' %}">Categorías</a></li>
             <li><a href="{% url 'subcateList' %}">SubCategorias</a></li>
             <li><a href="{% url 'tipoinsList' %}">Tipo de Instrumentos</a></li>
             <li><a href="{% url 'MarcaList' %}">Marcas</a></li>
-            {% endif %}
+         
             <hr>
             {% if user.is_vendedor or user.is_staff %}
             <h2>Solicitudes</h2>

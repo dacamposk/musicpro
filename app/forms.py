@@ -70,6 +70,7 @@ class productoForm (ModelForm):
 
 
 class CategoriaForm (forms.ModelForm):
+  
     class Meta :
         model = Categoria
         fields= '__all__'
