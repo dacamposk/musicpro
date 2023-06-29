@@ -1,21 +1,59 @@
-{% extends 'app/tienda/perfil/perfil.html' %}
+{% extends 'app/base.html' %}
 {% load static %}
 {% block contenido %}
 {% load crispy_forms_tags %}
+<section class="section-conten padding-y bg">
 
-<div class="container">
-    <h1>Agregar ubicacion</h1>
-    <form action="" method="post" id="formulario">
-      {% csrf_token %}
-      <div class="form-group">
-        {{ form | crispy }}
-       
-      </div>
-      <input type="submit" value="Enviar" class="btn btn-danger" id="enviar">
-      <input type="reset" value="Limpiar" class="btn btn-primary" id="limpiar">
-  
-    </form>
-    <!-- <div id="error" class="alert alert-danger" role="alert"></div>
-    <div class="alert alert-success" role="alert">{{mensaje}}</div> -->
-  </div>
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-3">
+               
+                <ul class="list-group">
+                    <a class="list-group-item" href="{% url 'viewOrders' %}"> Mi historial de ordenes
+                    </a>
+                    <a class="list-group-item active" style="background: #810404;" href="{% url 'viewUbis' %}">Mis
+                        Dirreciones</a>
+                    <a class="list-group-item" href="#"> Reembolsos</a>
+                    <a class="list-group-item" href="#">Configuración de Cuenta</a>
+
+                </ul>
+                <br>
+                <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Cerrar
+                        Sesión</span> </a>
+               
+            </aside>
+            <main class="col-md-6">
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Añade Nueva Dirrecion de Despacho</strong>
+
+                    </header>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-9">
+                              <form action="" method="post" id="formulario">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                  {{ form | crispy }}
+                                 
+                                </div>
+                                <input type="submit" value="Guardar" class="btn btn-danger" id="enviar">
+                            
+                              </form>
+
+                            </div>
+
+                        </div> 
+                    </div> 
+                   
+        </div>
+        </article>
+        </main>
+    </div>
+    </div>
+
+
+</section>
+
+
 {% endblock %}

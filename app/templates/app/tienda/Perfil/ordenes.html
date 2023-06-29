@@ -1,14 +1,65 @@
-{% extends 'app/tienda/perfil/perfil.html' %}
+{% extends 'app/base.html' %}
 {% load static %}
 {% block contenido %}
 
+<section class="section-conten padding-y bg">
+
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-3">
+                <!--   SIDEBAR   -->
+                <ul class="list-group">
+                    <a class="list-group-item active" style="background: #810404;" href="#"> Mi historial de ordenes
+                    </a>
+                    <a class="list-group-item"  href="{% url 'viewUbis' %}">Mis Dirreciones</a>
+                    
+                    <a class="list-group-item" href="#"> Reembolsos</a>
+                    <a class="list-group-item" href="#">Configuración de Cuenta</a>
+
+                </ul>
+                <br>
+                <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Cerrar
+                        Sesión</span> </a>
+                <!--   SIDEBAR .//END   -->
+            </aside>
+            <main class="col-md-9">
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Mis Ordenes de Compra</strong>
+
+                    </header>
+             
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Número</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in orders %}
+                                <tr>
+                                    <td>{{ i.order_number }}</td>
+                                    <td>{{ i.status }}</td>
+                                    <td>
+                                        <a href="#" class="btn btn-light">Ver Detalle</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+    </div>
+    </article>
+    </main>
+    </div>
+    </div>
 
 
-{% for i in orders %}
-<div class="row">
-    <label for="ci">numero :  {{i.order_number}}  </label>
-    <label for="ci">status :  {{i.status}}   </label>
- <a href="">ver detalle</a>
-</div>
-{% endfor %}
+</section>
+
+
 {% endblock %}

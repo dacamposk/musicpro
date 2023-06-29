@@ -1,17 +1,78 @@
-{% extends 'app/tienda/perfil/perfil.html' %}
+{% extends 'app/base.html' %}
 {% load static %}
 {% block contenido %}
 
-<div>
-   <a href="{% url 'newUbi' %}">nueva ubicacion</a>
-</div>
+<section class="section-conten padding-y bg">
 
-{% for i in ubicaciones %}
-<div class="row">
-    <label for="ci">ciudad :  {{i.ubicacion}}  </label>
-    <label for="ci">comuna :  {{i.comuna}}   </label>
-    <label for="ci">numero :  {{i.numero}}  </label>
-    <label for=""> eliminar</label>
-</div>
-{% endfor %}
+    <div class="container">
+        <div class="row">
+            <aside class="col-md-3">
+                <!--   SIDEBAR   -->
+                <ul class="list-group">
+                    <a class="list-group-item" href="{% url 'viewOrders' %}"> Mi historial de ordenes
+                    </a>
+                    <a class="list-group-item active" style="background: #810404;" href="{% url 'viewUbis' %}">Mis
+                        Dirreciones</a>
+                    <a class="list-group-item" href="#"> Reembolsos</a>
+                    <a class="list-group-item" href="#">Configuración de Cuenta</a>
+
+                </ul>
+                <br>
+                <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Cerrar
+                        Sesión</span> </a>
+                <!--   SIDEBAR .//END   -->
+            </aside>
+            <main class="col-md-9">
+                <article class="card">
+                    <header class="card-header">
+                        <strong class="d-inline-block mr-3">Mis Direcciones de Despacho </strong>
+
+                    </header>
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-8">
+                                <a href="{% url 'newUbi' %}" class="btn btn-light">Añadir Nueva Dirreción</a>
+
+                            </div>
+
+                        </div> <!-- row.// -->
+                    </div> <!-- card-body .// -->
+                    <div class="table-responsive">
+                        <table class="table table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Dirección</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for i in ubicaciones %}
+                                <tr>
+                                    <td>
+                                        <div class="row">
+                                            <label for="ci">Ciudad: {{ i.ubicacion }}</label><br>
+                                            <label for="ci">Comuna: {{ i.comuna }}</label><br>
+                                            <label for="ci">Número: {{ i.numero }}</label><br>
+                                            <label for="">Eliminar</label>
+                                        </div>
+                                    </td>
+                                    <td>
+
+                                        <a href="#" class="btn btn-light">Modificar</a>
+                                    </td>
+                                </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+        </div>
+        </article>
+        </main>
+    </div>
+    </div>
+
+
+</section>
+
+
 {% endblock %}

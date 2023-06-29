@@ -13,6 +13,7 @@ body {
 label:after {
     content: "" !important;
 }
+
 /* ====================== Header ==================== */
 
 header {
@@ -27,15 +28,15 @@ header {
 
 header a:hover {
 
-text-decoration: none;
-color: #810404;
+    text-decoration: none;
+    color: #810404;
 
 }
 
 .btn-primary:active {
-        color: #810404;
-    
-    }
+    color: #810404;
+
+}
 
 
 /* ====================== Inicio de Sesión Enlaces ==================== */
@@ -175,7 +176,7 @@ ol {
 }
 
 
-/* ====================== Contendor Principal ==================== */
+/* ====================== Contenedor Principal ==================== */
 
 .contenido {
     background-color: #fff;
@@ -186,18 +187,18 @@ ol {
 /* ====================== Tarjeta Productos ==================== */
 
 
-.producto .card{
+.producto .card {
     height: 350px;
-    width:100%;
+    width: 100%;
 }
 
 .producto .body-card {
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-    margin-left:20px;
-    margin-right:20px;
-    margin-top:10px;
+    margin-left: 20px;
+    margin-right: 20px;
+    margin-top: 10px;
 }
 
 .producto .body-card img {
@@ -208,27 +209,28 @@ ol {
 
 
 .detalle_producto img {
-    width: 70%; 
-    height: auto; 
-    display: block; 
+    width: 70%;
+    height: auto;
+    display: block;
     margin: 0 auto
-  }
+}
 
-  .detalle_producto .btn {
+.detalle_producto .btn {
     margin-bottom: 10px;
     background-color: #810404;
     border-color: #810404;
 }
 
-  .detalle_producto .hr {
+.detalle_producto .hr {
 
     position: absolute;
     bottom: 0;
     left: 50%;
     transform: translateX(-50%);
-    width: 80%; /* Ancho del hr */
+    width: 80%;
+    /* Ancho del hr */
 
-  }
+}
 
 
 /* ====================== Sellos de Calidad ==================== */
@@ -241,8 +243,8 @@ ol {
     font-weight: bold;
     text-align: center;
     margin-top: 50px;
-    margin-bottom:30px;
-    
+    margin-bottom: 30px;
+
 }
 
 .sellos-de-calidad h7 {
@@ -360,22 +362,24 @@ footer a:active {
     flex-wrap: nowrap;
     display: inline-flex;
     vertical-align: middle;
-  }
-  .input-spinner input.form-control {
+}
+
+.input-spinner input.form-control {
     text-align: center;
     max-width: 46px;
     font-weight: bold;
     flex-basis: 46px;
     border-color: #e4e4e4;
     flex-grow: 0;
-  }
-  .input-spinner .btn {
+}
+
+.input-spinner .btn {
     width: 42px;
     text-align: center;
     padding-left: 0.5rem;
     padding-right: 0.5rem;
-  }
-  
+}
+
 
 /* ====================== paginador ==================== */
 
@@ -388,61 +392,3 @@ footer a:active {
     border-color: #810404;
 }
 
-
-
-.slider {
-    width: 100%;
-    position: relative;
-    overflow: hidden;
-  }
-  
-  .slides {
-    display: flex;
-    transition: transform 0.5s ease-in-out;
-  }
-  
-  .slide {
-    flex: 0 0 100%;
-  }
-  
-  .slide img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-
-  }
-  
-  .prev,
-  .next {
-    position: absolute;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 40px;
-    height: 40px;
-    background-color: transparent;
-    color: #fff;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
-  }
-  
-  .prev:hover,
-  .next:hover {
-    background-color: rgba(0, 0, 0, 0.5);
-  }
-  
-  .prev {
-    left: 10px;
-  }
-  
-  .next {
-    right: 10px;
-  }
-  
-  .slider {
-    /* Resto del código */
-  
-    /* Agrega la siguiente regla */
-    overflow: hidden;
-  }
