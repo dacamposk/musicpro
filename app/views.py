@@ -445,8 +445,29 @@ def newUbi(request):
         formulario = ubicacionForm(request.POST)
         if formulario.is_valid():
             formulario.save()
-            messages.success(request, "SubCategoria Agregada Correctamente")
+         
     return render(request,'app/tienda/Perfil/nuevaUbi.html',datos)
+
+def deleteUbi(request,ubi):
+    current_user = request.user
+    ubi = UserUbicacion.objects.get(user=current_user,ubicacion=ubi)
+    ubi.delete()
+    return redirect(to="viewUbis")
+
+
+def modUbi(request,ubi): 
+    current_user = request.user
+    ubicacion = UserUbicacion.objects.get(user=current_user,ubicacion=ubi)
+    datos = {
+        'form': ubicacionForm(instance=ubicacion)
+    }
+    if request.method == 'POST':
+        formulario = ubicacionForm(data = request.POST,instance=ubicacion)
+        if formulario.is_valid():
+            formulario.save()
+            return redirect('viewUbis')
+           
+    return render(request,'app/tienda/Perfil/modUbi.html',datos)
 
 
 
@@ -459,12 +480,13 @@ def viewOrders(request):
    
     return render(request,'app/tienda/Perfil/ordenes.html', context)
 
-def detalleOrder(request,order):
-
+def detalleUserOrder(request,order):
+    orderOBJ = Order.objects.get(order_number=order)
     items = OrderProduct.objects.filter(order=order)
     contex = {
               'items':items,
-                'order':order
+                'order':order,
+                'objOrder':orderOBJ,
          }
 
-    return render(request,"app/admini/vendedor/detalleorder.html",contex)
+    return render(request,"app/tienda/Perfil/detalleUserOrder.html",contex)

@@ -1,7 +1,10 @@
 from django.shortcuts import get_object_or_404, render, redirect
-from app.models import Producto,User
+from app.models import Producto
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+
+from app.models import UserUbicacion
+from app.models import User
 
 def _cart_id(request):
     cart = request.session.session_key 
@@ -110,6 +113,10 @@ def checkout_form(request):
     return render(request, 'app/tienda/checkout_form.html', {'form': form})
 
 def checkout(request, total=0, quantity=0, cart_items=None):
+    current_user = request.user
+    usuario = User.objects.get(email =current_user )
+    ubis = UserUbicacion.objects.filter(user=current_user)
+
     tax=0
     try:
         cart = Cart.objects.get(cart_id=_cart_id(request))
@@ -128,7 +135,9 @@ def checkout(request, total=0, quantity=0, cart_items=None):
         'quantity ':quantity,
         'cart_items': cart_items,
         'tax': tax,
-        'grand_total': grand_total
+        'grand_total': grand_total,
+        'ubis': ubis,
+        'usuario': usuario
     }
 
     return render (request, 'app/tienda/checkout.html', context)

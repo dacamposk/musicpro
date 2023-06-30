@@ -46,4 +46,8 @@ urlpatterns = [
     path('Perfil/ubicaciones',viewUbis, name="viewUbis"),
     path('Perfil/nueva-ubicacion',newUbi, name="newUbi"),
     path('Perfil/ordenes',viewOrders, name="viewOrders"),
+    path('Perfil/ordenes/<order>',detalleUserOrder, name="detalleUserOrder"),
+    path('Perfil/delete-ubi/<ubi>',deleteUbi, name="deleteUbi"),
+    path('Perfil/modificar-ubicacion/<ubi>',modUbi, name="modUbi"),
+
 ]

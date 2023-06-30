@@ -21,7 +21,7 @@ def place_order(request, total=0, quantity=0):
     cart = Cart.objects.get(cart_id=_cart_id(request))
     cart_items = CartItem.objects.filter(cart=cart)
     cart_count = cart_items.count()
-    print(cart_items)
+    
     if cart_count == 0:
        pass
     grand_total = 0
@@ -36,9 +36,12 @@ def place_order(request, total=0, quantity=0):
 
     if request.method == 'POST':
         form = OrderForm(request.POST)
+       
         if form.is_valid():
+         
             data = Order()
             data.user = current_user
+            data.ubicacion =1
             data.first_name = form.cleaned_data['first_name']
             data.last_name = form.cleaned_data['last_name']
             data.phone = form.cleaned_data['phone']
