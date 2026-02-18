@@ -53,29 +53,31 @@
 ## 🚀 Instalación y ejecución (local)
 
 1) Clona el repositorio:
+```
 bash
 git clone https://github.com/dacamposk/musicpro.git
 cd musicpro
-
+```
 2) Crear y activar entorno virtual
+```
 python -m venv .venv
 source .venv/bin/activate
 # Windows PowerShell:
 # .venv\Scripts\Activate.ps1
-
+```
 3) Instalar dependencias
 ```
 pip install -r requeriments.txt
 pip install django-autoslug crispy-bootstrap4 transbank-sdk
 ```
 
- 5) Migraciones y superusuario
+4) Migraciones y superusuario
 ```
 python manage.py migrate
 python manage.py createsuperuser
 ```
 
- 7) Ejecutar servidor
+5) Ejecutar servidor
 
 ```
 python manage.py runserver
