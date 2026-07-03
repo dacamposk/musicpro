@@ -77,7 +77,7 @@ python manage.py runserver
 La aplicación estará disponible en `http://localhost:8000`
 
 
-<img width="1857" height="916" alt="image" src="https://github.com/user-attachments/assets/a23df510-53d9-47b2-a791-617ec5aecb34" /># 
+<img width="1857" height="916" alt="image" src="https://github.com/user-attachments/assets/a23df510-53d9-47b2-a791-617ec5aecb34" />
 <img width="1855" height="921" alt="image" src="https://github.com/user-attachments/assets/078f6ae8-c66c-45bc-aa63-ca74b731c18c" />
 <img width="1854" height="923" alt="image" src="https://github.com/user-attachments/assets/d829622e-3ea9-4d57-913c-f4676b3a0ebd" />
 <img width="1849" height="925" alt="image" src="https://github.com/user-attachments/assets/9a661ee1-47d5-4825-a971-1c1a86dfdfa5" />
