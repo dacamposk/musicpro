@@ -1,4 +1,4 @@
-# 🎸 MusicPro — E-Commerce de Instrumentos Musicales
+<img width="1857" height="916" alt="image" src="https://github.com/user-attachments/assets/a23df510-53d9-47b2-a791-617ec5aecb34" /># 🎸 MusicPro — E-Commerce de Instrumentos Musicales
 
 Plataforma web de e-commerce desarrollada con **Django 4.2**, orientada a la venta de instrumentos musicales. Incluye catálogo con filtros, carrito de compras, flujo completo de checkout, gestión de órdenes y pagos integrados con **Transbank Webpay Plus**.
 
@@ -64,8 +64,7 @@ source .venv/bin/activate        # Linux/Mac
 # .venv\Scripts\Activate.ps1     # Windows PowerShell
 
 # 3. Instalar dependencias
-pip install -r requeriments.txt
-pip install django-autoslug crispy-bootstrap4 transbank-sdk
+pip install -r requirements.txt
 
 # 4. Migraciones y superusuario
 python manage.py migrate
