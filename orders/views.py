@@ -9,9 +9,20 @@ from app.models import User
 import datetime
 from transbank.webpay.webpay_plus.transaction import Transaction
 from transbank.error.transbank_error import TransbankError
+from transbank.common.integration_api_keys import IntegrationApiKeys
+from transbank.common.integration_commerce_codes import IntegrationCommerceCodes
+from transbank.common.options import WebpayOptions
+from transbank.common.integration_type import IntegrationType
 from django.utils import timezone
 from .models import Payment
 
+def _get_webpay_transaction():
+
+    return Transaction(WebpayOptions(
+        commerce_code=IntegrationCommerceCodes.WEBPAY_PLUS,
+        api_key=IntegrationApiKeys.WEBPAY,
+        integration_type=IntegrationType.TEST,
+    ))
 
 def payments(request):
     return render (request,'orders/payments.html')
@@ -105,7 +116,7 @@ def pago(request,total,order):
     amount = total
     total= str('{:,.0f}'.format(total).replace(",", "@").replace(".", ",").replace("@", "."))
     try:
-        response = Transaction().create(buy_order, session_id, amount, return_url)
+        response = _get_webpay_transaction().create(buy_order, session_id, amount, return_url)
         context ={'total':total,"response":response}
         print(amount)
 
@@ -127,7 +138,7 @@ def terminar(request,order):
   
 
     try:
-        response = Transaction().commit(token) 
+        response = _get_webpay_transaction().commit(token)
 
         payment = Payment()
         payment.user = request.user  

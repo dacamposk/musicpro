@@ -14,6 +14,7 @@ from carts.views import _cart_id
 from .serializers import ProductoSerializer
 from rest_framework import viewsets
 
+
 class ProductoViewset(viewsets.ModelViewSet):
     queryset = Producto.objects.all()
     serializer_class = ProductoSerializer
@@ -439,14 +440,18 @@ def viewUbis(request):
     return render(request,'app/tienda/Perfil/ubicaciones.html', context)
 
 
-def newUbi(request): 
-    datos = {'form': ubicacionForm()}
+@login_required(login_url='loginCli')
+def newUbi(request):
     if request.method == 'POST':
         formulario = ubicacionForm(request.POST)
         if formulario.is_valid():
-            formulario.save()
-         
-    return render(request,'app/tienda/Perfil/nuevaUbi.html',datos)
+            ubi = formulario.save(commit=False)   # crea el objeto pero NO lo guarda todavía
+            ubi.user = request.user               # le asigna el user logueado
+            ubi.save()                            # ahora sí, guarda con user incluido
+            return redirect('viewUbis')
+    else:
+        formulario = ubicacionForm()
+    return render(request, 'app/tienda/Perfil/nuevaUbi.html', {'form': formulario})
 
 def deleteUbi(request,ubi):
     current_user = request.user

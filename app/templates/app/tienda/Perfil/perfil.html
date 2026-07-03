@@ -2,52 +2,52 @@
 {% load static %}
 {% block contenido %}
 
-<section class="section-conten padding-y bg">
+<section class="section-content container">
+    <header class="section-head" style="padding-top: 0;">
+        <h2>Mi cuenta</h2>
+        <span class="meta">Bienvenido de vuelta</span>
+    </header>
 
-    <div class="container">
-        <div class="row">
-        <aside class="col-md-3">
-          
-            <ul class="list-group">
-                <a class="list-group-item active" style="background: #810404; " href="{% url 'viewOrders' %}"> Mi historial de ordenes </a>
-                <a class="list-group-item"  href="{% url 'viewUbis' %}">Mis Direcciones</a>
-                <a class="list-group-item" href="#"> Reembolsos</a>
-                <a class="list-group-item" href="#">Configuración de Cuenta</a>
-              
-            </ul>
-            <br>
-            <a class="btn btn-light btn-block" href="{% url 'logout' %}"> <i class="fa fa-power-off"></i> <span class="text">Cerrar Sesión</span> </a> 
-       
-        </aside>
-        <main class="col-md-9">
-            <article class="card">
-            <header class="card-header">
-                <strong class="d-inline-block mr-3">Mi Perfil</strong>
-              
-            </header>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-md-12">
-                        <p>
-                            ¡Hola <span class="username">{{ user.username|capfirst }}</span>! 
-                            Bienvenido a tu perfil<br>  
-                            
-                        </p>
+    <div class="store-layout">
+        {% include 'app/tienda/Perfil/_sidebar.html' with active='perfil' %}
+
+        <main>
+            <div class="cart-card" style="padding: 28px; margin-bottom: 16px;">
+                <div class="eyebrow" style="margin-bottom: 20px;">Datos de contacto</div>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px;">Nombre</div>
+                        <div>{{ user.username|capfirst }} {{ user.apellido|default:"" }}</div>
                     </div>
-                </div> 
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px;">Email</div>
+                        <div style="font-family: var(--font-mono); font-size: 13px;">{{ user.email }}</div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px;">Teléfono</div>
+                        <div style="font-family: var(--font-mono); font-size: 13px;">{{ user.telefono|default:"—" }}</div>
+                    </div>
+                    <div>
+                        <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px;">Estado</div>
+                        <div><span style="display: inline-block; padding: 3px 8px; border-radius: 2px; background: rgba(123, 160, 91, 0.12); color: var(--success); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">Cuenta activa</span></div>
+                    </div>
+                </div>
             </div>
-        </div>
-    
-          
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
+                <a href="{% url 'viewOrders' %}" class="cart-card" style="padding: 24px; text-decoration: none; display: block;">
+                    <div class="eyebrow" style="margin-bottom: 8px;">Mis pedidos</div>
+                    <div style="font-family: var(--font-display); font-style: italic; font-size: 32px; color: var(--paper); line-height: 1;">{{ user.order_set.count }}</div>
+                    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em; text-transform: uppercase;">Ver historial →</div>
+                </a>
+                <a href="{% url 'viewUbis' %}" class="cart-card" style="padding: 24px; text-decoration: none; display: block;">
+                    <div class="eyebrow" style="margin-bottom: 8px;">Direcciones</div>
+                    <div style="font-family: var(--font-display); font-style: italic; font-size: 32px; color: var(--paper); line-height: 1;">{{ user.userubicacion_set.count }}</div>
+                    <div style="font-family: var(--font-mono); font-size: 11px; color: var(--muted); margin-top: 8px; letter-spacing: 0.06em; text-transform: uppercase;">Gestionar →</div>
+                </a>
             </div>
-            </article> 
         </main>
-    </div> 
     </div>
-    
-    
-    </section>
-
-
+</section>
 
 {% endblock %}

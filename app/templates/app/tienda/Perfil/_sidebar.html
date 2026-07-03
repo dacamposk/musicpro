@@ -1,0 +1,25 @@
+<aside>
+    <div class="filter-card">
+        <div class="filter-group">
+            <div style="display: flex; align-items: center; gap: 12px; padding-bottom: 16px; margin-bottom: 16px; border-bottom: 1px solid var(--line);">
+                <div style="width: 40px; height: 40px; border-radius: 50%; background: var(--amber); color: var(--bg); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-style: italic; font-size: 18px;">
+                    {{ user.username|first|upper }}
+                </div>
+                <div style="min-width: 0; flex: 1;">
+                    <div style="font-family: var(--font-display); font-style: italic; font-size: 14px; color: var(--paper);">{{ user.username|capfirst }}</div>
+                    <div style="font-family: var(--font-mono); font-size: 10px; color: var(--muted); letter-spacing: 0.06em; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">{{ user.email }}</div>
+                </div>
+            </div>
+
+            <ul style="display: flex; flex-direction: column; gap: 2px;">
+                <li><a href="{% url 'viewPerfil' %}" class="perfil-navlink {% if active == 'perfil' %}is-active{% endif %}">Mi perfil</a></li>
+                <li><a href="{% url 'viewOrders' %}" class="perfil-navlink {% if active == 'ordenes' %}is-active{% endif %}">Mis pedidos</a></li>
+                <li><a href="{% url 'viewUbis' %}" class="perfil-navlink {% if active == 'ubis' %}is-active{% endif %}">Mis direcciones</a></li>
+            </ul>
+        </div>
+
+        <div class="filter-group">
+            <a href="{% url 'logout' %}" class="btn btn-ghost btn-block">Cerrar sesión</a>
+        </div>
+    </div>
+</aside>

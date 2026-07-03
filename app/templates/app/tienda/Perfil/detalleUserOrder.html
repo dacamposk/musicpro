@@ -1,67 +1,57 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block contenido %}
-{% load crispy_forms_tags %}
 
+<section class="section-content container">
+    <header class="section-head" style="padding-top: 0;">
+        <h2>Pedido {{ order }}</h2>
+        <span class="meta">Estado: {{ objOrder.status }}</span>
+    </header>
 
+    <div class="store-layout">
+        {% include 'app/tienda/Perfil/_sidebar.html' with active='ordenes' %}
 
-  <section class="section-conten padding-y bg">
+        <main>
+            <div class="cart-card" style="padding: 28px; margin-bottom: 16px;">
+                <div class="eyebrow" style="margin-bottom: 16px;">Dirección de envío</div>
+                <p style="margin: 4px 0;"><strong>{{ objOrder.first_name }} {{ objOrder.last_name }}</strong></p>
+                <p style="margin: 4px 0; color: var(--paper-dim);">{{ objOrder.address_line_1 }} {{ objOrder.address_line_2 }}</p>
+                <p style="margin: 4px 0; color: var(--paper-dim);">{{ objOrder.city }}, {{ objOrder.region }}</p>
+                <p style="margin: 4px 0; color: var(--paper-dim); font-family: var(--font-mono); font-size: 12px;">{{ objOrder.email }} · {{ objOrder.phone }}</p>
+            </div>
 
-    <div class="container">
-        <div class="row">
-            <aside class="col-md-3">
-                <!--   SIDEBAR   -->
-                <ul class="list-group">
-                    <a class="list-group-item active" style="background: #810404;" href="{% url 'viewOrders' %}"> Mi historial de ordenes
-                    </a>
-                    <a class="list-group-item"  href="{% url 'viewUbis' %}">Mis Dirreciones</a>
-                    
-     
-                    <a class="list-group-item" href="#">Configuración de Cuenta</a>
+            <div class="cart-card">
+                <div class="eyebrow" style="padding: 20px 20px 0;">Productos</div>
+                <table class="table-shopping-cart">
+                    <thead>
+                        <tr>
+                            <th scope="col">Producto</th>
+                            <th scope="col">Cantidad</th>
+                            <th scope="col">Precio unitario</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for ve in items %}
+                        <tr>
+                            <td>
+                                <span style="font-family: var(--font-display); font-style: italic; color: var(--paper);">{{ ve.producto.nombreProducto }}</span>
+                            </td>
+                            <td style="font-family: var(--font-mono); font-size: 13px;">× {{ ve.quantity }}</td>
+                            <td style="font-family: var(--font-mono); font-size: 13px;">${{ ve.product_price|intcomma }}</td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                <div style="padding: 20px 20px; border-top: 1px solid var(--line); display: flex; justify-content: space-between; align-items: baseline;">
+                    <span style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase;">Total del pedido</span>
+                    <span style="font-family: var(--font-mono); font-size: 20px; color: var(--amber); font-weight: 500;">${{ objOrder.order_total|intcomma }}</span>
+                </div>
+            </div>
 
-                </ul>
-                <br>
-        
-                <!--   SIDEBAR .//END   -->
-            </aside>
-            <main class="col-md-9">
-                <article class="card">
-                    <header class="card-header">
-                        <strong class="d-inline-block mr-3">Detalle orden : {{order}}  Estado {{ objOrder.status }} </strong>
-
-                    </header>
-             
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Nombre producto</th>
-                                    <th scope="col">Cantidad</th>
-                                    <th scope="col">Precio</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for ve in items %}
-                                <tr>
-                                  <td>{{ve.producto.nombreProducto}}</td>
-                                  <td>{{ve.quantity}}</td>
-                                  <td>{{ve.product_price}}</td>
-                        
-                                </tr>
-                                {% endfor %}
-                              </tbody>
-                        </table>
-                    </div>
-        </div>
+            <a href="{% url 'viewOrders' %}" class="btn btn-ghost" style="margin-top: 16px;">← Volver a mis pedidos</a>
+        </main>
     </div>
-    </article>
-    </main>
-    </div>
-    </div>
-
-
 </section>
-
-
 
 {% endblock %}

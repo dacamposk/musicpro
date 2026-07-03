@@ -1,130 +1,74 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block contenido %}
 
-
-<section class="section-content padding-y">
-    <div class="container">
-
-        <div class="row">
-            <aside class="col-md-3">
-
-                <div class="card">
-                    <article class="filter-group">
-                        <header class="card-header">
-                            <h6 class="title">Subcategorias</h6>
-                        </header>
-                        <div class="filter-content collapse show" id="collapse_1">
-                            <div class="card-body">
-                                {% for sub in subCat %}
-                                <ul class="list-menu">
-                                    <li><a
-                                            href="{% url 'subCatfilter' sub.categoria.slug sub.slug  %}">{{sub.nombreSubCategoria}}</a>
-                                    </li>
-                                </ul>
-                                {% endfor %}
-                            </div> <!-- card-body.// -->
-                        </div>
-
-                        {% if not tipo %}
-
-                        {% else %}
-                    </article> <!-- filter-group  .// -->
-                    <hr>
-                    <article class="filter-group">
-                        <header class="card-header">
-                            <h6 class="title">Tipos</h6>
-                        </header>
-                        <div class="filter-content collapse show" id="collapse_4" >
-                            {% for t in tipo %}
-                            <div class="card-body">
-                                <div>
-                                   <a href="{% url 'tipoisntruFilter' t.subcategoria.categoria.slug t.subcategoria.slug t.slug %}"> 
-                                    {{t.nombreTipoInstrumento}} 
-                                   </a>
-                                   <br>
-                          
-
-
-                            </div><!-- card-body.// -->
-
-
+<section class="section-content container">
+    <div class="store-layout">
+        <aside>
+            <div class="filter-card">
+                <div class="filter-group">
+                    <header>
+                        <h6 class="title">Subcategorías</h6>
+                    </header>
+                    <div class="card-body">
+                        <ul>
+                            {% for sub in subCat %}
+                                <li><a href="{% url 'subCatfilter' sub.categoria.slug sub.slug %}">{{ sub.nombreSubCategoria }}</a></li>
+                            {% empty %}
+                                <li class="mono" style="color:var(--muted-2);font-size:12px;">Sin subcategorías</li>
                             {% endfor %}
-                        </div>
-                        <hr>
-                    </article> <!-- filter-group .// -->
-                    {% endif %}
-
-                </div> <!-- card.// -->
-
-            </aside> <!-- col.// -->
-            <main class="col-md-9">
-
-                <header class="border-bottom mb-4 pb-3">
-                    <div class="form-inline">
-                        <span class="mr-md-auto">{{ producto_count }} Productos Encontrados</span>
-
-                    </div>
-                </header><!-- sect-heading -->
-
-                {% load humanize %}
-                <div class="row">
-                    {% for p in productos %}
-                    <div class="col-xs col-sm-6 col-md col-lg-3">
-                        <div class="producto">
-                            <div class="card">
-                                <div class="body-card">
-                                    <div class="text-center"><img src="{{ p.imagen.url}}" class="img-fluid">
-                                    </div>
-
-                                    <h6 class="text-center ">{{p.marca}}</h6>
-                                    <h4 class="text-center text-truncate">{{p.nombreProducto}}</h4>
-                                    <h5 class="text-center ">${{p.precio | intcomma}}</h5>
-                                    <!-- Boton Ver Producto -->
-                                    <div name="{{ p.SKU }}">
-                                        <a href="{% url 'detalle' p.SKU %}">
-                                    </div>
-                                  
-                                        <div class="text-center"> <button type="button" class="btn btn-success " name="detalle">
-                                                Ver Producto</button>
-                                    </a>
-                                </div>
-
-
-
-                            </div>
-                        </div>
+                        </ul>
                     </div>
                 </div>
-                {% endfor %}
-                {% if productos.has_other_pages %}
-                <nav class="mt-4" aria-label="Page navigation sample">
-                    <ul class="pagination">
-                        {%if productos.has_previous%}
-                        <li class="page-item"><a class="page-link"
-                                href="?page={{productos.previous_page_numer}}">Previous</a></li>
-                        {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Anterior</a></li>
-                        {% endif %}
-                        {% for i in productos.paginator.page_range %}
-                        {%if productos.number == i %}
-                        <li class="page-item active"><a class="page-link" href="#">{{i}}</a></li>
-                        {% else %}
-                        <li class="page-item"><a class="page-link" href="?page={{i}}">{{i}}</a></li>
-                        {% endif %}
-                        {% endfor %}
 
-
-                        {%if productos.has_next%}
-                        <li class="page-item"><a class="page-link"
-                                href="?page={{productos.next_page_number}}">Siguiente</a></li>
-                        {% else %}
-                        <li class="page-item disabled"><a class="page-link" href="#">Siguiente</a></li>
-
-                        {% endif %}
-                    </ul>
-                </nav>
+                {% if tipo %}
+                <div class="filter-group">
+                    <header>
+                        <h6 class="title">Tipos de instrumento</h6>
+                    </header>
+                    <div class="card-body">
+                        <ul>
+                            {% for t in tipo %}
+                                <li><a href="{% url 'tipoisntruFilter' t.subcategoria.categoria.slug t.subcategoria.slug t.slug %}">{{ t.nombreTipoInstrumento }}</a></li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                </div>
                 {% endif %}
+            </div>
+        </aside>
 
-        </div>
-        {% endblock %}
+        <main>
+            <header class="store-header">
+                <h2 style="font-family:var(--font-display);font-style:italic;font-size:26px;font-weight:400;">Catálogo</h2>
+                <span class="count">{{ producto_count }} productos encontrados</span>
+            </header>
+
+            <div class="product-grid">
+                {% for p in productos %}
+                <article class="producto">
+                    <div class="card">
+                        <div class="body-card">
+                            <div class="img-wrap text-center">
+                                <img src="{{ p.imagen.url }}" alt="{{ p.nombreProducto }}">
+                            </div>
+                            <h6>{{ p.marca }}</h6>
+                            <h4 class="italic">{{ p.nombreProducto }}</h4>
+                            <h5>${{ p.precio|intcomma }}</h5>
+                            <a href="{% url 'detalle' p.SKU %}" class="btn btn-primary">Ver producto</a>
+                        </div>
+                    </div>
+                </article>
+                {% empty %}
+                <div style="grid-column: 1 / -1; text-align:center; padding: 60px 20px; color: var(--paper-dim);">
+                    <p class="italic" style="font-family:var(--font-display); font-size:22px; margin-bottom:8px;">Sin resultados en este filtro.</p>
+                    <p style="color:var(--muted); font-size:14px;">Probá con otra categoría o subcategoría.</p>
+                </div>
+                {% endfor %}
+            </div>
+        </main>
+    </div>
+</section>
+
+{% endblock %}

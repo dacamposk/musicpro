@@ -1,140 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
-  {%load static%}
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <link rel="icon" type="image/x-icon" href="{% static 'core/img/favicon.ico'%}">
-  <title>Caprichosa's</title>
-  <!-- CSS -->
-  <link rel="stylesheet" href="{% static 'core/css/styles.css'%}">
-  <!-- Font Awesome -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet" />
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" rel="stylesheet" />
-  <!-- MDB -->
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.css" rel="stylesheet" />
-</head>
+{% extends 'app/base.html' %}
+{% load static %}
+{% block contenido %}
 
-<body class="terminar">
-  <header style="background-color:#810404; height: 50px;">
-    <nav class="navbar fixed-top navbar-expand-lg mx-auto d-block justify-content-center" style="background-color:rgb(88, 11, 11)">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="/"><img class="px-4" height="100"></a>
-        <button class="navbar-toggler"
-                type="button"
-                data-mdb-toggle="collapse"
-                data-mdb-target="#navbarNavAltMarkup"
-                aria-controls="navbarNavAltMarkup"
-                aria-expanded="false"
-                aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <span class="navbar-text" style="font-size: 20px; font-weight: bold; color: white;">
-            Music Pro
-          </span>
-        </div>
-      </div>
-    </nav>
-  </header>
-  <br>
-  <br>
-  <br>
-  <br>
+<section class="container auth-wrap">
+    <div class="auth-card" style="max-width: 620px;">
 
+        {% if error %}
+            <div class="eyebrow" style="color: var(--danger);">Pago rechazado</div>
+            <h1>No pudimos procesar el pago.</h1>
+            <p class="sub">Ocurrió un error con Transbank y tu pago no se completó. Podés intentar nuevamente desde el carrito.</p>
+            <div style="background: rgba(194, 75, 60, 0.12); border: 1px solid rgba(194, 75, 60, 0.3); color: var(--danger); padding: 14px; border-radius: 2px; font-family: var(--font-mono); font-size: 12px; margin: 20px 0;">
+                {{ error }}
+            </div>
+            <a href="{% url 'cart' %}" class="btn btn-primary btn-block">Volver al carrito</a>
 
+        {% else %}
+            <div class="eyebrow" style="color: var(--success);">● Pago exitoso</div>
+            <h1>¡Gracias por tu compra!</h1>
+            <p class="sub">Tu pago fue procesado correctamente. Te enviamos el detalle a tu email registrado.</p>
 
-<section>
-  <div class="card">
-    <div class="card-body">
-      <h1 class="card-title">Pago realizado con éxito:</h1>
-      <table class="table table-light table-striped">
-        <tr>
-          <td>Resultado autenticación:</td>
-          <td>{{ response.vci }}</td>
-        </tr> 
-        <tr>
-          <td>Monto:</td>
-          <td>${{ response.amount }}</td>
-        </tr>
-        <tr>
-          <td>Estado:</td>
-          <td>{{ response.status }}</td>
-        </tr>
-        <tr>
-          <td>Numero orden:</td>
-          <td>{{ response.buy_order }}</td>
-        </tr>
-        <tr>
-          <td>Detalle tarjeta:</td>
-          <td>{{ response.card_detail }}</td>
-        </tr>
-        <tr>
-          <td>Fecha y hora autorización:</td>
-          <td>{{ response.transaction_date }}</td>
-        </tr>
-        <tr>
-          <td>Código autorización:</td>
-          <td>{{ response.authorization_code }}</td>
-        </tr>
-        <tr>
-          <td>Tipo de pago:</td>
-          <td>{{ response.payment_type_code }}</td>
-        </tr>
-        <tr>
-          <td>Monto de las cuotas:</td>
-          <td>{{ response.installments_amount }}</td>
-        </tr>
-        <tr>
-          <td>Cantidad de cuotas:</td>
-          <td>{{ response.installments_number }}</td>
-        </tr>
-      </table>
-      <a class="btn btn-primary" href="/">Volver inicio</a>
+            <div style="margin: 32px 0; padding: 24px; background: var(--bg); border-radius: 2px;">
+                <div style="font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 4px;">Comprobante</div>
+                <div style="font-family: var(--font-mono); font-size: 24px; color: var(--paper); font-weight: 500; margin-bottom: 24px;">${{ response.amount }}</div>
+
+                <dl style="margin: 0;">
+                    <dl class="dlist-align"><dt>Estado</dt><dd>{{ response.status }}</dd></dl>
+                    <dl class="dlist-align"><dt>N° de orden</dt><dd>{{ response.buy_order }}</dd></dl>
+                    <dl class="dlist-align"><dt>Tarjeta</dt><dd>{{ response.card_detail }}</dd></dl>
+                    <dl class="dlist-align"><dt>Fecha</dt><dd>{{ response.transaction_date }}</dd></dl>
+                    <dl class="dlist-align"><dt>Código autorización</dt><dd>{{ response.authorization_code }}</dd></dl>
+                    <dl class="dlist-align"><dt>Tipo de pago</dt><dd>{{ response.payment_type_code }}</dd></dl>
+                    {% if response.installments_number %}
+                        <dl class="dlist-align"><dt>Cuotas</dt><dd>{{ response.installments_number }} × ${{ response.installments_amount }}</dd></dl>
+                    {% endif %}
+                </dl>
+            </div>
+
+            <a href="{% url 'home' %}" class="btn btn-primary btn-block">Volver a la tienda</a>
+            <a href="{% url 'viewOrders' %}" class="btn btn-ghost btn-block">Ver mis pedidos</a>
+        {% endif %}
     </div>
-  </div>
 </section>
-  <br>
 
-
-
-<!-- FOOTER -->
-
-<footer class="footer text-center text-white">
-    <!-- Grid container -->
-    <div class="container p-4 pb-0">
-      <!-- Section: Social media -->
-      <div class="mb-4">
-        <!-- Facebook -->
-        <a class="btn btn-outline-light btn-floating m-1" href="#!" target="_blank" role="button"><i class="fab fa-facebook-f"></i></a>
-        <!-- Instagram -->
-        <a class="btn btn-outline-light btn-floating m-1" href="https://www.instagram.com/caprichosas_cafe/" target="_blank"
-          role="button"><i class="fab fa-instagram"></i></a>
-      </div>
-      <!-- Section: Social media -->
-    </div>
-    <!-- Grid container -->
-
-    <!-- Location and number -->
-    <div class="text-center p-1">
-      <i class="fas fa-location-dot"></i> España 243 Placilla, Valparaíso
-    </div>
-    <div class="wanumber text-center p-2">
-      <i class="fab fa-whatsapp"></i> +56 9 53684070
-    </div>
-    <!-- Location and number -->
-  </footer>
-
-</body>
-
-
-
-<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
-
-
-
-
-
-</html>  
+{% endblock %}

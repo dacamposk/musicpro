@@ -99,9 +99,8 @@ class tipoiForm (forms.ModelForm):
         fields= '__all__'
 
 
-class ubicacionForm (forms.ModelForm):
-    class Meta :
+class ubicacionForm(forms.ModelForm):
+    class Meta:
         model = UserUbicacion
-        fields= '__all__'
-       
+        fields = ['ubicacion', 'numero', 'region', 'comuna']
 

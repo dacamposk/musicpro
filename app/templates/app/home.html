@@ -1,91 +1,88 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block contenido %}
 
-<div class="contenido">
-    {% comment %} <div class="slider">
-        <div class="slides">
-          <div class="slide">
-            <img src="#" alt="Imagen 2">
+<section class="hero container">
+    <div>
+        <div class="eyebrow">Tienda de instrumentos · Santiago · Desde 2023</div>
+        <h1 class="hero-title">El instrumento correcto cambia todo lo que <em>tocas</em>.</h1>
+        <p class="hero-sub">Guitarras, teclados, baterías y equipo de estudio elegidos a mano. Envío a todo Chile, garantía oficial y ficha técnica en cada producto.</p>
+        <a href="#destacados" class="btn btn-primary">Ver catálogo →</a>
+    </div>
 
+    {% with p_hero=productos.0 %}
+    {% if p_hero %}
+    <div class="hero-feat">
+        <div class="brand-line">{{ p_hero.marca }}</div>
+        <h3>{{ p_hero.nombreProducto }}</h3>
+        <div class="feat-img">
+            <img src="{{ p_hero.imagen.url }}" alt="{{ p_hero.nombreProducto }}">
         </div>
-        <div class="slide">
-          <img src="#" alt="Imagen 2">
+        <div class="price-row">
+            <div>
+                <div class="price-label">Precio CLP</div>
+            </div>
+            <div class="price-value">${{ p_hero.precio|intcomma }}</div>
         </div>
-        <div class="slide">
-          <img src="#" alt="Imagen 2">
-            <!-- <img src="{% static 'img/imagen3.png' %}" alt="Imagen 2">
+    </div>
+    {% endif %}
+    {% endwith %}
+</section>
 
-          </div>
-          <div class="slide">
-            <img src="{% static 'img/imagen3.png' %}" alt="Imagen 2">
-          </div>
-          <div class="slide">
-            <img src="{% static 'img/imagen2.jpg' %}" alt="Imagen 2"> -->
-        </div>
-        </div>
-        <button class="prev" onclick="previousSlide()">&#10094;</button>
-        <button class="next" onclick="nextSlide()">&#10095;</button>
-      </div> {% endcomment %}
-{% load humanize %}
-<div class="row">
-    {% for p in productos %}
-    <div class="col-xs col-sm-6 col-md col-lg-3">
-        <div class="producto">
+<section class="container">
+    <header class="section-head" id="destacados">
+        <h2>Destacados esta semana</h2>
+        <span class="meta">{{ productos|length }} productos</span>
+    </header>
+
+    <div class="product-grid">
+        {% for p in productos %}
+        <article class="producto">
             <div class="card">
                 <div class="body-card">
-                    <div class="text-center"><img src="{{ p.imagen.url}}" class="img-fluid">
+                    <div class="img-wrap text-center">
+                        <img src="{{ p.imagen.url }}" alt="{{ p.nombreProducto }}">
                     </div>
-
-                    <h6 class="text-center ">{{p.marca}}</h6>
-                    <h4 class="text-center text-truncate">{{p.nombreProducto}}</h4>
-                    <h5 class="text-center ">${{p.precio | intcomma }}</h5>
-                    <!-- Boton Ver Producto -->
-                    <a href="{% url 'detalle' p.SKU %}">
-                        <div class="text-center"> <button type="button" class="btn btn-success ">
-                                Ver Producto</button>
-                    </a>
+                    <h6>{{ p.marca }}</h6>
+                    <h4 class="italic">{{ p.nombreProducto }}</h4>
+                    <h5>${{ p.precio|intcomma }}</h5>
+                    <a href="{% url 'detalle' p.SKU %}" class="btn btn-primary">Ver producto</a>
                 </div>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</section>
 
+<section class="container">
+    <header class="section-head">
+        <h2>Por qué comprar con nosotros</h2>
+        <span class="meta">Garantías reales</span>
+    </header>
+    <div class="row">
+        <div>
+            <div class="sellos-de-calidad">
+                <img src="{% static 'img/icons/garantia.png' %}" alt="">
+                <h5>Garantía</h5>
+                <h7>Todos nuestros productos cuentan con garantía de hasta 3 meses.</h7>
+            </div>
+        </div>
+        <div>
+            <div class="sellos-de-calidad">
+                <img src="{% static 'img/icons/envios.png' %}" alt="">
+                <h5>Envíos a todo Chile</h5>
+                <h7>Despacho a todo el territorio nacional en 48–72h.</h7>
+            </div>
+        </div>
+        <div>
+            <div class="sellos-de-calidad">
+                <img src="{% static 'img/icons/tienda.png' %}" alt="">
+                <h5>Tienda física</h5>
+                <h7>Sucursales a lo largo de Santiago para probar antes de comprar.</h7>
             </div>
         </div>
     </div>
-</div>
+</section>
 
-
-{% endfor %}
-
-<div class="row">
-    <div class="col-xs col-sm-12 col-md-12 col-lg-4">
-
-        <div class="sellos-de-calidad">
-            <img src="{% static 'img/icons/garantia.png' %}" class="img-fluid">
-            <br>
-            <h5>Garantia</h5>
-            <h7>Todos nuestros productos cuentan con garantia <br> de hasta 3 meses.</h7>
-        </div>
-    </div>
-
-    <div class="col-xs col-sm-12 col-md-12 col-lg-4">
-        <div class="sellos-de-calidad">
-            <img src="{% static 'img/icons/envios.png' %}" class="img-fluid">
-            <br>
-            <h5>Envíos a todo Chile</h5>
-            <h7>Contamos con envios a todo el territorio nacional.</h7>
-        </div>
-    </div>
-    <div class="col-xs col-sm-12 col-md-12 col-lg-4">
-        <div class="sellos-de-calidad">
-            <img src="{% static 'img/icons/tienda.png' %}" class="img-fluid">
-            <br>
-            <h5>Tienda Fisica</h5>
-            <h7>Contamos con distintas sucursales a lo largo de todo santiago.</h7>
-        </div>
-    </div>
-</div>
-
-<br>
-<br>
-<br>
-<br>
 {% endblock %}

@@ -1,64 +1,50 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block contenido %}
 
+<section class="container">
+    <div class="detalle-wrap">
+        <aside>
+            <div class="detalle_producto">
+                <div class="img-panel">
+                    <img src="{{ producto.imagen.url }}" alt="{{ producto.nombreProducto }}">
+                </div>
+            </div>
+        </aside>
 
-{% load humanize %}
+        <main class="detalle_producto">
+            <div class="brand-tag">{{ producto.marca }}</div>
+            <h2 class="title">{{ producto.nombreProducto }}</h2>
+            <var class="price">${{ producto.precio|intcomma }}</var>
 
-<div class="card">
-  <div class="row no-gutters">
-    <aside class="col-md-6">
-      <article class="detalle_producto">
-        <div>
-          <img src="{{ producto.imagen.url}}" class="img-fluid">
-        </div> <!-- img-big-wrap.// -->
+            {% if producto.stock > 0 %}
+                <span class="stock-tag">● En stock · {{ producto.stock }} unidades</span>
+            {% else %}
+                <span class="stock-tag out">● Fuera de stock</span>
+            {% endif %}
 
-      </article> <!-- gallery-wrap .end// -->
-    </aside>
-    <main class="col-md-6 border-left" style="padding:20px;">
-      <article class="detalle_producto " >
-        <h2 class="title">{{producto.nombreProducto}}</h2>
-        <div class="mb-3">
-          <var class="price h5">${{producto.precio | intcomma}}</var>
+            <div class="meta-row">
+                <div class="cell">
+                    <span>Marca</span>
+                    <b>{{ producto.marca }}</b>
+                </div>
+                <div class="cell">
+                    <span>SKU</span>
+                    <b>{{ producto.SKU }}</b>
+                </div>
+            </div>
 
+            <h4>Descripción del producto</h4>
+            <p class="descripcion">{{ producto.descripcion|linebreaksbr }}</p>
 
-        </div>
-        <div style="display: inline-block;">
-          <h6 style="display: inline; margin: 0;">
-            </h4tyle>Marca:</h4> {{producto.marca}}
-        </div>
-        <br>
-        <br>
-        <div>
-          <h4>Descripción del Producto</h4>
-        </div>
-        <hr>
-        <div>{{producto.descripcion}}</div>
+            {% if producto.stock > 0 %}
+                <a href="{% url 'add_cart' producto.SKU %}" class="btn btn-primary btn-lg btn-block">Añadir al carrito</a>
+            {% else %}
+                <button type="button" class="btn btn-ghost btn-lg btn-block" disabled style="opacity:.5;cursor:not-allowed;">Producto agotado</button>
+            {% endif %}
+        </main>
+    </div>
+</section>
 
-        <br>
-        {% if producto.stock > 0 %}
-        
-        <div style="display: inline-block;">
-          <h5 style="display: inline; margin: 0; color:red;">
-          </h5tyle>Stock: {{producto.stock}} </h5>
-          {% else %}
-          <div style="display: inline-block;">
-          <h5 style="display: inline; margin: 0; color:red;">
-          {% endif %}
-        </div>
-        <br>
-        <br>
-        {% if producto.stock <= 0 %}
-        <h5>Producto fuera de stock</h5>
-        {% else %}
-        <div> <a href="{% url 'add_cart' producto.SKU %}">
-            <button class="btn btn-primary btn-lg" type="button">Añadir al carrito</button></div></a>
-        {% endif %}
-      </article>
-    </main>
-
-  </div>
-
-
-
-  {% endblock %}
+{% endblock %}

@@ -2,76 +2,39 @@
 {% load static %}
 {% block contenido %}
 
-<section class="section-conten padding-y bg">
+<section class="section-content container">
+    <header class="section-head" style="padding-top: 0;">
+        <h2>Mis direcciones</h2>
+        <a href="{% url 'newUbi' %}" class="btn btn-primary">+ Nueva dirección</a>
+    </header>
 
-    <div class="container">
-        <div class="row">
-            <aside class="col-md-3">
-                <!--   SIDEBAR   -->
-                <ul class="list-group">
-                    <a class="list-group-item" href="{% url 'viewOrders' %}"> Mi historial de ordenes
-                    </a>
-                    <a class="list-group-item active" style="background: #810404;" href="{% url 'viewUbis' %}">Mis
-                        Dirreciones</a>
-               
-                    <a class="list-group-item" href="#">Configuración de Cuenta</a>
+    <div class="store-layout">
+        {% include 'app/tienda/Perfil/_sidebar.html' with active='ubis' %}
 
-                </ul>
-                <br>
-                
-                <!--   SIDEBAR .//END   -->
-            </aside>
-            <main class="col-md-9">
-                <article class="card">
-                    <header class="card-header">
-                        <strong class="d-inline-block mr-3">Mis Direcciones de Despacho </strong>
-
-                    </header>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-8">
-                                <a href="{% url 'newUbi' %}" class="btn btn-light">Añadir Nueva Dirreción</a>
-
-                            </div>
-
-                        </div> <!-- row.// -->
-                    </div> <!-- card-body .// -->
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Dirección</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for i in ubicaciones %}
-                                <tr>
-                                    <td>
-                                        <div class="row">
-                                            <label for="ci">Ciudad: {{ i.ubicacion }}</label><br>
-                                            <label for="ci">Comuna: {{ i.comuna }}</label><br>
-                                            <label for="ci">Número: {{ i.numero }}</label><br>
-                                            <a href="{% url 'deleteUbi' i.ubicacion %}"> eliminar</a>
-                                        </div>
-                                    </td>
-                                    <td>
-
-                                        <a href="{% url 'modUbi' i.ubicacion %}" class="btn btn-light">Modificar</a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
+        <main>
+            {% if ubicaciones %}
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 14px;">
+                    {% for i in ubicaciones %}
+                    <div class="cart-card" style="padding: 20px;">
+                        <div class="eyebrow" style="margin-bottom: 10px;">{{ i.region }}</div>
+                        <div style="font-family: var(--font-display); font-style: italic; font-size: 18px; color: var(--paper); margin-bottom: 4px;">{{ i.ubicacion }} {{ i.numero|stringformat:'d' }}</div>
+                        <div style="color: var(--paper-dim); font-size: 13px; margin-bottom: 16px;">{{ i.comuna }}</div>
+                        <div style="display: flex; gap: 8px; padding-top: 14px; border-top: 1px solid var(--line);">
+                            <a href="{% url 'modUbi' i.ubicacion %}" class="btn btn-ghost" style="flex: 1; padding: 8px 12px; font-size: 12px;">Modificar</a>
+                            <a href="{% url 'deleteUbi' i.ubicacion %}" class="btn btn-danger">Eliminar</a>
+                        </div>
                     </div>
-        </div>
-        </article>
+                    {% endfor %}
+                </div>
+            {% else %}
+                <div class="cart-empty">
+                    <h2>Sin direcciones guardadas.</h2>
+                    <p style="color: var(--paper-dim); font-size: 14px; margin-bottom: 24px;">Guardá una dirección para agilizar tus próximas compras.</p>
+                    <a href="{% url 'newUbi' %}">+ Agregar primera dirección →</a>
+                </div>
+            {% endif %}
         </main>
     </div>
-    </div>
-
-
 </section>
-
 
 {% endblock %}

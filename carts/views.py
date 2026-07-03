@@ -2,6 +2,7 @@ from django.shortcuts import get_object_or_404, render, redirect
 from app.models import Producto
 from carts.models import Cart, CartItem
 from django.core.exceptions import ObjectDoesNotExist
+from django.contrib.auth.decorators import login_required
 
 from app.models import UserUbicacion
 from app.models import User
@@ -12,15 +13,15 @@ def _cart_id(request):
         cart= request.session.create()
     return cart
     
-def add_cart(request,producto_sku):
-    producto = Producto.objects.get(SKU=producto_sku) #obtiene el producto
+def add_cart(request, producto_sku):
+    producto = Producto.objects.get(SKU=producto_sku)
 
     try:
-        cart = Cart.objects.get(cart_id=_cart_id(request)) #obtiene el carro usando el id del carro en la sesión
-    except:
+        cart = Cart.objects.get(cart_id=_cart_id(request))
+    except Cart.DoesNotExist:
         cart = Cart.objects.create(
-            cart_id = _cart_id(request),
-            user = request.user
+            cart_id=_cart_id(request),
+            user=request.user if request.user.is_authenticated else None,
         )
     cart.save()
 
@@ -112,6 +113,7 @@ def checkout_form(request):
 
     return render(request, 'app/tienda/checkout_form.html', {'form': form})
 
+@login_required(login_url='loginCli')
 def checkout(request, total=0, quantity=0, cart_items=None):
     current_user = request.user
     usuario = User.objects.get(email =current_user )

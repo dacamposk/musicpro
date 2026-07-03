@@ -1,64 +1,56 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block contenido %}
 
-<section class="section-conten padding-y bg">
+<section class="section-content container">
+    <header class="section-head" style="padding-top: 0;">
+        <h2>Mis pedidos</h2>
+        <span class="meta">{{ orders|length }} pedido{{ orders|length|pluralize }}</span>
+    </header>
 
-    <div class="container">
-        <div class="row">
-            <aside class="col-md-3">
-                <!--   SIDEBAR   -->
-                <ul class="list-group">
-                    <a class="list-group-item active" style="background: #810404;" href="#"> Mi historial de ordenes
-                    </a>
-                    <a class="list-group-item"  href="{% url 'viewUbis' %}">Mis Dirreciones</a>
-                    
-             
-                    <a class="list-group-item" href="#">Configuración de Cuenta</a>
+    <div class="store-layout">
+        {% include 'app/tienda/Perfil/_sidebar.html' with active='ordenes' %}
 
-                </ul>
-                <br>
-        
-                <!--   SIDEBAR .//END   -->
-            </aside>
-            <main class="col-md-9">
-                <article class="card">
-                    <header class="card-header">
-                        <strong class="d-inline-block mr-3">Mis Ordenes de Compra</strong>
-
-                    </header>
-             
-                    <div class="table-responsive">
-                        <table class="table table-hover">
-                            <thead>
-                                <tr>
-                                    <th>Número</th>
-                                    <th>Estado</th>
-                                    <th>Acciones</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                {% for i in orders %}
-                                <tr>
-                                    <td>{{ i.order_number }}</td>
-                                    <td>{{ i.status }}</td>
-                                    <td>
-                                        <a href="{% url 'detalleUserOrder' i.order_number %}" class="btn btn-light">Ver Detalle</a>
-                                    </td>
-                                </tr>
-                                {% endfor %}
-                            </tbody>
-                        </table>
-                    </div>
-        </div>
+        <main>
+            {% if orders %}
+                <div class="cart-card">
+                    <table class="table-shopping-cart">
+                        <thead>
+                            <tr>
+                                <th scope="col">Número</th>
+                                <th scope="col">Fecha</th>
+                                <th scope="col">Total</th>
+                                <th scope="col">Estado</th>
+                                <th scope="col"></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in orders %}
+                            <tr>
+                                <td style="font-family: var(--font-mono); font-size: 12px; color: var(--paper);">{{ i.order_number }}</td>
+                                <td style="font-family: var(--font-mono); font-size: 12px; color: var(--paper-dim);">{{ i.create_at|date:"d/m/Y" }}</td>
+                                <td style="font-family: var(--font-mono); font-size: 13px; color: var(--paper);">${{ i.order_total|intcomma }}</td>
+                                <td>
+                                    <span style="display: inline-block; padding: 3px 8px; border-radius: 2px; background: rgba(232, 162, 76, 0.12); color: var(--amber); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase;">{{ i.status }}</span>
+                                </td>
+                                <td style="text-align: right;">
+                                    <a href="{% url 'detalleUserOrder' i.order_number %}" class="mono" style="color: var(--amber); font-size: 11px; letter-spacing: 0.06em;">VER DETALLE →</a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            {% else %}
+                <div class="cart-empty">
+                    <h2>Todavía no hay pedidos.</h2>
+                    <p style="color: var(--paper-dim); font-size: 14px; margin-bottom: 24px;">Cuando hagas tu primera compra vas a poder ver el historial acá.</p>
+                    <a href="{% url 'home' %}">Explorar catálogo →</a>
+                </div>
+            {% endif %}
+        </main>
     </div>
-    </article>
-    </main>
-    </div>
-    </div>
-
-
 </section>
-
 
 {% endblock %}

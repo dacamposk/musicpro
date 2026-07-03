@@ -15,14 +15,22 @@
 
           <form action="{% url 'place_order' %}" method="post">
             {% csrf_token %}
-            {% for i in ubis %}
-            <div class="form-check">
-                <input class="form-check-input" type="radio" name="ubicacion" value='{{ i.id }}' >
-                    {{ i.ubicacion }}
-                </label>
-            </div>
-          {% endfor %}
-
+      {% if ubis %}
+    <h4 style="font-family: var(--font-mono); font-size: 11px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase; margin-bottom: 14px;">Tus direcciones guardadas</h4>
+    {% for i in ubis %}
+        <label style="display: flex; align-items: center; gap: 10px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 2px; margin-bottom: 8px; cursor: pointer;">
+            <input type="radio" name="ubicacion" value="{{ i.id }}"
+                   class="ubi-radio"
+                   data-direccion="{{ i.ubicacion }}"
+                   data-numero="{{ i.numero|stringformat:'d' }}"
+                   data-comuna="{{ i.comuna }}"
+                   data-region="{{ i.region }}"
+                   style="width: auto;">
+<span>{{ i.ubicacion }} {{ i.numero|stringformat:'d' }} · {{ i.comuna }}, {{ i.region }}</span>
+        </label>
+    {% endfor %}
+    <hr style="margin: 20px 0;">
+{% endif %}
             <div class="form-row">
               <div class="col-md-6 form-group">
                 <label for="">Nombre</label>
@@ -140,5 +148,14 @@
 
 </div>
 
-
+<script>
+    document.querySelectorAll('.ubi-radio').forEach(function (radio) {
+        radio.addEventListener('change', function () {
+            document.querySelector('[name="address_line_1"]').value = this.dataset.direccion || '';
+            document.querySelector('[name="address_line_2"]').value = this.dataset.numero || '';
+            document.querySelector('[name="city"]').value           = this.dataset.comuna || '';
+            document.querySelector('[name="region"]').value         = this.dataset.region || '';
+        });
+    });
+</script>
 {% endblock %}

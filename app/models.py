@@ -128,7 +128,10 @@ class User(AbstractBaseUser,PermissionsMixin):
 
 
 class Region(models.Model):
-    nombre = models.CharField(primary_key=True,max_length=80)
+    nombre = models.CharField(primary_key=True, max_length=80)
+
+    def __str__(self):
+        return self.nombre
 
 class Comuna(models.Model):
     nombre  = models.CharField(primary_key=True,max_length=80)

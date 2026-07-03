@@ -1,131 +1,92 @@
 {% extends 'app/base.html' %}
 {% load static %}
+{% load humanize %}
 {% block contenido %}
 
-
-{% load humanize %}
-
-<section class="section-content padding-y bg">
-  <div class="container">
+<section class="cart-wrap-page container">
 
     {% if not cart_items %}
-    <h2 class="text_center">El carrito de compras esta vacio</h2>
-    <br>
-    <div class="text-center">
-      <a href="{% url 'home' %}">Continua Comprando</a>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-      <br>
-    </div>
-
+        <div class="cart-empty">
+            <h2>El carrito está vacío.</h2>
+            <p style="color: var(--paper-dim); font-size: 14px; margin-bottom: 24px;">Aún no agregaste ningún instrumento. Explora el catálogo y suma lo que estes buscando.</p>
+            <a href="{% url 'home' %}">Ver catálogo →</a>
+        </div>
     {% else %}
-    <div class="row">
-      <aside class="col-lg-9">
-        <div class="card">
-          <table class="table table-borderless table-shopping-cart">
-            <thead class="text-muted">
-              <tr class="small text-uppercase">
-                <th scope="col">Producto</th>
-                <th scope="col" width="120">Cantidad</th>
-                <th scope="col" width="120">Precio</th>
-                <th scope="col" class="text-right" width="200"> </th>
-              </tr>
-            </thead>
-            <tbody>
-              {% for cart_item in cart_items %}
 
-              <tr>
-                <td>
-                  <figure class="itemside align-items-center">
-                    <div class="aside"><img src="{{ cart_item.producto.imagen.url}}" class="img-sm"></div>
-                    <figcaption class="info">
-                      <a href="{{ cart_item.producto.get_url }}"
-                        class="title text-dark">{{cart_item.producto.nombreProducto}}</a>
-                      <p class="text-muted small">{{ cart_item.producto.marca}}</p>
-                    </figcaption>
-                  </figure>
-                </td>
-                <td>
+    <header class="section-head" style="margin-bottom: 32px; padding-top: 0;">
+        <h2>Carrito</h2>
+        <span class="meta">{{ cart_items|length }} artículo{{ cart_items|length|pluralize }}</span>
+    </header>
 
-                  </head>
+    <div class="cart-layout">
+        <div class="cart-card">
+            <table class="table-shopping-cart">
+                <thead>
+                    <tr>
+                        <th scope="col">Producto</th>
+                        <th scope="col" width="140">Cantidad</th>
+                        <th scope="col" width="140">Precio</th>
+                        <th scope="col" width="160"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for cart_item in cart_items %}
+                    <tr>
+                        <td>
+                            <figure class="itemside">
+                                <div class="aside"><img src="{{ cart_item.producto.imagen.url }}" alt="" class="img-sm"></div>
+                                <figcaption class="info">
+                                    <a href="{{ cart_item.producto.get_url }}" class="title">{{ cart_item.producto.nombreProducto }}</a>
+                                    <p>{{ cart_item.producto.marca }}</p>
+                                </figcaption>
+                            </figure>
+                        </td>
+                        <td>
+                            <div class="input-spinner">
+                                <a href="{% url 'remove_cart' cart_item.producto.SKU %}" class="btn btn-light" title="Restar uno">−</a>
+                                <input type="text" class="form-control" value="{{ cart_item.quantity }}" readonly>
+                                <a href="{% url 'add_cart' cart_item.producto.SKU %}" class="btn btn-light" title="Sumar uno">+</a>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="price-wrap">
+                                <div class="price"><h6>${{ cart_item.sub_total|intcomma }}</h6></div>
+                                <small>${{ cart_item.producto.precio|intcomma }} c/u</small>
+                            </div>
+                        </td>
+                        <td>
+                            <a href="{% url 'remove_cart_item' cart_item.producto.SKU %}" class="btn btn-danger">Eliminar</a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
 
-                  <body>
-
-                    <div class="col">
-                      <div class="input-group input-spinner">
-                        <div class="input-group-prepend">
-                          <a href="{% url 'remove_cart' cart_item.producto.SKU%}" class="btn btn-light button-size"
-                            style=" border: 1px solid #ccc;" type="button" id="button-minus">-</a>
-                        </div>
-                        <input type="text" class="form-control" value="{{ cart_item.quantity}}">
-
-                        <div class="input-group-append">
-                          <a href="{% url 'add_cart' cart_item.producto.SKU %}"
-                            class="btn btn-light button-size  btn-outline-secondary" style=" border: 1px solid #ccc;"
-                            type="button" id="button-plus">+
-                          </a>
-
-                        </div>
-                </td>
-                <td>
-                  <div class="price-wrap">
-                    <var class="price">
-                      <h6>${{ cart_item.sub_total | intcomma}}</h6>
-                    </var>
-                    <small class="text-muted"> ${{ cart_item.producto.precio | intcomma}} c/u</small>
-                  </div>
-                </td>
-                <td class="text-right">
-                  <a href="{% url 'remove_cart_item' cart_item.producto.SKU %}" class="btn btn-danger"> Eliminar
-                    Producto</a>
-                </td>
-              </tr>
-              {% endfor %}
-
-
-
-            </tbody>
-          </table>
-        </div> <!-- card.// -->
-
-      </aside> <!-- col.// -->
-      <aside class="col-lg-3">
-
-        <div class="card">
-          <div class="card-body">
+        <aside class="cart-summary">
+            <h3>Resumen</h3>
             <dl class="dlist-align">
-              <dt>Precio Total:</dt>
-              <dd class="text-right">${{total|intcomma}}</dd>
+                <dt>Subtotal</dt>
+                <dd>${{ total|intcomma }}</dd>
             </dl>
             <dl class="dlist-align">
-              <dt>Impuesto:</dt>
-              <dd class="text-right"> ${{tax |intcomma}} </dd>
+                <dt>IVA (19%)</dt>
+                <dd>${{ tax|intcomma }}</dd>
             </dl>
             <dl class="dlist-align">
-              <dt>Total:</dt>
-              <dd class="text-right text-dark b"><strong>${{grand_total |intcomma}}</strong></dd>
+                <dt>Total</dt>
+                <dd style="font-size: 18px; color: var(--amber);">${{ grand_total|intcomma }}</dd>
             </dl>
             <hr>
-            <p class="text-center mb-3">
-              <img src="{% static 'img/icons/payments.png' %}" height="26">
+            <a href="{% url 'checkout' %}" class="btn btn-primary btn-block">Ir al checkout</a>
+            <a href="{% url 'home' %}" class="btn btn-ghost btn-block">Seguir comprando</a>
+            <p style="text-align: center; margin-top: 20px; padding-top: 16px; border-top: 1px solid var(--line); font-family: var(--font-mono); font-size: 10px; letter-spacing: 0.14em; color: var(--muted); text-transform: uppercase;">
+                Pagos vía Transbank Webpay
             </p>
-            <a href="{% url 'checkout' %}" class="btn btn-primary btn-block">Ir al Checkout</a>
-            <a href="{% url 'home' %}" class="btn btn-light btn-block">Seguir Comprando</a>
-          </div> <!-- card-body.// -->
-        </div> <!-- card.// -->
+        </aside>
+    </div>
 
-      </aside> <!-- col.// -->
-
-
-    </div> <!-- row.// -->
     {% endif %}
-  </div> <!-- container .//  -->
 </section>
 
 {% endblock %}

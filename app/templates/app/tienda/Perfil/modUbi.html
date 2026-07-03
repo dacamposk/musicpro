@@ -1,58 +1,31 @@
 {% extends 'app/base.html' %}
 {% load static %}
-{% block contenido %}
 {% load crispy_forms_tags %}
-<section class="section-conten padding-y bg">
+{% block contenido %}
 
-    <div class="container">
-        <div class="row">
-            <aside class="col-md-3">
-               
-                <ul class="list-group">
-                    <a class="list-group-item" href="{% url 'viewOrders' %}"> Mi historial de ordenes
-                    </a>
-                    <a class="list-group-item active" style="background: #810404;" href="{% url 'viewUbis' %}">Mis
-                        Dirreciones</a>
-        
-                    <a class="list-group-item" href="#">Configuración de Cuenta</a>
+<section class="section-content container">
+    <header class="section-head" style="padding-top: 0;">
+        <h2>Modificar dirección</h2>
+        <a href="{% url 'viewUbis' %}" class="meta" style="color: var(--muted);">← Volver</a>
+    </header>
 
-                </ul>
-                <br>
-          
-               
-            </aside>
-            <main class="col-md-6">
-                <article class="card">
-                    <header class="card-header">
-                        <strong class="d-inline-block mr-3">Modificar Dirrecion de Despacho</strong>
+    <div class="store-layout">
+        {% include 'app/tienda/Perfil/_sidebar.html' with active='ubis' %}
 
-                    </header>
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-9">
-                              <form action="" method="post" id="formulario">
-                                {% csrf_token %}
-                                <div class="form-group">
-                                  {{ form | crispy }}
-                                 
-                                </div>
-                                <input type="submit" value="Guardar" class="btn btn-danger" id="enviar">
-                            
-                              </form>
-
-                            </div>
-
-                        </div> 
-                    </div> 
-                   
-        </div>
-        </article>
+        <main>
+            <div class="cart-card" style="padding: 32px; max-width: 560px;">
+                <div class="eyebrow" style="margin-bottom: 20px;">Editar los datos</div>
+                <form action="" method="post">
+                    {% csrf_token %}
+                    {{ form|crispy }}
+                    <div style="display: flex; gap: 10px; margin-top: 20px;">
+                        <button type="submit" class="btn btn-primary" style="flex: 1;">Guardar cambios</button>
+                        <a href="{% url 'viewUbis' %}" class="btn btn-ghost">Cancelar</a>
+                    </div>
+                </form>
+            </div>
         </main>
     </div>
-    </div>
-
-
 </section>
-
 
 {% endblock %}
