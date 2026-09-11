@@ -1,0 +1,28 @@
+services:
+  db:
+    image: postgres:16
+    environment:
+      POSTGRES_DB: musicpro
+      POSTGRES_USER: musicpro
+      POSTGRES_PASSWORD: musicpro
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U musicpro"]
+      interval: 5s
+      retries: 5
+
+  web:
+    build: .
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+    environment:
+      DATABASE_URL: postgres://musicpro:musicpro@db:5432/musicpro
+    depends_on:
+      db:
+        condition: service_healthy
+
+volumes:
+  pgdata:
