@@ -1,0 +1,923 @@
+[
+{
+  "model": "sessions.session",
+  "pk": "pt4jiftz9uw7hi8lmxgsp1kpww2yk8vk",
+  "fields": {
+    "session_data": ".eJxVjDsOgzAQRO_iOrJs_MFOmZ4zWLt4NyaJjIShinL3gESRaLp5b-YtEmxrSVujJU1ZXIUWl98OYXxSPUB-QL3PcpzrukwoD0WetMlhzvS6ne7fQYFW9jVql4kYYwgALoY-RNeZXjtvyWdGRrTszZ5gOBgLZJRhp0h53ymdxecL6TY3hw:1x4pcT:ngkinvQ-tYVfM-Ce0Z_JI_YI4IOK5iYeniDk1faiFcA",
+    "expire_date": "2026-09-25T00:59:57.958Z"
+  }
+},
+{
+  "model": "app.user",
+  "fields": {
+    "password": "pbkdf2_sha256$1200000$OruxXH1uOcb7B6aDEKhSzo$+XNygKeXOpO68zM5ouJM1tGnVnqBBmg+2luwVjIgLEE=",
+    "last_login": "2026-09-11T00:59:57.955Z",
+    "is_superuser": false,
+    "email": "daniel_chat@live.com",
+    "username": "daniel",
+    "apellido": "campos",
+    "telefono": "99570080",
+    "is_active": true,
+    "is_staff": true,
+    "is_bodeguero": false,
+    "is_vendedor": false,
+    "is_contador": false,
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "app.categoria",
+  "pk": "Equipamiento de Audio",
+  "fields": {
+    "descripcion": "",
+    "slug": "equipamiento-de-audio"
+  }
+},
+{
+  "model": "app.categoria",
+  "pk": "Instrumentos de Cuerda",
+  "fields": {
+    "descripcion": "",
+    "slug": "instrumentos-de-cuerda"
+  }
+},
+{
+  "model": "app.categoria",
+  "pk": "Instrumentos de Percusión",
+  "fields": {
+    "descripcion": "",
+    "slug": "instrumentos-de-percusion"
+  }
+},
+{
+  "model": "app.subcategoria",
+  "pk": "Amplificación",
+  "fields": {
+    "descripcion": "",
+    "slug": "amplificacion",
+    "categoria": "Equipamiento de Audio"
+  }
+},
+{
+  "model": "app.subcategoria",
+  "pk": "Bajo",
+  "fields": {
+    "descripcion": "",
+    "slug": "bajo",
+    "categoria": "Instrumentos de Cuerda"
+  }
+},
+{
+  "model": "app.subcategoria",
+  "pk": "Batería",
+  "fields": {
+    "descripcion": "",
+    "slug": "bateria",
+    "categoria": "Instrumentos de Percusión"
+  }
+},
+{
+  "model": "app.subcategoria",
+  "pk": "Guitarra",
+  "fields": {
+    "descripcion": "",
+    "slug": "guitarra",
+    "categoria": "Instrumentos de Cuerda"
+  }
+},
+{
+  "model": "app.subcategoria",
+  "pk": "Microfonía",
+  "fields": {
+    "descripcion": "",
+    "slug": "microfonia",
+    "categoria": "Equipamiento de Audio"
+  }
+},
+{
+  "model": "app.subcategoria",
+  "pk": "Percusión Menor",
+  "fields": {
+    "descripcion": "",
+    "slug": "percusion-menor",
+    "categoria": "Instrumentos de Percusión"
+  }
+},
+{
+  "model": "app.tipoinstrumento",
+  "pk": "Amplificador de Guitarra",
+  "fields": {
+    "descripcion": "",
+    "slug": "amplificador-de-guitarra",
+    "subcategoria": "Amplificación"
+  }
+},
+{
+  "model": "app.tipoinstrumento",
+  "pk": "Bajo Eléctrico",
+  "fields": {
+    "descripcion": "",
+    "slug": "bajo-electrico",
+    "subcategoria": "Guitarra"
+  }
+},
+{
+  "model": "app.tipoinstrumento",
+  "pk": "Batería Acústica",
+  "fields": {
+    "descripcion": "",
+    "slug": "bateria-acustica",
+    "subcategoria": "Batería"
+  }
+},
+{
+  "model": "app.tipoinstrumento",
+  "pk": "Guitarra Acústica",
+  "fields": {
+    "descripcion": "",
+    "slug": "guitarra-acustica",
+    "subcategoria": "Guitarra"
+  }
+},
+{
+  "model": "app.tipoinstrumento",
+  "pk": "Guitarra Eléctrica",
+  "fields": {
+    "descripcion": "",
+    "slug": "guitarra-electrica",
+    "subcategoria": "Guitarra"
+  }
+},
+{
+  "model": "app.tipoinstrumento",
+  "pk": "Micrófono Dinámico",
+  "fields": {
+    "descripcion": "",
+    "slug": "microfono-dinamico",
+    "subcategoria": "Microfonía"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "AudioMusica",
+  "fields": {
+    "descripcion": "",
+    "slug": "audiomusica"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "FAMA",
+  "fields": {
+    "descripcion": "",
+    "slug": "fama"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "Fender",
+  "fields": {
+    "descripcion": "",
+    "slug": "fender"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "Gibson",
+  "fields": {
+    "descripcion": "",
+    "slug": "gibson"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "Ibañez",
+  "fields": {
+    "descripcion": "",
+    "slug": "ibanez"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "Marchshall",
+  "fields": {
+    "descripcion": "",
+    "slug": "marchshall"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "Pearl",
+  "fields": {
+    "descripcion": "",
+    "slug": "pearl"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "Shure",
+  "fields": {
+    "descripcion": "",
+    "slug": "shure"
+  }
+},
+{
+  "model": "app.marca",
+  "pk": "Yamaha",
+  "fields": {
+    "descripcion": "",
+    "slug": "yamaha"
+  }
+},
+{
+  "model": "app.producto",
+  "pk": 1,
+  "fields": {
+    "nombreProducto": "Guitarra Eléctrica Fender Player Stratocaster",
+    "slug": "guitarra-electrica-fender-player-stratocaster",
+    "descripcion": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+    "precio": 899000,
+    "imagen": "img/productos/fenderplayeriistratblack.webp",
+    "stock": 99,
+    "categoria": "Instrumentos de Cuerda",
+    "subcategoria": "Guitarra",
+    "tipoinstrumento": "Guitarra Eléctrica",
+    "marca": "Fender",
+    "is_available": true,
+    "create_date": "2026-09-11T01:13:51.108Z",
+    "modified_date": "2026-09-11T01:13:51.108Z"
+  }
+},
+{
+  "model": "app.producto",
+  "pk": 2,
+  "fields": {
+    "nombreProducto": "Guitarra Eléctrica Ibanez GRG121DX",
+    "slug": "guitarra-electrica-ibanez-grg121dx",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "precio": 329000,
+    "imagen": "img/productos/images.jpg",
+    "stock": 99,
+    "categoria": "Instrumentos de Cuerda",
+    "subcategoria": "Guitarra",
+    "tipoinstrumento": "Guitarra Eléctrica",
+    "marca": "Ibañez",
+    "is_available": true,
+    "create_date": "2026-09-11T01:15:52.959Z",
+    "modified_date": "2026-09-11T01:15:52.959Z"
+  }
+},
+{
+  "model": "app.producto",
+  "pk": 3,
+  "fields": {
+    "nombreProducto": "Guitarra Acústica Yamaha FG800",
+    "slug": "guitarra-acustica-yamaha-fg800",
+    "descripcion": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
+    "precio": 279000,
+    "imagen": "img/productos/D_NQ_NP_684401-MLA46237796763_062021-O.webp",
+    "stock": 98,
+    "categoria": "Instrumentos de Cuerda",
+    "subcategoria": "Guitarra",
+    "tipoinstrumento": "Guitarra Acústica",
+    "marca": "Yamaha",
+    "is_available": true,
+    "create_date": "2026-09-11T01:16:44.826Z",
+    "modified_date": "2026-09-11T01:16:44.826Z"
+  }
+},
+{
+  "model": "app.producto",
+  "pk": 4,
+  "fields": {
+    "nombreProducto": "Batería Acústica Pearl Roadshow 5 Piezas",
+    "slug": "bateria-acustica-pearl-roadshow-5-piezas",
+    "descripcion": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+    "precio": 749000,
+    "imagen": "img/productos/719.webp",
+    "stock": 99,
+    "categoria": "Instrumentos de Percusión",
+    "subcategoria": "Batería",
+    "tipoinstrumento": "Batería Acústica",
+    "marca": "Pearl",
+    "is_available": true,
+    "create_date": "2026-09-11T02:12:07.937Z",
+    "modified_date": "2026-09-11T02:12:07.937Z"
+  }
+},
+{
+  "model": "app.producto",
+  "pk": 5,
+  "fields": {
+    "nombreProducto": "Amplificador Marshall MG30GFX",
+    "slug": "amplificador-marshall-mg30gfx",
+    "descripcion": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+    "precio": 389000,
+    "imagen": "img/productos/images_1.jpg",
+    "stock": 99,
+    "categoria": "Equipamiento de Audio",
+    "subcategoria": "Amplificación",
+    "tipoinstrumento": "Amplificador de Guitarra",
+    "marca": "Marchshall",
+    "is_available": true,
+    "create_date": "2026-09-11T02:13:26.668Z",
+    "modified_date": "2026-09-11T02:13:26.668Z"
+  }
+},
+{
+  "model": "app.producto",
+  "pk": 6,
+  "fields": {
+    "nombreProducto": "Micrófono Shure SM58",
+    "slug": "microfono-shure-sm58",
+    "descripcion": "\"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\"",
+    "precio": 149000,
+    "imagen": "img/productos/images_2.jpg",
+    "stock": 99,
+    "categoria": "Equipamiento de Audio",
+    "subcategoria": "Microfonía",
+    "tipoinstrumento": "Micrófono Dinámico",
+    "marca": "Shure",
+    "is_available": true,
+    "create_date": "2026-09-11T02:14:33.896Z",
+    "modified_date": "2026-09-11T02:14:33.896Z"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 1,
+  "fields": {
+    "action_time": "2026-09-11T01:05:39.849Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "categoria"
+    ],
+    "object_id": "Instrumentos de Viento",
+    "object_repr": "Instrumentos de Viento",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 2,
+  "fields": {
+    "action_time": "2026-09-11T01:05:58.192Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "AudioMusica",
+    "object_repr": "AudioMusica",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 3,
+  "fields": {
+    "action_time": "2026-09-11T01:08:24.831Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "categoria"
+    ],
+    "object_id": "Instrumentos de Viento",
+    "object_repr": "Instrumentos de Viento",
+    "action_flag": 3,
+    "change_message": ""
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 4,
+  "fields": {
+    "action_time": "2026-09-11T01:08:34.950Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "categoria"
+    ],
+    "object_id": "Instrumentos de Cuerda",
+    "object_repr": "Instrumentos de Cuerda",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 5,
+  "fields": {
+    "action_time": "2026-09-11T01:08:42.139Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "categoria"
+    ],
+    "object_id": "Instrumentos de Percusión",
+    "object_repr": "Instrumentos de Percusión",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 6,
+  "fields": {
+    "action_time": "2026-09-11T01:08:48.240Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "categoria"
+    ],
+    "object_id": "Equipamiento de Audio",
+    "object_repr": "Equipamiento de Audio",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 7,
+  "fields": {
+    "action_time": "2026-09-11T01:09:00.147Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "subcategoria"
+    ],
+    "object_id": "Guitarra",
+    "object_repr": "Guitarra",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 8,
+  "fields": {
+    "action_time": "2026-09-11T01:09:07.038Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "subcategoria"
+    ],
+    "object_id": "Bajo",
+    "object_repr": "Bajo",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 9,
+  "fields": {
+    "action_time": "2026-09-11T01:09:14.453Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "subcategoria"
+    ],
+    "object_id": "Batería",
+    "object_repr": "Batería",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 10,
+  "fields": {
+    "action_time": "2026-09-11T01:09:26.253Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "subcategoria"
+    ],
+    "object_id": "Percusión Menor",
+    "object_repr": "Percusión Menor",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 11,
+  "fields": {
+    "action_time": "2026-09-11T01:09:47.736Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "subcategoria"
+    ],
+    "object_id": "Amplificación",
+    "object_repr": "Amplificación",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 12,
+  "fields": {
+    "action_time": "2026-09-11T01:09:54.139Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "subcategoria"
+    ],
+    "object_id": "Microfonía",
+    "object_repr": "Microfonía",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 13,
+  "fields": {
+    "action_time": "2026-09-11T01:10:15.259Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "tipoinstrumento"
+    ],
+    "object_id": "Guitarra Eléctrica",
+    "object_repr": "Guitarra Eléctrica",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 14,
+  "fields": {
+    "action_time": "2026-09-11T01:10:29.117Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "tipoinstrumento"
+    ],
+    "object_id": "Guitarra Acústica",
+    "object_repr": "Guitarra Acústica",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 15,
+  "fields": {
+    "action_time": "2026-09-11T01:10:50.452Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "tipoinstrumento"
+    ],
+    "object_id": "Bajo Eléctrico",
+    "object_repr": "Bajo Eléctrico",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 16,
+  "fields": {
+    "action_time": "2026-09-11T01:11:11.867Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "Fender",
+    "object_repr": "Fender",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 17,
+  "fields": {
+    "action_time": "2026-09-11T01:11:16.615Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "Gibson",
+    "object_repr": "Gibson",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 18,
+  "fields": {
+    "action_time": "2026-09-11T01:11:23.058Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "Yamaha",
+    "object_repr": "Yamaha",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 19,
+  "fields": {
+    "action_time": "2026-09-11T01:11:27.685Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "Shure",
+    "object_repr": "Shure",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 20,
+  "fields": {
+    "action_time": "2026-09-11T01:11:32.501Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "FAMA",
+    "object_repr": "FAMA",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 21,
+  "fields": {
+    "action_time": "2026-09-11T01:13:51.109Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "producto"
+    ],
+    "object_id": "1",
+    "object_repr": "Guitarra Eléctrica Fender Player Stratocaster",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 22,
+  "fields": {
+    "action_time": "2026-09-11T01:15:19.615Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "Ibañez",
+    "object_repr": "Ibañez",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 23,
+  "fields": {
+    "action_time": "2026-09-11T01:15:52.959Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "producto"
+    ],
+    "object_id": "2",
+    "object_repr": "Guitarra Eléctrica Ibanez GRG121DX",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 24,
+  "fields": {
+    "action_time": "2026-09-11T01:16:44.827Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "producto"
+    ],
+    "object_id": "3",
+    "object_repr": "Guitarra Acústica Yamaha FG800",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 25,
+  "fields": {
+    "action_time": "2026-09-11T01:41:25.958Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "tipoinstrumento"
+    ],
+    "object_id": "Batería Acústica",
+    "object_repr": "Batería Acústica",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 26,
+  "fields": {
+    "action_time": "2026-09-11T02:12:05.425Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "Pearl",
+    "object_repr": "Pearl",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 27,
+  "fields": {
+    "action_time": "2026-09-11T02:12:07.939Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "producto"
+    ],
+    "object_id": "4",
+    "object_repr": "Batería Acústica Pearl Roadshow 5 Piezas",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 28,
+  "fields": {
+    "action_time": "2026-09-11T02:13:12.248Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "tipoinstrumento"
+    ],
+    "object_id": "Amplificador de Guitarra",
+    "object_repr": "Amplificador de Guitarra",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 29,
+  "fields": {
+    "action_time": "2026-09-11T02:13:25.247Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "marca"
+    ],
+    "object_id": "Marchshall",
+    "object_repr": "Marchshall",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 30,
+  "fields": {
+    "action_time": "2026-09-11T02:13:26.668Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "producto"
+    ],
+    "object_id": "5",
+    "object_repr": "Amplificador Marshall MG30GFX",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 31,
+  "fields": {
+    "action_time": "2026-09-11T02:14:11.191Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "tipoinstrumento"
+    ],
+    "object_id": "Micrófono Dinámico",
+    "object_repr": "Micrófono Dinámico",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+},
+{
+  "model": "admin.logentry",
+  "pk": 32,
+  "fields": {
+    "action_time": "2026-09-11T02:14:33.897Z",
+    "user": [
+      "daniel_chat@live.com"
+    ],
+    "content_type": [
+      "app",
+      "producto"
+    ],
+    "object_id": "6",
+    "object_repr": "Micrófono Shure SM58",
+    "action_flag": 1,
+    "change_message": "[{\"added\": {}}]"
+  }
+}
+]
