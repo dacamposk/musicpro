@@ -2,6 +2,8 @@ FROM python:3.12-slim
 
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
+ENV SECRET_KEY=solo-para-build
+ENV DEBUG=False
 
 WORKDIR /app
 
@@ -14,10 +16,13 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-# Genera los archivos estaticos dentro de la imagen
-RUN SECRET_KEY=solo-para-build DEBUG=False python manage.py collectstatic --no-input
+# Archivos estaticos
+RUN python manage.py collectstatic --no-input
+
+# Base de datos lista con el catalogo cargado
+RUN python manage.py migrate --no-input
+RUN python manage.py loaddata datos.json
 
 EXPOSE 8000
 
-# Aplica migraciones y levanta el servidor de produccion
-CMD ["sh", "-c", "python manage.py migrate --no-input && gunicorn musicpro.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 2 --timeout 120"]
+CMD ["sh", "-c", "gunicorn musicpro.wsgi:application --bind 0.0.0.0:${PORT:-8000} --workers 2 --timeout 120"]
