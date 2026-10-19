@@ -14,12 +14,15 @@ services:
 
   web:
     build: .
+    # En local usamos runserver para tener autoreload
+    command: python manage.py runserver 0.0.0.0:8000
     ports:
       - "8000:8000"
     volumes:
       - .:/app
     environment:
       DATABASE_URL: postgres://musicpro:musicpro@db:5432/musicpro
+      DEBUG: "True"
     depends_on:
       db:
         condition: service_healthy
